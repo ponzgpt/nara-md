@@ -89,9 +89,10 @@ NaraMD helps clinical neurophysiologists work out which standard, criterion or p
 
    The two columns sit side by side at 960px and wider, and stack below that. Numbered badges match the `[n]` citations in the answer.
 6. **Header controls are one family:** Sources (pill), region (pill that opens a menu) and theme (round). All three are 36px high with the same border, a tint on hover and a press scale. On narrow screens, Sources collapses to its icon.
-7. Modality chips, region and theme apply immediately and persist in the browser. There is no settings page. The library proxy lives in **Sources**.
-8. The page is light by default whatever the OS says. Dark is opt-in and applied before first paint.
-9. Motion is limited to hover states, the menu pop, the example fade and the loading shimmer, and all of them respect `prefers-reduced-motion`. Focus is always visible, <kbd>/</kbd> focuses search, the region menu works with the arrow keys and Escape, and results are announced through a live region.
+7. **Region** reorders documents *within* each group: first the user's region (tagged with its code, e.g. `US`), then international bodies (`International`), then other regions' societies. It never lets a less relevant document jump ahead of a more relevant one from the same tier, and never changes group membership. If the region's societies have no documents in the library yet, a notice says so and links to them. An existing answer is re-asked, because the region is part of the prompt.
+8. Modality chips, region and theme apply immediately and persist in the browser. There is no settings page. The library proxy lives in **Sources**.
+9. The page is light by default whatever the OS says. Dark is opt-in and applied before first paint.
+10. Motion is limited to hover states, the menu pop, the example fade and the loading shimmer, and all of them respect `prefers-reduced-motion`. Focus is always visible, <kbd>/</kbd> focuses search, the region menu works with the arrow keys and Escape, and results are announced through a live region.
 
 ## 5. Voice
 

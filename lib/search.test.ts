@@ -54,3 +54,11 @@ test("every entry has a document type", () => {
 test("the document covering more of the question wins", () => {
   assert.match(rank(lib, "CIDP electrodiagnostic criteria")[0].title, /chronic inflammatory demyelinating/i);
 });
+
+test("region tiers: own societies local, IFCN international, others other", async () => {
+  const { tierOf, missingLocal } = await import("./catalog.ts");
+  assert.equal(tierOf(["ACNS"], "us"), "local");
+  assert.equal(tierOf(["IFCN"], "us"), "international");
+  assert.equal(tierOf(["ACNS"], "uk"), "other");
+  assert.deepEqual(missingLocal("uk", lib), ["BSCN"]); // flips the day a BSCN document is added
+});

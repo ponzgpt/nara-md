@@ -6,7 +6,7 @@ export const MODALITIES = [
 ];
 
 // Global bodies apply everywhere; each region adds the societies whose guidance local practice follows.
-export const GLOBAL_SOCIETIES = ["IFCN", "ILAE", "WFN", "ISCEV", "ISIN"];
+export const GLOBAL_SOCIETIES = ["IFCN", "ILAE", "WFN", "ISCEV", "ISIN", "WFSICCM"];
 export const REGIONS: Record<string, { label: string; short: string; societies: string[] }> = {
   global: { label: "Global", short: "Global", societies: [] },
   us: { label: "United States", short: "US", societies: ["ACNS", "AANEM", "AAN", "AASM", "ASNM"] },
@@ -62,6 +62,19 @@ export const CONNECTORS: Connector[] = [
 ];
 
 export const boostFor = (region: string) => [...GLOBAL_SOCIETIES, ...(REGIONS[region]?.societies ?? [])];
+
+// How a document relates to the user's region: issued by one of its societies, by an international body, or neither.
+export type Tier = "local" | "international" | "other";
+export function tierOf(societies: string[], region: string): Tier {
+  if (societies.some((s) => REGIONS[region]?.societies.includes(s))) return "local";
+  if (societies.some((s) => GLOBAL_SOCIETIES.includes(s))) return "international";
+  return "other";
+}
+export const TIER_ORDER: Record<Tier, number> = { local: 0, international: 1, other: 2 };
+
+// The region's societies that have no document in the library yet, so the UI can say so instead of silently doing nothing.
+export const missingLocal = (region: string, library: { societies: string[] }[]) =>
+  (REGIONS[region]?.societies ?? []).filter((s) => !library.some((e) => e.societies.includes(s)));
 
 // Where a citation opens: DOI (through the user's library proxy unless open access), else PubMed.
 export function citationHref(s: { doi: string | null; pmid: string | null; openAccess: boolean }, proxy: string): string {

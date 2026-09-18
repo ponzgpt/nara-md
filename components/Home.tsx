@@ -5,7 +5,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import library from "@/data/library.json";
 import { rank, type Entry } from "@/lib/search";
-import { boostFor, DOC_TYPES, MODALITIES } from "@/lib/catalog";
+import { boostFor, DOC_TYPES, missingLocal, MODALITIES } from "@/lib/catalog";
 import { useStored } from "@/lib/use-stored";
 import type { AskResponse } from "@/lib/types";
 import { Results } from "@/components/Results";
@@ -36,8 +36,14 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
     return () => removeEventListener("keydown", focus);
   }, []);
 
+  const missing = useMemo(() => missingLocal(region, LIBRARY), [region]);
   const entries = useMemo(() => rank(LIBRARY, q, { modalities: scope, boostSocieties: boostFor(region) }), [q, scope, region]);
   const active = Boolean(q.trim() || result || asking || scope.length);
+  // An answer is written for a region (it's in the prompt), so a region change re-asks the same question.
+  const [answeredFor, setAnsweredFor] = useState(region);
+  useEffect(() => {
+    if (region !== answeredFor && result && !asking) ask(q);
+  }, [region]); // eslint-disable-line react-hooks/exhaustive-deps
   const toggle = (m: string) => setScope(scope.includes(m) ? scope.filter((x) => x !== m) : [...scope, m]);
   const reset = () => { setQ(""); setResult(null); setScope([]); scrollTo({ top: 0 }); };
   const edit = (v: string) => { setQ(v); setResult(null); }; // a new query invalidates the last answer
@@ -47,6 +53,7 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
     setQ(question);
     scrollTo({ top: 0 });
     setAsking(true);
+    setAnsweredFor(region);
     setResult(null);
     try {
       const res = await fetch("/api/ask", {
@@ -103,7 +110,7 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
         </section>
 
         {active
-          ? <Results q={q} entries={entries} result={result} asking={asking} proxy={proxy} papers={papers} />
+          ? <Results q={q} entries={entries} result={result} asking={asking} proxy={proxy} papers={papers} region={region} missing={missing} />
           : children}
       </main>
 

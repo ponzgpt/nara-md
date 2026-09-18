@@ -49,6 +49,10 @@ question ─┬─ lib/search.ts ───────── curated library (da
 
 Add `{"q": "<exact title>", "soc": ["ACNS"], "mod": ["EEG"], "type": "criteria|terminology|technical|practice"}` to `data/seeds.json`, then run `npm run library` followed by `npm test`. The script prints any seed it can't match with confidence.
 
+### Why filtering runs in the browser
+
+The curated library ships with the page as about 60 KB of JSON. Search, modality scope and region ordering run client-side, instantly and with no request, using the same `lib/search.ts` the server uses to pick the answer's sources. The server is called only to search the literature and write the answer. Move library filtering behind an API when either (a) the library reaches thousands of documents, or (b) it includes licensed content that can't be shipped to the browser, which will happen with the paid connectors.
+
 ## Sources and access
 
 | Kind | Sources | How |

@@ -206,3 +206,6 @@ button.icon:hover svg { transform: rotate(-15deg); }
 .results .handoff { margin-top: 1rem; }
 @media (prefers-reduced-motion: reduce) { .examples, .menu { animation: none; } }
 @media (max-width: 520px) { .pill .label { display: none; } .pill { padding: 0 .65rem; } .bar nav { gap: .3rem; } }
+.tag.local { background: var(--blush); color: var(--on-blush); }
+.tag.intl { background: transparent; color: var(--text-muted); border: 1px solid var(--divider); }
+.region-note { font-size: .85rem; color: var(--text-muted); background: var(--tint-soft); border: 1px dashed var(--border); border-radius: 12px; padding: .7rem .9rem; margin: 0 0 1rem; }
