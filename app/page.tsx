@@ -1,109 +1,120 @@
-"use client";
-// One screen: search box that filters instantly and asks on Enter, modality chips that scope both,
-// region in the header. Every preference is adjusted in place and remembered in the browser.
-import { useEffect, useMemo, useRef, useState } from "react";
+// Landing page: what Nara does for a clinical neurophysiologist, in plain words. The product lives at /search.
+import Link from "next/link";
 import library from "@/data/library.json";
-import { rank, type Entry } from "@/lib/search";
-import { boostFor, MODALITIES, REGIONS } from "@/lib/catalog";
-import { useStored } from "@/lib/use-stored";
-import type { AskResponse } from "@/lib/types";
-import { Answer } from "@/components/Answer";
-import { GuidelineList } from "@/components/GuidelineList";
-import { SourcesSheet } from "@/components/SourcesSheet";
+import { Brand } from "@/components/Brand";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
-const LIBRARY = library as Entry[];
+const FEATURES = [
+  { title: "Speaks neurophysiology", body: "Type the way you write reports: CTS, NCSE, LPD, SSEP, MSLT. Nara knows what you mean." },
+  { title: "Cites everything", body: "Every sentence points to the guideline or paper behind it. If the sources don't settle the question, Nara says so instead of filling the gap." },
+  { title: "Knows where you practise", body: "BSCN in the UK, ACNS and AANEM in the US, JSCN in Japan. The international bodies always, your local ones first." },
+  { title: "Fits your list", body: "Carpal tunnels on a Tuesday, or the whole EEG, EMG and IONM service. Scope Nara to what you actually report." },
+  { title: "Uses the access you already have", body: "Add your library's OpenAthens or EZproxy link and paywalled papers open through your trust or university." },
+  { title: "Ready for the report", body: "Answers end with one line of wording you can paste straight in. The citations stay with you, not in the report." },
+];
 
-export default function Home() {
-  const [region, setRegion] = useStored("nara.region", "global");
-  const [scope, setScope] = useStored<string[]>("nara.scope", []);
-  const [proxy, setProxy] = useStored("nara.proxy", "");
-  const [q, setQ] = useState("");
-  const [result, setResult] = useState<AskResponse | null>(null);
-  const [asking, setAsking] = useState(false);
-  const input = useRef<HTMLInputElement>(null);
-  const sources = useRef<HTMLDialogElement>(null);
+const SOCIETIES = ["IFCN", "ILAE", "ACNS", "AANEM", "AASM", "BSCN", "EAN", "PNS", "ISIN", "ISCEV"];
 
-  useEffect(() => {
-    const focus = (e: KeyboardEvent) => {
-      if (e.key === "/" && !(e.target instanceof HTMLInputElement)) { e.preventDefault(); input.current?.focus(); }
-    };
-    addEventListener("keydown", focus);
-    return () => removeEventListener("keydown", focus);
-  }, []);
+const FAQ = [
+  { q: "Is it free?", a: "Yes, while Nara is in pilot. There's no account to create and nothing to install." },
+  { q: "Where do the answers come from?", a: `A curated library of ${library.length} society guidelines, each checked against its DOI or PubMed record, plus a live search of Europe PMC, which includes MEDLINE. An AI model writes the answer from those sources only, and shows you every one.` },
+  { q: "Does it replace OpenEvidence or Consensus?", a: "No. They cover all of medicine. Nara covers one specialty in depth. When your question is broad, Nara passes it to them in one click." },
+  { q: "What happens to my question?", a: "It goes to Europe PMC and to an AI provider to write the answer. Nara stores nothing. Some free AI providers may keep prompts, which is one more reason never to type patient details." },
+  { q: "Who is it for?", a: "Consultants, trainees and clinical physiologists in neurophysiology, and neurologists who report their own studies." },
+];
 
-  const entries = useMemo(() => rank(LIBRARY, q, { modalities: scope, boostSocieties: boostFor(region) }), [q, scope, region]);
-  const toggle = (m: string) => setScope(scope.includes(m) ? scope.filter((x) => x !== m) : [...scope, m]);
-
-  async function ask(e: React.FormEvent) {
-    e.preventDefault();
-    if (!q.trim() || asking) return;
-    setAsking(true);
-    setResult(null);
-    try {
-      const res = await fetch("/api/ask", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ q, region, modalities: scope }),
-      });
-      setResult(await res.json());
-    } catch {
-      setResult({ answer: null, sources: [], error: "Network error. The library below still works." });
-    } finally {
-      setAsking(false);
-    }
-  }
-
+export default function Landing() {
   return (
     <>
       <header className="bar">
-        <span className="brand">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" /><path d="M5 17h5l2-6 3 12 3-15 2 9h7" /></svg>
-          Nara<sup>MD</sup>
-        </span>
+        <Brand />
         <nav>
-          <button className="ghost" onClick={() => sources.current?.showModal()}>Sources</button>
-          <label className="region">
-            <span className="sr-only">Region</span>
-            <select value={region} onChange={(e) => setRegion(e.target.value)}>
-              {Object.entries(REGIONS).map(([k, r]) => <option key={k} value={k}>{r.label}</option>)}
-            </select>
-          </label>
+          <a className="ghost-link" href="#how">How it works</a>
+          <Link className="btn small" href="/search">Open Nara</Link>
+          <ThemeToggle />
         </nav>
       </header>
 
-      <main>
-        <section className="hero">
+      <main className="landing">
+        <section className="l-hero">
+          <p className="kicker">For clinical neurophysiologists</p>
           <h1>The guideline, before the report is signed.</h1>
-          <p className="lede">Society guidance and literature for EEG, EMG/NCS, evoked potentials, sleep and IONM. Cited, in seconds.</p>
-          <form onSubmit={ask} className="search" role="search">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-            <input ref={input} value={q} onChange={(e) => setQ(e.target.value)} autoFocus
-              placeholder="Search or ask a question" aria-label="Search guidelines or ask a question" />
-            <button type="submit" disabled={!q.trim() || asking}>{asking ? "Reading…" : "Ask"}</button>
-          </form>
-          <p className="hint">Try “LPD vs GPD”, “CTS NCS”, “MSLT”. <kbd>/</kbd> to focus · no patient identifiers</p>
-          <div className="chips" role="group" aria-label="Scope to modalities">
-            {MODALITIES.map((m) => (
-              <button key={m} className="chip" aria-pressed={scope.includes(m)} onClick={() => toggle(m)}>{m}</button>
+          <p className="lede">
+            The study is done. One question stands between you and the signature.
+            Nara finds the society guidance that settles it, cites it, and gives you a line for the report.
+          </p>
+          <div className="ctas">
+            <Link className="btn" href="/search">Open Nara. It&apos;s free</Link>
+            <a className="btn ghost-btn" href="#how">See how it works</a>
+          </div>
+          <p className="micro">No account · No patient data · EEG, EMG/NCS, evoked potentials, sleep, IONM</p>
+
+          <figure className="preview" aria-label="Example answer">
+            <div className="preview-q"><span>Example</span>Right hemispheric periodic discharges at 1 Hz with superimposed fast activity. What do I call it?</div>
+            <p>Under the ACNS 2021 critical care terminology these are <b>lateralized periodic discharges</b> with the “plus” modifier for superimposed fast activity: <b>LPDs+F</b><sup>1</sup>.</p>
+            <div className="wording"><span className="eyebrow">Report wording</span><p>Lateralized periodic discharges, right hemisphere, 1 Hz, with superimposed fast activity (LPDs+F).</p></div>
+            <p className="preview-cite"><sup>1</sup> American Clinical Neurophysiology Society&apos;s Standardized Critical Care EEG Terminology: 2021 Version · <em>J Clin Neurophysiol</em></p>
+          </figure>
+        </section>
+
+        <section className="l-block narrow">
+          <h2>You know this moment.</h2>
+          <p>LPDs or GPDs? Mild or moderate carpal tunnel? Does this MSLT meet criteria?</p>
+          <p>You know roughly where the answer is: somewhere between an ACNS PDF, a 2008 paper in <em>Clinical Neurophysiology</em> and a paywall your trust may or may not cover.</p>
+          <p>Twenty minutes later, the report is still open.</p>
+          <p className="punch">Nara gives you those twenty minutes back.</p>
+        </section>
+
+        <section className="l-block">
+          <h2 className="center">What it does for you</h2>
+          <div className="grid">
+            {FEATURES.map((f) => (
+              <article key={f.title} className="feature"><h3>{f.title}</h3><p>{f.body}</p></article>
             ))}
-            {scope.length > 0 && <button className="chip clear" onClick={() => setScope([])}>Clear</button>}
           </div>
         </section>
 
-        <section aria-live="polite">
-          {asking && <div className="card skeleton" aria-label="Reading sources"><i /><i /><i /></div>}
-          {result && <Answer r={result} q={q} proxy={proxy} />}
+        <section className="l-block" id="how">
+          <h2 className="center">Three steps. About thirty seconds.</h2>
+          <ol className="steps">
+            <li><b>Ask</b><span>Type the question as it is in your head, shorthand included.</span></li>
+            <li><b>Read</b><span>A short answer, guideline first, with every source one click away.</span></li>
+            <li><b>Paste</b><span>Copy the report wording. Sign. Next patient.</span></li>
+          </ol>
         </section>
 
-        <section>
-          <h2 className="eyebrow">{q || scope.length ? `${entries.length} guidelines` : "Library"}</h2>
-          <GuidelineList entries={entries} proxy={proxy} />
+        <section className="l-block narrow center">
+          <h2>Built on the guidance you already trust</h2>
+          <p className="soc-strip">{SOCIETIES.join(" · ")}</p>
+          <p className="fine">Plus the open literature through Europe PMC. Nara is independent and is not affiliated with or endorsed by these organisations.</p>
+        </section>
+
+        <section className="l-block narrow">
+          <h2>What Nara is not</h2>
+          <ul className="nots">
+            <li><b>Not a substitute for your judgement.</b> It points to the evidence. You read the trace.</li>
+            <li><b>Not a general chatbot.</b> It answers from published sources and shows you each one.</li>
+            <li><b>Not a place for patient data.</b> Ask about the finding, never about the patient.</li>
+          </ul>
+        </section>
+
+        <section className="l-block narrow">
+          <h2>Questions</h2>
+          {FAQ.map((f) => (
+            <details key={f.q} className="faq"><summary>{f.q}</summary><p>{f.a}</p></details>
+          ))}
+        </section>
+
+        <section className="l-final">
+          <h2>Your next report deserves thirty seconds, not thirty tabs.</h2>
+          <Link className="btn" href="/search">Open Nara</Link>
         </section>
       </main>
 
-      <footer className="foot">Nara MD answers from published sources and does not replace clinical judgement.</footer>
-
-      <SourcesSheet ref={sources} region={region} proxy={proxy} onProxy={setProxy} />
+      <footer className="foot">
+        Nara MD answers from published sources and does not replace clinical judgement ·{" "}
+        <a href="https://github.com/ponzgpt/nara-md" target="_blank" rel="noreferrer">Source on GitHub</a>
+      </footer>
     </>
   );
 }

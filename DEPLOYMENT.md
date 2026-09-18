@@ -32,11 +32,15 @@ The script:
 
 ## Secrets
 
-`ANTHROPIC_API_KEY` is optional. Without it, Nara returns ranked sources only. Set it on the server, never in the repo:
+The LLM key is optional; without one, Nara returns ranked sources only. Set it on the server, never in the repo. For the MVP, use a free OpenRouter key (https://openrouter.ai/keys):
 
 ```bash
+ssh hoid 'docker service update --env-add OPENROUTER_API_KEY=sk-or-... nara-md'
+# later, for Claude Opus 5 (takes precedence):
 ssh hoid 'docker service update --env-add ANTHROPIC_API_KEY=sk-ant-... nara-md'
 ```
+
+Env vars survive `scripts/deploy.sh`, because it only swaps the image.
 
 `/api/ask` is rate-limited per IP (20 requests per 10 minutes, see `lib/rate-limit.ts`), so a public URL can't drain the key.
 

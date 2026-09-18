@@ -34,4 +34,5 @@ Colour is never the only signal. Every tag also has a text label.
 2. Modality chips and the region selector take effect immediately and are remembered in the browser. There is no settings screen.
 3. The only setting that isn't visible on the main screen is the library proxy prefix. It lives in **Sources**, next to what it affects.
 4. Motion is limited to hover states and the loading shimmer. Both turn off under `prefers-reduced-motion`.
-5. Focus rings are always visible, the page works with the keyboard alone (<kbd>/</kbd> focuses search) and new answers are announced to screen readers through a live region.
+5. The page is light by default, whatever the OS setting. Dark mode is opt-in through the header toggle, stored in the browser and applied before first paint so the page never flashes the wrong theme.
+6. Focus rings are always visible, the page works with the keyboard alone (<kbd>/</kbd> focuses search) and new answers are announced to screen readers through a live region.

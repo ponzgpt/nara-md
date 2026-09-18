@@ -14,7 +14,12 @@ npm run dev        # http://localhost:3000
 npm test           # ranking, scoping and library-integrity checks
 ```
 
-`ANTHROPIC_API_KEY` (in `.env.local`) is optional. Without it Nara still searches and ranks sources. With it, Claude Opus 5 writes the answer from the retrieved sources only, and every claim carries a citation.
+Written answers need one LLM key in `.env.local` (see `.env.example`). With neither key, Nara still searches and ranks sources:
+
+| Key | Model | When |
+|---|---|---|
+| `OPENROUTER_API_KEY` | Free OpenRouter models, tried in order (DeepSeek V4 Flash → Gemma 4 31B → Qwen 3.8). Override the list with `OPENROUTER_MODELS` | MVP default, costs nothing |
+| `ANTHROPIC_API_KEY` | Claude Opus 5 | Best answers. Takes precedence when set |
 
 ## How it works
 
@@ -22,13 +27,15 @@ npm test           # ranking, scoping and library-integrity checks
 question ─┬─ lib/search.ts ───────── curated library (data/library.json), jargon-aware, scoped by modality, boosted by region
           └─ lib/connectors/europepmc.ts ── live literature (title + abstract)
                      │
-          app/api/ask/route.ts ── numbered sources ──► Claude (optional) ──► answer [n] + "Report wording"
+          app/api/ask/route.ts ── numbered sources ──► lib/llm.ts (OpenRouter free / Claude) ──► answer [n] + "Report wording"
 ```
 
 | Path | Role |
 |---|---|
-| `app/page.tsx` | The single screen. Typing filters the library, Enter asks. Chips and region change the results immediately and are remembered in the browser |
-| `components/` | `Answer` (citations, copyable report wording, hand-offs), `GuidelineList`, `SourcesSheet` (sources + library proxy) |
+| `app/page.tsx` | Landing page (`/`): what Nara does for a neurophysiologist |
+| `app/search/page.tsx` | The product (`/search`). Typing filters the library, Enter asks. Chips, region and theme change the page immediately and are remembered in the browser |
+| `lib/llm.ts` | Answer synthesis: chooses between Anthropic, OpenRouter and none, depending on which key is set |
+| `components/` | `Brand`, `ThemeToggle`, `Answer` (citations, copyable report wording, hand-offs), `GuidelineList`, `SourcesSheet` (sources + library proxy) |
 | `app/api/ask/route.ts` | Retrieval and synthesis. Validates input, rate-limits per IP, and never logs the question |
 | `lib/search.ts` | Token ranking with a table of field shorthand (CTS, LPD, NCSE, MSLT, SSEP…) |
 | `lib/catalog.ts` | Modalities, regions and their societies, connectors, citation links. **Adding a country or a source only means editing this data** |
@@ -74,4 +81,4 @@ Estimate: about **40–60k physicians** worldwide read neurophysiology, plus rou
 
 ## Privacy
 
-Questions go to Europe PMC and, when a key is set, to Anthropic. Nothing is stored or logged server-side, and preferences stay in the browser. Don't enter patient identifiers.
+Questions go to Europe PMC and, when a key is set, to the LLM provider. Free OpenRouter models may keep prompts. Nothing is stored or logged server-side, and preferences stay in the browser. Don't enter patient identifiers.

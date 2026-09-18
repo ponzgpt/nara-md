@@ -1,11 +1,11 @@
-// POST /api/ask — retrieve (curated guidelines + Europe PMC), then synthesize a cited answer with Claude.
-// Without ANTHROPIC_API_KEY it returns the ranked sources only, so the product works with zero secrets.
-import Anthropic from "@anthropic-ai/sdk";
+// POST /api/ask — retrieve (curated guidelines + Europe PMC), then synthesize a cited answer (lib/llm.ts).
+// With no LLM key configured it returns the ranked sources only, so the product works with zero secrets.
 import library from "@/data/library.json";
 import { rank, tokens, type Entry } from "@/lib/search";
 import { boostFor, MODALITIES, REGIONS } from "@/lib/catalog";
 import { searchLiterature } from "@/lib/connectors/europepmc";
 import { allow } from "@/lib/rate-limit";
+import { synthesize } from "@/lib/llm";
 import type { AskResponse, Source } from "@/lib/types";
 
 const SYSTEM = `You support clinical neurophysiologists (EEG, EMG/NCS, evoked potentials, PSG, IONM) who are finishing a study report.
@@ -38,26 +38,15 @@ export async function POST(req: Request) {
     ...literature,
   ].map((s, i) => ({ ...s, n: i + 1 }));
 
-  if (!process.env.ANTHROPIC_API_KEY) return reply({ answer: null, sources, note: "Showing ranked sources. Written answers are not enabled on this server." });
-
   const context = sources.map((s) => `[${s.n}] (${s.kind}) ${s.title} — ${s.meta}\n${s.abstract || "(no abstract)"}`).join("\n\n");
+  const prompt = `Region: ${REGIONS[region].label}. Scope: ${modalities.join(", ") || "all modalities"}.\n\nSources:\n${context}\n\nQuestion: ${question}`;
   try {
-    const msg = await new Anthropic().beta.messages.create({
-      model: "claude-opus-5",
-      max_tokens: 16000,
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
-      output_config: { effort: "low" }, // the clinician is mid-report: latency beats depth
-      system: SYSTEM,
-      messages: [{
-        role: "user",
-        content: `Region: ${REGIONS[region].label}. Scope: ${modalities.join(", ") || "all modalities"}.\n\nSources:\n${context}\n\nQuestion: ${question}`,
-      }],
-    });
-    if (msg.stop_reason === "refusal") return reply({ answer: null, sources, note: "No written answer for this question. Sources are below." });
-    return reply({ answer: msg.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join(""), sources });
+    const { text, refused } = await synthesize(SYSTEM, prompt);
+    if (refused) return reply({ answer: null, sources, note: "No written answer for this question. Sources are below." });
+    if (!text) return reply({ answer: null, sources, note: "Showing ranked sources. Written answers are not enabled on this server." });
+    return reply({ answer: text, sources });
   } catch (err) {
-    console.error("anthropic:", err instanceof Anthropic.APIError ? `${err.status} ${err.name}` : err); // never log the question
-    return reply({ answer: null, sources, note: "The answer service is unavailable right now. Sources are below." });
+    console.error("llm:", err instanceof Error ? err.message : err); // never log the question
+    return reply({ answer: null, sources, note: "The answer service is busy right now. Sources are below." });
   }
 }

@@ -22,14 +22,13 @@
   --font-stack: var(--font), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #08171b; --surface: #0f2429; --surface-2: #132d33; --ink: #e8f3f2; --muted: #93acb0; --hair: #1f3b41;
-    --teal: #5fd4c8; --teal-hover: #86e2d8; --on-teal: #062024; --aqua: #0f3431;
-    --pink: #36192a; --rose: #f4a9c1; --wash-a: #0d3533; --wash-b: #2c1522; --amber-bg: #2e2210; --amber: #ffc46b;
-    --shadow: 0 0 0 1px var(--hair);
-    color-scheme: dark;
-  }
+/* Dark is opt-in (toggle in the header); light is the brand default whatever the OS says. */
+:root[data-theme="dark"] {
+  --bg: #08171b; --surface: #0f2429; --surface-2: #132d33; --ink: #e8f3f2; --muted: #93acb0; --hair: #1f3b41;
+  --teal: #5fd4c8; --teal-hover: #86e2d8; --on-teal: #062024; --aqua: #0f3431;
+  --pink: #36192a; --rose: #f4a9c1; --wash-a: #0d3533; --wash-b: #2c1522; --amber-bg: #2e2210; --amber: #ffc46b;
+  --shadow: 0 0 0 1px var(--hair);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -146,3 +145,58 @@ h1 { font-size: clamp(2.1rem, 5.6vw, 3.5rem); line-height: 1.06; letter-spacing:
   .row { padding: .9rem 1rem; }
   .card { padding: 1.2rem; }
 }
+
+/* Header icon button + link-styled buttons (shared by landing and app) */
+button.icon { background: transparent; color: var(--ink); padding: .45rem; border: 1px solid var(--hair); display: grid; place-items: center; }
+button.icon:hover { background: var(--aqua); }
+button.icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.brand { color: var(--ink); } .brand:hover { text-decoration: none; }
+.btn { display: inline-block; font-weight: 600; border-radius: 999px; padding: .75rem 1.5rem; background: var(--teal); color: var(--on-teal); }
+.btn:hover { background: var(--teal-hover); text-decoration: none; }
+.btn.small { padding: .45rem 1rem; font-size: .9rem; }
+.ghost-btn { background: transparent; color: var(--teal); border: 1.5px solid var(--hair); }
+.ghost-btn:hover { background: var(--aqua); }
+.ghost-link { color: var(--muted); font-weight: 500; padding: .4rem .6rem; }
+
+/* Landing */
+.landing { max-width: 1040px; }
+.l-hero { text-align: center; padding: clamp(3rem, 10vh, 6rem) 0 2rem; }
+.l-hero h1 { max-width: 15ch; font-size: clamp(2.4rem, 6.4vw, 4.2rem); }
+.l-hero .lede { max-width: 38rem; font-size: clamp(1.05rem, 2vw, 1.22rem); color: var(--muted); }
+.kicker { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--rose); background: var(--pink); padding: .3rem .8rem; border-radius: 999px; margin: 0 0 1.4rem; }
+.ctas { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; }
+.micro { color: var(--muted); font-size: .84rem; margin: 1rem 0 0; }
+.preview { max-width: 640px; margin: 3.5rem auto 0; text-align: left; background: var(--surface); border: 1px solid var(--hair); border-radius: 22px; box-shadow: var(--shadow), 0 30px 60px -30px rgb(12 117 116 / .35); padding: 1.5rem 1.6rem; }
+.preview p { margin: 0 0 .8rem; }
+.preview sup { color: var(--teal); font-weight: 700; font-size: .68em; }
+.preview-q { font-weight: 600; background: var(--surface-2); border: 1px solid var(--hair); border-radius: 14px; padding: .8rem 1rem; margin-bottom: 1.1rem; }
+.preview-q span { display: inline-block; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--rose); background: var(--pink); border-radius: 999px; padding: .1rem .5rem; margin-right: .6rem; vertical-align: 2px; }
+.preview .wording p { padding-right: 0; }
+.preview-cite { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--hair); padding-top: .8rem; margin: .4rem 0 0 !important; }
+
+.l-block { padding: clamp(3rem, 8vh, 5rem) 0 0; }
+.l-block.narrow { max-width: 640px; margin: 0 auto; }
+.l-block h2, .l-final h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); letter-spacing: -.03em; line-height: 1.12; margin: 0 0 1.2rem; }
+.l-block p { font-size: 1.1rem; margin: 0 0 1rem; }
+.center { text-align: center; }
+.punch { font-weight: 700; color: var(--teal); font-size: 1.25rem !important; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.feature { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 1.4rem 1.5rem; box-shadow: var(--shadow); }
+.feature h3 { margin: 0 0 .45rem; font-size: 1.12rem; letter-spacing: -.01em; }
+.feature h3::before { content: ""; display: block; width: 28px; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--teal), var(--rose)); margin-bottom: .9rem; }
+.feature p { margin: 0; color: var(--muted); font-size: .98rem; }
+.steps { list-style: none; counter-reset: s; padding: 0; margin: 2rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.steps li { counter-increment: s; padding: 1.4rem; border-radius: var(--radius); background: var(--aqua); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--teal); color: var(--on-teal); font-weight: 700; margin-bottom: .8rem; }
+.steps b { display: block; font-size: 1.2rem; margin-bottom: .2rem; }
+.steps span { color: var(--ink); opacity: .8; }
+.soc-strip { font-weight: 700; font-size: 1.15rem !important; letter-spacing: .02em; color: var(--rose); }
+.fine { color: var(--muted); font-size: .88rem !important; }
+.nots { padding: 0; list-style: none; display: grid; gap: .8rem; }
+.nots li { padding: 1rem 1.2rem; border-left: 3px solid var(--rose); background: var(--surface); border-radius: 0 12px 12px 0; }
+.faq { border-bottom: 1px solid var(--hair); padding: .9rem 0; }
+.faq summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; }
+.faq p { color: var(--muted); font-size: 1rem !important; margin: .6rem 0 0 !important; }
+.l-final { text-align: center; margin: 5rem 0 2rem; padding: 3rem 1.5rem; border-radius: 28px; background: linear-gradient(135deg, var(--aqua), var(--pink)); }
+.l-final h2 { max-width: 20ch; margin: 0 auto 1.5rem; }
+@media (max-width: 520px) { .ghost-link { display: none; } }
