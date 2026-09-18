@@ -5,17 +5,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import library from "@/data/library.json";
 import { rank, type Entry } from "@/lib/search";
-import { boostFor, MODALITIES, REGIONS } from "@/lib/catalog";
+import { boostFor, DOC_TYPES, MODALITIES } from "@/lib/catalog";
 import { useStored } from "@/lib/use-stored";
 import type { AskResponse } from "@/lib/types";
-import { Answer } from "@/components/Answer";
-import { GuidelineList } from "@/components/GuidelineList";
+import { Results } from "@/components/Results";
+import { Examples } from "@/components/Examples";
+import { RegionMenu } from "@/components/RegionMenu";
 import { SourcesSheet } from "@/components/SourcesSheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const LIBRARY = library as Entry[];
+const SOCIETIES = new Set(LIBRARY.flatMap((e) => e.societies)).size;
+const COUNTS = DOC_TYPES.map((t) => ({ ...t, n: LIBRARY.filter((e) => e.type === t.id).length }));
 
-export function Home({ children }: { children: React.ReactNode }) {
+export function Home({ papers, children }: { papers: string; children: React.ReactNode }) {
   const [region, setRegion] = useStored("nara.region", "global");
   const [scope, setScope] = useStored<string[]>("nara.scope", []);
   const [proxy, setProxy] = useStored("nara.proxy", "");
@@ -37,6 +40,7 @@ export function Home({ children }: { children: React.ReactNode }) {
   const active = Boolean(q.trim() || result || asking || scope.length);
   const toggle = (m: string) => setScope(scope.includes(m) ? scope.filter((x) => x !== m) : [...scope, m]);
   const reset = () => { setQ(""); setResult(null); setScope([]); scrollTo({ top: 0 }); };
+  const edit = (v: string) => { setQ(v); setResult(null); }; // a new query invalidates the last answer
 
   async function ask(question: string) {
     if (!question.trim() || asking) return;
@@ -52,7 +56,7 @@ export function Home({ children }: { children: React.ReactNode }) {
       });
       setResult(await res.json());
     } catch {
-      setResult({ answer: null, sources: [], error: "Network error. The library below still works." });
+      setResult({ answer: null, sources: [], error: "Network error. The standards below still work." });
     } finally {
       setAsking(false);
     }
@@ -66,58 +70,41 @@ export function Home({ children }: { children: React.ReactNode }) {
           <span>Nara<b>MD</b></span>
         </a>
         <nav>
-          <button className="ghost" onClick={() => sources.current?.showModal()}>Sources</button>
-          <label className="region">
-            <span className="sr-only">Region</span>
-            <select value={region} onChange={(e) => setRegion(e.target.value)}>
-              {Object.entries(REGIONS).map(([k, r]) => <option key={k} value={k}>{r.label}</option>)}
-            </select>
-          </label>
+          <button className="pill" onClick={() => sources.current?.showModal()} title="Sources and library access" aria-label="Sources and library access">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5ZM13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13Z" /></svg>
+            <span className="label">Sources</span>
+          </button>
+          <RegionMenu value={region} onChange={setRegion} />
           <ThemeToggle />
         </nav>
       </header>
 
       <main className={active ? "home active" : "home"}>
         <section className="hero">
-          <p className="kicker">For clinical neurophysiologists</p>
-          <h1>Every standard in your field. One question away.</h1>
-          <p className="lede">
-            Criteria, terminology, technical standards and protocols from IFCN, ACNS, AANEM, ILAE, AASM and more.
-            Ask which one applies, and NaraMD shows you where it comes from.
-          </p>
+          <h1><span>Every standard in clinical neurophysiology.</span> <span>One question away.</span></h1>
+          <ul className="stats" aria-label="What NaraMD searches">
+            {COUNTS.map((c) => <li key={c.id}><b>{c.n}</b> {c.short}</li>)}
+            <li><b>{SOCIETIES}</b> societies</li>
+            <li><b>{papers}</b> papers</li>
+          </ul>
           <form onSubmit={(e) => { e.preventDefault(); ask(q); }} className="search" role="search">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-            <input ref={input} value={q} onChange={(e) => setQ(e.target.value)} autoFocus
+            <input ref={input} value={q} onChange={(e) => edit(e.target.value)} autoFocus
               placeholder="Ask about a standard, criterion or protocol" aria-label="Ask about a standard, criterion or protocol" />
             <button type="submit" disabled={!q.trim() || asking}>{asking ? "Reading…" : "Ask"}</button>
           </form>
-          <p className="hint">
-            Try{" "}
-            {["Awaji vs Gold Coast", "LPD vs GPD", "MSLT criteria", "EEG minimum standards"].map((ex, i) => (
-              <span key={ex}>{i > 0 && " · "}<button type="button" className="example" onClick={() => ask(ex)}>{ex}</button></span>
-            ))}
-          </p>
+          <Examples onPick={ask} />
           <div className="chips" role="group" aria-label="Scope to modalities">
             {MODALITIES.map((m) => (
               <button key={m} className="chip" aria-pressed={scope.includes(m)} onClick={() => toggle(m)}>{m}</button>
             ))}
             {scope.length > 0 && <button className="chip clear" onClick={() => setScope([])}>Clear</button>}
           </div>
-          <p className="micro">No account · no patient data · <kbd>/</kbd> to focus</p>
         </section>
 
-        {active ? (
-          <>
-            <section aria-live="polite">
-              {asking && <div className="card skeleton" aria-label="Reading sources"><i /><i /><i /></div>}
-              {result && <Answer r={result} q={q} proxy={proxy} />}
-            </section>
-            <section>
-              <h2 className="eyebrow">{entries.length} guidelines{scope.length ? ` · ${scope.join(", ")}` : ""}</h2>
-              <GuidelineList entries={entries} proxy={proxy} />
-            </section>
-          </>
-        ) : children}
+        {active
+          ? <Results q={q} entries={entries} result={result} asking={asking} proxy={proxy} papers={papers} />
+          : children}
       </main>
 
       <footer className="foot">

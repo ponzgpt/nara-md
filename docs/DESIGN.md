@@ -78,10 +78,20 @@ NaraMD helps clinical neurophysiologists work out which standard, criterion or p
 ## 4. Layout and behaviour
 
 1. **Home is the tool.** `/` shows the search box as the hero, like OpenEvidence. The marketing sections sit below and show only while idle. Typing, asking or picking a modality switches to results. Clicking the logo returns to idle.
-2. The search box filters the library as you type. Enter, or clicking an example, asks across all sources.
-3. Modality chips, region and theme apply immediately and are remembered in the browser. There is no settings page. The library proxy lives in **Sources**, next to what it affects.
-4. The page is light by default whatever the OS says. Dark is opt-in through the header toggle and applied before first paint.
-5. Motion is limited to hover states and the loading shimmer, and both respect `prefers-reduced-motion`. Focus is always visible, <kbd>/</kbd> focuses search, and answers are announced through a live region.
+2. **Headline:** "Every standard in clinical neurophysiology. / One question away." There is one sentence per line, broken by meaning and not by container width, and `text-wrap: balance` handles lines that still have to wrap. The second line, the promise, is set in `--primary`. There is no audience kicker: visitors are neurophysiologists and neurologists, and the headline already names the field.
+3. **Metrics under the headline** are real counts: documents per type from `data/library.json`, the number of societies, and the Europe PMC record count (fetched live, cached for a day). Don't round up and don't pad the numbers.
+4. **Examples rotate** three at a time every 6 s. They pause on hover or focus and stay still under `prefers-reduced-motion`. Clicking one asks it straight away. `lib/search.test.ts` fails if any example stops finding a document.
+5. **Results follow an ontology** of the question the clinician is trying to settle:
+   - **Answer**, when an LLM is configured: at most 5 sentences, then a **Bottom line**.
+   - **Standards** (left): curated society documents grouped by what they settle: *Criteria & grading*, *Terminology, classification & scoring*, *Technical standards*, *Practice guidelines & consensus*.
+   - **Literature** (right): Europe PMC.
+   - **Elsewhere**: hand-offs to PubMed, OpenEvidence and Consensus, at the foot of the literature column.
+
+   The two columns sit side by side at 960px and wider, and stack below that. Numbered badges match the `[n]` citations in the answer.
+6. **Header controls are one family:** Sources (pill), region (pill that opens a menu) and theme (round). All three are 36px high with the same border, a tint on hover and a press scale. On narrow screens, Sources collapses to its icon.
+7. Modality chips, region and theme apply immediately and persist in the browser. There is no settings page. The library proxy lives in **Sources**.
+8. The page is light by default whatever the OS says. Dark is opt-in and applied before first paint.
+9. Motion is limited to hover states, the menu pop, the example fade and the loading shimmer, and all of them respect `prefers-reduced-motion`. Focus is always visible, <kbd>/</kbd> focuses search, the region menu works with the arrow keys and Escape, and results are announced through a live region.
 
 ## 5. Voice
 

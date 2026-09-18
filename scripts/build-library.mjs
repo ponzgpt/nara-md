@@ -27,6 +27,7 @@ for (const s of seeds) {
     openAccess: h.isOpenAccess === "Y" || !!h.pmcid,
     abstract: (h.abstractText ?? "").replace(/<[^>]+>/g, "").slice(0, 1200),
     societies: s.soc,
+    type: s.type,
     modalities: s.mod,
     retired: /\[RETIRED\]/i.test(h.title),
   });

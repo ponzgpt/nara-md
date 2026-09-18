@@ -33,12 +33,13 @@ question ─┬─ lib/search.ts ───────── curated library (da
 | Path | Role |
 |---|---|
 | `app/page.tsx` | `/`: the home page *is* the tool. The search is the hero; the marketing below it (`components/Marketing.tsx`) shows only while idle. `/search` redirects here |
-| `components/Home.tsx` | Tool state: typing filters, Enter or an example asks, and chips/region/theme apply instantly and persist. The logo returns to idle |
+| `components/Home.tsx` | Tool state and hero: headline, live metrics, search, rotating examples (`Examples`), modality chips. The logo returns to idle |
+| `components/Results.tsx` | Answer, then **Standards** (grouped by document type) and **Literature** side by side, then hand-offs. Numbers match the `[n]` citations |
 | `lib/llm.ts` | Answer synthesis: chooses between Anthropic, OpenRouter and none, depending on which key is set |
-| `components/` | `ThemeToggle`, `Answer` (citations, copyable bottom line, hand-offs), `GuidelineList`, `SourcesSheet` (sources + library proxy) |
+| `components/` | `Answer`, `StandardsList`, `RegionMenu`, `ThemeToggle`, `SourcesSheet` (sources + library proxy) |
 | `app/api/ask/route.ts` | Retrieval and synthesis. Validates input, rate-limits per IP, and never logs the question |
-| `lib/search.ts` | Token ranking with a table of field shorthand (CTS, LPD, NCSE, MSLT, SSEP…) |
-| `lib/catalog.ts` | Modalities, regions and their societies, connectors, citation links. **Adding a country or a source only means editing this data** |
+| `lib/search.ts` | Ranking. Shorthand (CIDP, LPD, MSLT…) expands to phrases and weighs double. Generic words ("criteria", "standards") refine a match but can't make one. Documents covering more of the question's concepts win |
+| `lib/catalog.ts` | Modalities, regions and their societies, document types (the results ontology), rotating examples, connectors, citation links. **Adding a country or a source only means editing this data** |
 | `lib/connectors/` | One file per live source. Add new connectors here |
 | `data/seeds.json` → `scripts/build-library.mjs` → `data/library.json` | The library pipeline. Seeds are titles plus tags. The script resolves each one against Europe PMC to get a real DOI/PMID, drops errata and letters, and flags retired guidance. Run it with `npm run library` |
 | `app/tokens.css`, `docs/DESIGN.md` | Design standard: primitive and semantic colour tokens (Sterile Aqua + blush), measured contrast, type, layout, voice |
@@ -46,7 +47,7 @@ question ─┬─ lib/search.ts ───────── curated library (da
 
 ### Adding a guideline
 
-Add `{"q": "<exact title>", "soc": ["ACNS"], "mod": ["EEG"]}` to `data/seeds.json`, then run `npm run library` followed by `npm test`. The script prints any seed it can't match with confidence.
+Add `{"q": "<exact title>", "soc": ["ACNS"], "mod": ["EEG"], "type": "criteria|terminology|technical|practice"}` to `data/seeds.json`, then run `npm run library` followed by `npm test`. The script prints any seed it can't match with confidence.
 
 ## Sources and access
 

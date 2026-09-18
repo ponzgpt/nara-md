@@ -36,3 +36,21 @@ test("criteria questions find the criteria papers", () => {
   assert.match(top, /new diagnostic criteria for ALS/);
   assert.match(rank(lib, "EEG minimum standards", {})[0].title, /minimum/i);
 });
+
+test("generic words alone never make a match", () => {
+  assert.equal(rank(lib, "fnd criteria").length, 0);
+  assert.ok(rank(lib, "criteria").length > 0); // but a purely generic query still browses
+});
+
+test("every rotating example finds a document", async () => {
+  const { EXAMPLES } = await import("./catalog.ts");
+  for (const ex of EXAMPLES) assert.ok(rank(lib, ex).length > 0, `no match for example "${ex}"`);
+});
+
+test("every entry has a document type", () => {
+  for (const e of lib) assert.ok(["criteria", "terminology", "technical", "practice"].includes(e.type), e.title);
+});
+
+test("the document covering more of the question wins", () => {
+  assert.match(rank(lib, "CIDP electrodiagnostic criteria")[0].title, /chronic inflammatory demyelinating/i);
+});

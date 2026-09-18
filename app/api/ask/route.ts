@@ -28,9 +28,13 @@ export async function POST(req: Request) {
   if (!question) return reply({ answer: null, sources: [], error: "Empty question." }, 400);
 
   const guidelines = rank(library as Entry[], question, { modalities, boostSocieties: boostFor(region) }).slice(0, 6);
-  // Short jargon queries ("CTS NCS") go to Europe PMC expanded; full sentences go as written.
-  // ponytail: word-count heuristic; a proper query rewriter (or letting Claude write the query) is the upgrade.
-  const literature = await searchLiterature(question.split(/\s+/).length <= 3 ? tokens(question).join(" ") : question);
+  // Short jargon queries ("fnd criteria") go to Europe PMC as expanded phrases; full sentences go as written.
+  // ponytail: word-count heuristic; letting the LLM write the literature query is the upgrade.
+  // If the expansion is too strict (e.g. "Awaji vs Gold Coast"), retry with the user's own words, which
+  // for comparisons finds exactly the papers that discuss both sides.
+  const short = question.split(/\s+/).length <= 4;
+  let literature = await searchLiterature(short ? tokens(question) : question);
+  if (short && !literature.length) literature = await searchLiterature(question.replace(/\b(vs|versus|or)\b/gi, " "));
   const sources: Source[] = [
     ...guidelines.map((e) => ({
       kind: "guideline" as const, title: e.title, meta: `${e.societies.join(" · ")} · ${e.journal} ${e.year}`,

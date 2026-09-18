@@ -7,17 +7,34 @@ export const MODALITIES = [
 
 // Global bodies apply everywhere; each region adds the societies whose guidance local practice follows.
 export const GLOBAL_SOCIETIES = ["IFCN", "ILAE", "WFN", "ISCEV", "ISIN"];
-export const REGIONS: Record<string, { label: string; societies: string[] }> = {
-  global: { label: "Global", societies: [] },
-  us: { label: "United States", societies: ["ACNS", "AANEM", "AAN", "AASM", "ASNM"] },
-  uk: { label: "United Kingdom", societies: ["BSCN", "EAN"] },
-  es: { label: "Spain", societies: ["SENFC", "EAN"] },
-  de: { label: "Germany", societies: ["DGKN", "EAN"] },
-  eu: { label: "Europe (other)", societies: ["EAN", "EFNS", "PNS"] },
-  jp: { label: "Japan", societies: ["JSCN"] },
-  cn: { label: "China", societies: [] },
-  latam: { label: "Latin America", societies: ["ACNS", "AANEM"] },
+export const REGIONS: Record<string, { label: string; short: string; societies: string[] }> = {
+  global: { label: "Global", short: "Global", societies: [] },
+  us: { label: "United States", short: "US", societies: ["ACNS", "AANEM", "AAN", "AASM", "ASNM"] },
+  uk: { label: "United Kingdom", short: "UK", societies: ["BSCN", "EAN"] },
+  es: { label: "Spain", short: "ES", societies: ["SENFC", "EAN"] },
+  de: { label: "Germany", short: "DE", societies: ["DGKN", "EAN"] },
+  eu: { label: "Europe (other)", short: "EU", societies: ["EAN", "EFNS", "PNS"] },
+  jp: { label: "Japan", short: "JP", societies: ["JSCN"] },
+  cn: { label: "China", short: "CN", societies: [] },
+  latam: { label: "Latin America", short: "LatAm", societies: ["ACNS", "AANEM"] },
 };
+
+// The ontology results are grouped by: what kind of question a document settles. Order = display order.
+export const DOC_TYPES = [
+  { id: "criteria", label: "Criteria & grading", short: "criteria sets" },
+  { id: "terminology", label: "Terminology, classification & scoring", short: "terminologies & classifications" },
+  { id: "technical", label: "Technical standards", short: "technical standards" },
+  { id: "practice", label: "Practice guidelines & consensus", short: "practice guidelines" },
+] as const;
+
+// Rotating search suggestions. Each one shows a different thing NaraMD settles, and lib/search.test.ts
+// checks that every one of them finds a document in the library.
+export const EXAMPLES = [
+  "Awaji vs Gold Coast", "LPD vs GPD", "CTS severity grading",
+  "Seizure classification 2017 vs 2025", "EEG minimum recording standards", "Hypopnea scoring rules",
+  "NCSE Salzburg criteria", "MSLT criteria", "CIDP electrodiagnostic criteria",
+  "Brain death EEG standards", "MEP monitoring in IONM", "TMS safety screening",
+];
 
 export const SOCIETY_SITES: Record<string, string> = {
   IFCN: "https://www.ifcn.info", ACNS: "https://www.acns.org", AANEM: "https://www.aanem.org",
