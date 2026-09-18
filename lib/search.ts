@@ -12,7 +12,8 @@ export type Entry = {
 const SYNONYMS: Record<string, string> = {
   cts: "carpal tunnel", ncs: "nerve conduction electrodiagnostic", emg: "electromyography electrodiagnostic",
   edx: "electrodiagnostic", une: "ulnar neuropathy elbow", sfemg: "single fiber",
-  als: "amyotrophic lateral sclerosis als", mnd: "motor neuron amyotrophic als",
+  als: "amyotrophic lateral sclerosis als", awaji: "electrodiagnostic criteria als", gold: "diagnostic criteria als",
+  minimum: "minimum technical standards requirements", mnd: "motor neuron amyotrophic als",
   cidp: "chronic inflammatory demyelinating polyradiculoneuropathy", gbs: "guillain barre",
   mmn: "multifocal motor neuropathy", dsp: "distal symmetric polyneuropathy",
   ceeg: "continuous eeg critically ill", icu: "critical care critically ill",

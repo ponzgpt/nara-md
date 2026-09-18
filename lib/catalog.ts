@@ -28,15 +28,15 @@ export const SOCIETY_SITES: Record<string, string> = {
 };
 
 // How each source reaches the clinician:
-//   live  — queried by Nara on every question
+//   live  — queried by NaraMD on every question
 //   proxy — paywalled DOIs opened through the user's own library proxy (EZproxy / OpenAthens prefix)
 //   link  — hand-off, with the question prefilled when the URL ends in "="
 export type Connector = { id: string; name: string; kind: "live" | "proxy" | "link"; access: string; note: string; url?: string; handoff?: boolean };
 export const CONNECTORS: Connector[] = [
-  { id: "nara", name: "Nara guideline library", kind: "live", access: "Open", note: "Curated society guidance, every entry resolved to a DOI or PMID." },
+  { id: "nara", name: "NaraMD guideline library", kind: "live", access: "Open", note: "Curated society guidance, every entry resolved to a DOI or PMID." },
   { id: "epmc", name: "Europe PMC (includes MEDLINE/PubMed)", kind: "live", access: "Open", note: "Live literature search with open-access flags." },
   { id: "pubmed", name: "PubMed", kind: "link", access: "Open", note: "Open the same query in PubMed.", url: "https://pubmed.ncbi.nlm.nih.gov/?term=", handoff: true },
-  { id: "openevidence", name: "OpenEvidence", kind: "link", access: "Free for verified HCPs", note: "No public API; Nara hands off the question.", url: "https://www.openevidence.com/", handoff: true },
+  { id: "openevidence", name: "OpenEvidence", kind: "link", access: "Free for verified HCPs", note: "No public API; NaraMD hands off the question.", url: "https://www.openevidence.com/", handoff: true },
   { id: "consensus", name: "Consensus", kind: "link", access: "Freemium", note: "General research engine for broad questions.", url: "https://consensus.app/results/?q=", handoff: true },
   { id: "cochrane", name: "Cochrane Library", kind: "proxy", access: "Institutional / national licence", note: "Opened through your library proxy." },
   { id: "embase", name: "Embase", kind: "proxy", access: "Institutional", note: "Opened through your library proxy." },

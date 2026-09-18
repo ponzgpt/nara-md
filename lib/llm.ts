@@ -39,7 +39,7 @@ async function openrouter(system: string, user: string): Promise<Synthesis> {
       authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
       "content-type": "application/json",
       "http-referer": "https://naramd.technoir.cloud",
-      "x-title": "Nara MD",
+      "x-title": "NaraMD",
     },
     body: JSON.stringify({
       models: FREE_MODELS,

@@ -1,5 +1,5 @@
 "use client";
-// A cited answer: body with [n] superscripts, copyable report wording, numbered sources, hand-offs.
+// A cited answer: body with [n] superscripts, a copyable bottom line, numbered sources, hand-offs.
 import { CONNECTORS, citationHref } from "@/lib/catalog";
 import type { AskResponse, Source } from "@/lib/types";
 
@@ -8,7 +8,7 @@ const stripCites = (t: string) => t.replace(/\s*\[\d+(?:,\s*\d+)*\]/g, "");
 
 export function Answer({ r, q, proxy }: { r: AskResponse; q: string; proxy: string }) {
   const byN = new Map(r.sources.map((s) => [s.n, s]));
-  const [body, wording] = (r.answer ?? "").split(/Report wording:\s*/);
+  const [body, wording] = (r.answer ?? "").split(/Bottom line:\s*/);
 
   const cite = (text: string) => text.split(CITE).map((part, i) => {
     const ns = part.match(/^\[([\d,\s]+)\]$/)?.[1].split(",").map(Number);
@@ -26,7 +26,7 @@ export function Answer({ r, q, proxy }: { r: AskResponse; q: string; proxy: stri
       {body.trim() && body.trim().split(/\n{2,}/).map((p, i) => <p key={i}>{cite(p)}</p>)}
       {wording && (
         <div className="wording">
-          <span className="eyebrow">Report wording</span>
+          <span className="eyebrow">Bottom line</span>
           <p>{cite(wording.trim())}</p>
           <button className="ghost" onClick={() => navigator.clipboard.writeText(stripCites(wording.trim()))}>Copy</button>
         </div>

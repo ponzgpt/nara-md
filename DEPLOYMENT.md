@@ -32,7 +32,7 @@ The script:
 
 ## Secrets
 
-The LLM key is optional; without one, Nara returns ranked sources only. Set it on the server, never in the repo. For the MVP, use a free OpenRouter key (https://openrouter.ai/keys):
+The LLM key is optional; without one, NaraMD returns ranked sources only. Set it on the server, never in the repo. For the MVP, use a free OpenRouter key (https://openrouter.ai/keys):
 
 ```bash
 ssh hoid 'docker service update --env-add OPENROUTER_API_KEY=sk-or-... nara-md'

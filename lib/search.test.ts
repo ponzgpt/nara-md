@@ -29,3 +29,10 @@ test("retired guidance ranks below current guidance on the same topic", () => {
 test("no errata or letters slipped into the library", () => {
   for (const e of lib) assert.doesNotMatch(e.title, /\b(erratum|corrigendum)\b|^(response|reply|comment)/i, e.title);
 });
+
+test("criteria questions find the criteria papers", () => {
+  const top = rank(lib, "Awaji vs Gold Coast").slice(0, 2).map((e) => e.title).join(" | ");
+  assert.match(top, /criteria for diagnosis of ALS/);
+  assert.match(top, /new diagnostic criteria for ALS/);
+  assert.match(rank(lib, "EEG minimum standards", {})[0].title, /minimum/i);
+});

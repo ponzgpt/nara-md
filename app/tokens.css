@@ -1,0 +1,87 @@
+/* NaraMD design tokens — the single source of truth for colour. See docs/DESIGN.md.
+   Palette: "Sterile Aqua" (media.io medical palettes) + blush from "Neonatal Hush".
+   Two layers:
+     1. Primitives (--p-*)  raw palette values. Never used directly by components.
+     2. Semantics  (--*)    what components use. Themes only remap this layer.
+   Every text/background pair listed in DESIGN.md meets WCAG 2.2 AA (≥ 4.5:1). */
+
+:root {
+  /* 1 · Primitives */
+  --p-white: #ffffff;
+  --p-aqua-50: #f5fbfd;   /* derived: half-step lighter than aqua-100 */
+  --p-aqua-100: #eaf7fb;  /* Sterile Aqua */
+  --p-aqua-200: #bfeaf2;  /* Sterile Aqua */
+  --p-aqua-400: #63c9d6;  /* Sterile Aqua: decorative only in light (1.9:1 on white) */
+  --p-aqua-700: #1a6f7a;  /* Sterile Aqua #1E7F8C darkened to pass AA as text/button */
+  --p-aqua-800: #155a63;  /* hover */
+  --p-slate-900: #20343a; /* Sterile Aqua ink */
+  --p-slate-500: #56707a; /* derived muted ink */
+  --p-slate-200: #dcebef; /* derived divider */
+  --p-blush-100: #fbe7f1; /* Neonatal Hush */
+  --p-rose-700: #9c3d66;  /* derived: text on blush */
+  --p-amber-100: #fdf3e1;
+  --p-amber-800: #7d4c00;
+  /* dark-theme primitives */
+  --p-night-950: #0f1e22;
+  --p-night-900: #18292e;
+  --p-night-800: #173b42;
+  --p-night-700: #24444b;
+  --p-mist-300: #9db6bd;
+  --p-blush-900: #3a2330;
+  --p-rose-300: #f2b8d0;
+  --p-amber-900: #2e2210;
+  --p-amber-300: #ffc46b;
+
+  /* 2 · Semantics — light (default) */
+  --bg: var(--p-white);
+  --surface: var(--p-white);         /* cards, lists, sheets */
+  --tint: var(--p-aqua-100);         /* selected/hover fills, callouts */
+  --tint-soft: var(--p-aqua-50);     /* row hover, inputs */
+  --border: var(--p-aqua-200);       /* control outlines */
+  --divider: var(--p-slate-200);     /* hairlines between rows */
+  --text: var(--p-slate-900);
+  --text-muted: var(--p-slate-500);
+  --primary: var(--p-aqua-700);      /* actions, links, focus */
+  --primary-hover: var(--p-aqua-800);
+  --on-primary: var(--p-white);
+  --accent: var(--p-aqua-400);       /* decoration only: gradients, rules, icons ≥ 24px */
+  --blush: var(--p-blush-100);       /* secondary fill: society tags, kicker */
+  --on-blush: var(--p-rose-700);
+  --warn-bg: var(--p-amber-100);
+  --warn: var(--p-amber-800);
+  --wash-a: var(--p-aqua-200);       /* hero background wash */
+  --wash-b: var(--p-blush-100);
+  --shadow: 0 1px 2px rgb(32 52 58 / .05), 0 12px 32px rgb(26 111 122 / .08);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: var(--p-night-950);
+  --surface: var(--p-night-900);
+  --tint: var(--p-night-800);
+  --tint-soft: var(--p-night-900);
+  --border: var(--p-night-700);
+  --divider: var(--p-night-700);
+  --text: var(--p-aqua-100);
+  --text-muted: var(--p-mist-300);
+  --primary: var(--p-aqua-400);      /* in dark, aqua-400 is legible (7.8:1) */
+  --primary-hover: var(--p-aqua-200);
+  --on-primary: var(--p-night-950);
+  --accent: var(--p-aqua-400);
+  --blush: var(--p-blush-900);
+  --on-blush: var(--p-rose-300);
+  --warn-bg: var(--p-amber-900);
+  --warn: var(--p-amber-300);
+  --wash-a: var(--p-night-800);
+  --wash-b: var(--p-blush-900);
+  --shadow: 0 0 0 1px var(--p-night-700);
+  color-scheme: dark;
+}
+
+/* Shape and type (theme-independent) */
+:root {
+  --radius: 18px;         /* cards, lists */
+  --radius-lg: 22px;      /* sheets, hero preview */
+  --radius-pill: 999px;   /* buttons, chips, search */
+  --font-stack: var(--font), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}

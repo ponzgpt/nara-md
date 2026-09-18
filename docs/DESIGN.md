@@ -1,38 +1,88 @@
-# Design system — "Clinic Calm"
+# NaraMD design standard
 
-Nara is used between two tasks: the study is done and the report isn't signed yet. The interface should feel calm and trustworthy, and it should get out of the way.
+NaraMD helps clinical neurophysiologists work out which standard, criterion or protocol applies. The interface should feel clinical, calm and trustworthy. The question is the product, so everything else stays out of the way.
 
-## Research behind it
+## 1. Colour
 
-- **Healthcare conventions.** Medical products tend to use white or very pale backgrounds, one clear accent (usually blue or teal) and deep slate text. Aqua and teal read as clinical and modern. Pastel rose softens the palette without adding alarm. ([Octet HealthTech palettes](https://octet.design/colors/user-interfaces/healthtech-ui-design/), [GEC healthcare palettes](https://gecdesigns.com/color-palettes/healthcare))
-- **NHS design system.** Every text colour meets WCAG AA at minimum. One primary colour dominates and secondary colours are used with decreasing emphasis. The typeface is humanist, chosen for legibility at small sizes. ([NHS colour](https://service-manual.nhs.uk/design-system/styles/colour), [NHS accessibility](https://service-manual.nhs.uk/accessibility/design))
-- **Apple-style restraint.** One screen and one input. Chrome is translucent, most of the page is white space, and settings are changed in place rather than on a separate settings page.
+**Source of truth:** `app/tokens.css`. Components use **semantic tokens only**. A hex value anywhere else is a bug.
 
-## Tokens (`app/globals.css`)
+**Palette:** *Sterile Aqua* from [media.io medical palettes](https://www.media.io/color-palette/medical-color-palette.html), with blush from *Neonatal Hush* as the soft secondary. Chosen over Calm Pulse (aqua only), Pediatric Cheer (pink + sky) and Clinic Calm (blue).
 
-| Token | Light | Dark | Use | Contrast |
-|---|---|---|---|---|
-| `--ink` | `#0f2a33` | `#e8f3f2` | Body text | 15.0 / 16.1 |
-| `--muted` | `#587079` | `#93acb0` | Secondary text | 5.2 / 6.7 |
-| `--teal` | `#0c7574` | `#5fd4c8` | Primary: actions, links, selected chips | 5.5 on white · 4.9 on `--aqua` |
-| `--aqua` | `#e3f5f3` | `#0f3431` | Primary tint: hover, open-access tags, report wording | — |
-| `--rose` / `--pink` | `#a8335a` / `#fdecf1` | `#f4a9c1` / `#36192a` | Secondary: society names, guideline tags | 5.6 / 8.5 |
-| `--amber` / `--amber-bg` | `#7d4c00` / `#fdf3e1` | — | Warnings (retired guidance) | 6.6 |
-| `--wash-a` / `--wash-b` | aqua / rose | deep versions | Decorative gradient at the top of the page | not used behind text |
+### 1.1 Primitives (raw palette — never used by components)
 
-Colour is never the only signal. Every tag also has a text label.
+| Token | Hex | Origin |
+|---|---|---|
+| `--p-white` | `#FFFFFF` | — |
+| `--p-aqua-50` | `#F5FBFD` | derived, half-step lighter |
+| `--p-aqua-100` | `#EAF7FB` | Sterile Aqua |
+| `--p-aqua-200` | `#BFEAF2` | Sterile Aqua |
+| `--p-aqua-400` | `#63C9D6` | Sterile Aqua |
+| `--p-aqua-700` | `#1A6F7A` | Sterile Aqua `#1E7F8C` darkened to pass AA |
+| `--p-aqua-800` | `#155A63` | derived hover |
+| `--p-slate-900` | `#20343A` | Sterile Aqua ink |
+| `--p-slate-500` | `#56707A` | derived muted ink |
+| `--p-slate-200` | `#DCEBEF` | derived divider |
+| `--p-blush-100` | `#FBE7F1` | Neonatal Hush |
+| `--p-rose-700` | `#9C3D66` | derived text on blush |
+| `--p-amber-100` / `-800` | `#FDF3E1` / `#7D4C00` | warning pair |
+| dark: `--p-night-950/900/800/700`, `--p-mist-300`, `--p-blush-900`, `--p-rose-300` | `#0F1E22` `#18292E` `#173B42` `#24444B` `#9DB6BD` `#3A2330` `#F2B8D0` | derived for dark theme |
 
-## Type and shape
+### 1.2 Semantic tokens (what components use)
 
-- **Font:** Figtree, self-hosted through `next/font` (no request to Google at runtime). It's humanist and very legible at small sizes. System fonts are the fallback.
-- **Headline:** weight 800 with tight tracking. Body text is 16.5px with 1.55 line height.
-- **Shapes:** pill-shaped controls, 18px radius on cards, 22px on sheets, and soft teal-tinted shadows.
+| Token | Role | Light | Dark |
+|---|---|---|---|
+| `--bg` | Page | white | night-950 |
+| `--surface` | Cards, lists, sheets | white | night-900 |
+| `--tint` | Selected/hover fills, callouts, steps | aqua-100 | night-800 |
+| `--tint-soft` | Row hover, inputs | aqua-50 | night-900 |
+| `--border` | Control outlines (search, chips, selects) | aqua-200 | night-700 |
+| `--divider` | Hairlines between rows | slate-200 | night-700 |
+| `--text` | Body and headings | slate-900 | aqua-100 |
+| `--text-muted` | Secondary text | slate-500 | mist-300 |
+| `--primary` | Actions, links, focus ring, selected chips | aqua-700 | aqua-400 |
+| `--primary-hover` | Hover on primary | aqua-800 | aqua-200 |
+| `--on-primary` | Text on primary | white | night-950 |
+| `--accent` | **Decoration only**: gradients, rules, large icons | aqua-400 | aqua-400 |
+| `--blush` / `--on-blush` | Secondary: society names, kicker, guideline tags, "MD" in the wordmark | blush-100 / rose-700 | blush-900 / rose-300 |
+| `--warn-bg` / `--warn` | Retired guidance | amber | amber |
+| `--wash-a` / `--wash-b` | Hero background wash | aqua-200 / blush-100 | night-800 / blush-900 |
 
-## Interaction rules
+### 1.3 Contrast (WCAG 2.2, measured)
 
-1. The search box does two jobs: typing filters the library instantly, and Enter asks across all sources.
-2. Modality chips and the region selector take effect immediately and are remembered in the browser. There is no settings screen.
-3. The only setting that isn't visible on the main screen is the library proxy prefix. It lives in **Sources**, next to what it affects.
-4. Motion is limited to hover states and the loading shimmer. Both turn off under `prefers-reduced-motion`.
-5. The page is light by default, whatever the OS setting. Dark mode is opt-in through the header toggle, stored in the browser and applied before first paint so the page never flashes the wrong theme.
-6. Focus rings are always visible, the page works with the keyboard alone (<kbd>/</kbd> focuses search) and new answers are announced to screen readers through a live region.
+| Pair | Light | Dark |
+|---|---|---|
+| text / bg | 13.0 | 15.6 |
+| text / tint | 11.9 | — |
+| text-muted / bg | 5.3 | 7.1 (on surface) |
+| primary / bg | 5.8 | 8.8 |
+| primary / tint | 5.3 | 6.2 |
+| on-primary / primary | 5.8 | 8.8 |
+| on-blush / blush | 5.4 | 8.6 |
+| warn / warn-bg | 6.6 | 9.9 |
+
+**Rules**
+- Body text needs at least 4.5:1. `--accent` (1.9:1 on white) must never carry text.
+- Colour is never the only signal. Every tag also has a word.
+- Aqua means *act* (primary). Blush means *who said it* (societies, provenance). Amber means *careful* (retired guidance). Don't mix these roles.
+
+## 2. Type
+
+- **Figtree**, self-hosted through `next/font`, with a system-font fallback. It's humanist and legible at small sizes.
+- **Scale:** hero 2.3–3.9rem / 800. Section headings 1.7–2.4rem / 700. Body 16.5px / 1.55. Meta text 0.8rem.
+- **Wordmark:** "Nara" in `--text` plus "MD" in `--on-blush`, set as one word, **NaraMD**. The product is never called "Nara" on its own or "Nara MD".
+
+## 3. Shape and depth
+
+`--radius` 18px for cards and lists, `--radius-lg` 22px for sheets and the preview, `--radius-pill` for buttons, chips and search. Shadows are soft and tinted with the primary colour. In dark mode a 1px outline replaces the shadow.
+
+## 4. Layout and behaviour
+
+1. **Home is the tool.** `/` shows the search box as the hero, like OpenEvidence. The marketing sections sit below and show only while idle. Typing, asking or picking a modality switches to results. Clicking the logo returns to idle.
+2. The search box filters the library as you type. Enter, or clicking an example, asks across all sources.
+3. Modality chips, region and theme apply immediately and are remembered in the browser. There is no settings page. The library proxy lives in **Sources**, next to what it affects.
+4. The page is light by default whatever the OS says. Dark is opt-in through the header toggle and applied before first paint.
+5. Motion is limited to hover states and the loading shimmer, and both respect `prefers-reduced-motion`. Focus is always visible, <kbd>/</kbd> focuses search, and answers are announced through a live region.
+
+## 5. Voice
+
+UK English and plain words. Sound like a colleague, not a brochure: short sentences, concrete examples (Awaji vs Gold Coast, ACNS 2012 vs 2021), and honesty about limits ("If the sources don't settle it, NaraMD says so"). The core promise is **clarity between standards, criteria and protocols**. Reports, papers and teaching are downstream uses, not the headline.
