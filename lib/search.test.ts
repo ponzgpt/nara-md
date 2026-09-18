@@ -25,3 +25,7 @@ test("retired guidance ranks below current guidance on the same topic", () => {
   const r = rank(lib, "carpal tunnel");
   assert.ok(!r[0].retired);
 });
+
+test("no errata or letters slipped into the library", () => {
+  for (const e of lib) assert.doesNotMatch(e.title, /\b(erratum|corrigendum)\b|^(response|reply|comment)/i, e.title);
+});

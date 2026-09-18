@@ -39,13 +39,13 @@
   "retired": false
  },
  {
-  "id": "33958570",
-  "title": "American Clinical Neurophysiology Society Guideline 1: Minimum Technical Requirements for Performing Clinical Electroencephalography: ERRATUM",
-  "authors": "undefined",
+  "id": "27482788",
+  "title": "American Clinical Neurophysiology Society Guideline 1: Minimum Technical Requirements for Performing Clinical Electroencephalography",
+  "authors": "Sinha SR, Sullivan L, Sabau D et al.",
   "journal": "J Clin Neurophysiol",
-  "year": 2021,
-  "doi": "10.1097/wnp.0000000000000817",
-  "pmid": "33958570",
+  "year": 2016,
+  "doi": "10.1097/wnp.0000000000000308",
+  "pmid": "27482788",
   "pmcid": null,
   "openAccess": false,
   "abstract": "",
@@ -429,6 +429,26 @@
   ],
   "modalities": [
    "Nerve ultrasound",
+   "Carpal tunnel"
+  ],
+  "retired": false
+ },
+ {
+  "id": "42728830",
+  "title": "AANEM Consensus-Based Guideline for Grading the Severity of Carpal Tunnel Syndrome",
+  "authors": "Robinson LR, Al-Lawati ZJ, Andary M et al.",
+  "journal": "Muscle Nerve",
+  "year": 2026,
+  "doi": "10.1002/mus.70384",
+  "pmid": "42728830",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Electrodiagnostic (EDX) reports for patients with carpal tunnel syndrome (CTS) often include a description of severity, but considerable variability in approach creates confusion for referring physicians, patients, and EDX practitioners. The purpose of this project was to establish a consensus-based recommendation for a single grading system for CTS severity. A literature review, a survey of EDX practitioners, a Delphi consensus methodology (physician and non-physician stakeholders), and expert rankings were used to select a single recommended grading system for CTS severity. Twelve different CTS grading systems have been published. Of 1,253 survey respondents, only 43% of surveyed used solely nerve conduction results to determine severity; often symptoms or a mixture of EDX and clinical features were used. Twenty-seven percent of respondents did not use a particular grading system. The consensus of 18 EDX clinicians, other clinicians, and patients was that seven elements are essential to a grading system: consistency, comprehensibility, validity, objectivity, uniformity, responsiveness, and ordinality. An assessment of the 12 published scales, using these seven essential elements ",
+  "societies": [
+   "AANEM"
+  ],
+  "modalities": [
+   "EMG/NCS",
    "Carpal tunnel"
   ],
   "retired": false

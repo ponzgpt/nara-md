@@ -10,7 +10,7 @@ const out = [];
 for (const s of seeds) {
   const url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?format=json&pageSize=25&resultType=core&query=${encodeURIComponent(`TITLE:(${s.q.replace(/[():"]/g, " ")})`)}`;
   const hits = (await (await fetch(url)).json()).resultList?.result ?? [];
-  const real = hits.filter((h) => !/^(corrigendum|erratum|response|reply|comment|endorsement|\[)/i.test(h.title) && (!s.year || +h.pubYear === s.year));
+  const real = hits.filter((h) => !/^(response|reply|comment|endorsement|\[)|\b(erratum|corrigendum)\b/i.test(h.title) && (!s.year || +h.pubYear === s.year));
   const best = real.map((h) => ({ h, score: overlap(s.q, h.title) })).sort((a, b) => b.score - a.score)[0];
   if (!best || best.score < 0.6) { console.log(`✗ NO MATCH  ${s.q}  ${best ? `→ ${best.h.title}` : ""}`); continue; }
   const h = best.h;

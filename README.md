@@ -1,65 +1,77 @@
 # Nara MD
 
-**The guideline, before the report is signed.** A search and answer tool for clinical neurophysiologists: EEG, EMG/NCS, evoked potentials, sleep, IONM.
+**The guideline, before the report is signed.** Search and cited answers for clinical neurophysiologists: EEG, EMG/NCS, evoked potentials, sleep, IONM.
 
-A clinician has just run a study and needs to settle one question before signing the report. Nara searches a curated library of society guidance (IFCN, ACNS, AANEM, ILAE, AASM, EAN/PNS, ISIN…) and the open literature (Europe PMC, which covers MEDLINE/PubMed), and answers with citations and one line they can paste into the report.
+**Live:** https://naramd.technoir.cloud
 
-## Run it
+A clinician has just run a study and needs to settle one question before signing the report. Nara searches a curated library of society guidance (IFCN, ACNS, AANEM, ILAE, AASM, EAN/PNS, ISIN…) and the open literature (Europe PMC, which includes MEDLINE/PubMed). It answers with numbered citations and one line of wording they can paste into the report.
+
+## Quick start
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
-npm test             # ranking + citability checks
-npm run library      # re-resolve data/seeds.json against Europe PMC → data/library.json
+npm run dev        # http://localhost:3000
+npm test           # ranking, scoping and library-integrity checks
 ```
 
-`ANTHROPIC_API_KEY` is optional. Without it Nara still searches and ranks sources. With it, answers are written by Claude Opus 5 from the retrieved sources only, with citations.
+`ANTHROPIC_API_KEY` (in `.env.local`) is optional. Without it Nara still searches and ranks sources. With it, Claude Opus 5 writes the answer from the retrieved sources only, and every claim carries a citation.
 
-## What's in the MVP
+## How it works
 
-| Piece | Where |
+```
+question ─┬─ lib/search.ts ───────── curated library (data/library.json), jargon-aware, scoped by modality, boosted by region
+          └─ lib/connectors/europepmc.ts ── live literature (title + abstract)
+                     │
+          app/api/ask/route.ts ── numbered sources ──► Claude (optional) ──► answer [n] + "Report wording"
+```
+
+| Path | Role |
 |---|---|
-| Guideline library: 43 entries, each resolved to a real DOI/PMID by script. Errata and letters are filtered out, retired guidance is flagged | `data/seeds.json` → `scripts/build-library.mjs` → `data/library.json` |
-| Search tuned to the field's shorthand (CTS, LPD, NCSE, MSLT, SSEP…), with results scoped by modality and boosted by region | `lib/search.ts` |
-| Answers: curated guidelines plus live Europe PMC results, then a cited answer with report-ready wording | `app/api/ask/route.ts` |
-| Per-clinician setup: region, the modalities they read, and their library proxy prefix. Stored in the browser only | `app/page.tsx`, `lib/catalog.ts` |
-| Sources, split into **live** (queried by Nara), **via your library** (paywalled DOIs routed through the user's EZproxy/OpenAthens) and **hand-off** (OpenEvidence, Consensus, PubMed, AASM manual) | `lib/catalog.ts` |
+| `app/page.tsx` | The single screen. Typing filters the library, Enter asks. Chips and region change the results immediately and are remembered in the browser |
+| `components/` | `Answer` (citations, copyable report wording, hand-offs), `GuidelineList`, `SourcesSheet` (sources + library proxy) |
+| `app/api/ask/route.ts` | Retrieval and synthesis. Validates input, rate-limits per IP, and never logs the question |
+| `lib/search.ts` | Token ranking with a table of field shorthand (CTS, LPD, NCSE, MSLT, SSEP…) |
+| `lib/catalog.ts` | Modalities, regions and their societies, connectors, citation links. **Adding a country or a source only means editing this data** |
+| `lib/connectors/` | One file per live source. Add new connectors here |
+| `data/seeds.json` → `scripts/build-library.mjs` → `data/library.json` | The library pipeline. Seeds are titles plus tags. The script resolves each one against Europe PMC to get a real DOI/PMID, drops errata and letters, and flags retired guidance. Run it with `npm run library` |
+| `docs/DESIGN.md` | Design system: palette, contrast values, type, interaction rules |
+| `DEPLOYMENT.md`, `scripts/deploy.sh` | Production on the Hostinger VPS |
 
-## Market sizing (Sept 2026)
+### Adding a guideline
 
-Nobody publishes a global headcount for clinical neurophysiologists. The rows below are anchored to published figures where they exist:
+Add `{"q": "<exact title>", "soc": ["ACNS"], "mod": ["EEG"]}` to `data/seeds.json`, then run `npm run library` followed by `npm test`. The script prints any seed it can't match with confidence.
 
-| Segment | Anchor | Estimate |
+## Sources and access
+
+| Kind | Sources | How |
 |---|---|---|
-| US physicians who interpret EEG/EMG | ABPN active certificates: Clinical Neurophysiology 2,498 · Epilepsy 2,396 · Neuromuscular 978 · Sleep 1,247 (as of 31 Dec 2025, with overlap). AANEM has 7,500+ members (neurology + PM&R doing EDX) | ~12–15k |
-| Japan | JSCN has ~3,000 members (physicians and technologists) | ~2–3k physicians |
-| Europe | Clinical neurophysiology is its own specialty in Spain, the UK, the Nordics and others. Elsewhere neurologists do the work | ~10–15k |
-| China + rest of world | Large EEG/EMG volume, little data. China is its own market (language, access to sources) | ~15–30k |
-| **Physicians, global** | | **~40–60k** |
-| Technologists / neurodiagnostic scientists (a later expansion) | ASET, ABRET, NHS healthcare scientists | ~2× physicians |
+| Live | Nara library, Europe PMC | Queried on every question |
+| Via your library | Cochrane, Embase, MEDLINE Complete | Paywalled DOIs open through the clinician's EZproxy/OpenAthens prefix (set in **Sources**) |
+| Hand-off | PubMed, OpenEvidence, Consensus, AASM Scoring Manual | Opened with the question prefilled where the site supports it. OpenEvidence has no public API |
 
-At $150–300 per physician per year, the physician market is roughly **$6–18M ARR**. It's a niche, and that drives three decisions:
+## Market and positioning
 
-1. **Go global from the start.** No single country is big enough.
-2. **Sell to departments and hospitals as well as individuals.** Institutions already pay for Embase/Cochrane, and the proxy bridge lets Nara ride on those licences.
-3. **Win on depth.** Consensus and OpenEvidence are broad. Nara wins on terminology, regional guidance and the report workflow, and hands broad questions off to them.
+Nobody publishes a global headcount. These anchors are published figures:
 
-Device market for context: global EEG/EMG equipment is estimated at $0.85–1.7B (2025), which gives device makers (Natus, Nihon Kohden, Cadwell, Compumedics) a reason to partner or embed.
+- **ABPN active certificates (31 Dec 2025):** Clinical Neurophysiology 2,498 · Epilepsy 2,396 · Neuromuscular 978 · Sleep 1,247.
+- **AANEM:** more than 7,500 members.
+- **JSCN (Japan):** about 3,000 members.
 
-## Positioning vs. Consensus / OpenEvidence
+Estimate: about **40–60k physicians** worldwide read neurophysiology, plus roughly twice as many technologists. At $150–300 per physician per year that is **about $6–18M ARR**. Three decisions follow from how small that is:
 
-- **Consensus** is a general research-paper engine. **OpenEvidence** is a general clinical answer engine, free for US HCPs and funded by ads. Both are strong for broad questions, and Nara links to both.
-- **Nara** covers one specialty. It ranks society guidelines first, understands the field's shorthand, shows which society's guidance applies in the user's country, opens scoped to the modalities they actually read (carpal tunnel only, EEG only, or everything), and ends each answer with wording for the report.
+1. **Global from day one.** No single country is big enough.
+2. **Sell to departments and institutions**, not only to individuals. The proxy bridge lets Nara ride on the Embase/Cochrane licences they already pay for.
+3. **Win on depth, not breadth.** Nara focuses on society guidance, the field's terminology, regional differences and the report workflow. Broad questions are handed off to Consensus and OpenEvidence rather than competing with them.
 
-## Global vs local
+**Global vs local:** a global core (IFCN, ILAE, WFN, ISIN, ISCEV) plus a region layer that ranks local bodies higher: US (ACNS, AANEM, AASM, ASNM), UK (BSCN), Spain (SENFC), Germany (DGKN), Japan (JSCN), EU (EAN/PNS).
 
-A single global core covers IFCN, ILAE, WFN, ISIN and ISCEV. A region layer boosts local bodies: US (ACNS, AANEM, AASM, ASNM), UK (BSCN), Spain (SENFC), Germany (DGKN), Japan (JSCN), EU (EAN/PNS). The region layer lives in `lib/catalog.ts`, so adding a country means editing data, not code.
+## Roadmap
 
-## Next
+- National guidance published outside journals: BSCN, SENFC, JSCN and Chinese society documents, often PDFs or not in English.
+- NCS normative values by age and height as structured data. This is where most report questions end up.
+- Direct connectors for paid sources (Ovid/EBSCO/Elsevier APIs with institutional tokens), and Nara exposed as an MCP server.
+- Accounts and institutional SSO (OpenAthens/Shibboleth) once institutional pilots start.
 
-- Add national guidance that isn't in journals (BSCN, SENFC, JSCN and Chinese society documents are mostly PDFs on society sites or in local languages).
-- Add normative values (NCS reference tables by age and height) as structured data. This is where most report questions end up.
-- Connect paid sources directly (Ovid/EBSCO/Elsevier APIs with institutional tokens) and expose Nara as an MCP server so clinicians can use it from their own assistant.
-- Accounts and SSO (OpenAthens/Shibboleth) once there are institutional pilots.
+## Privacy
 
-**Privacy:** questions go to Europe PMC and, when a key is set, to Anthropic. Don't enter patient identifiers. Nothing is logged server-side.
+Questions go to Europe PMC and, when a key is set, to Anthropic. Nothing is stored or logged server-side, and preferences stay in the browser. Don't enter patient identifiers.
