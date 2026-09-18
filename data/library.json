@@ -1,0 +1,847 @@
+[
+ {
+  "id": "33475321",
+  "title": "American Clinical Neurophysiology Society's Standardized Critical Care EEG Terminology: 2021 Version",
+  "authors": "Hirsch LJ, Fong MWK, Leitinger M et al.",
+  "journal": "J Clin Neurophysiol",
+  "year": 2021,
+  "doi": "10.1097/wnp.0000000000000806",
+  "pmid": "33475321",
+  "pmcid": "PMC8135051",
+  "openAccess": true,
+  "abstract": "",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "EEG",
+   "ICU-EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "27482790",
+  "title": "American Clinical Neurophysiology Society Guideline 7: Guidelines for EEG Reporting",
+  "authors": "Tatum WO, Olga S, Ochoa JG et al.",
+  "journal": "J Clin Neurophysiol",
+  "year": 2016,
+  "doi": "10.1097/wnp.0000000000000319",
+  "pmid": "27482790",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "This EEG Guideline incorporates the practice of structuring a report of results obtained during routine adult electroencephalography. It is intended to reflect one of the current practices in reporting an EEG and serves as a revision of the previous guideline entitled \"Writing an EEG Report.\" The goal of this guideline is not only to convey clinically relevant information, but also to improve interrater reliability for clinical and research use by standardizing the format of EEG reports. With this in mind, there is expanded documentation of the patient history to include more relevant clinical information that can affect the EEG recording and interpretation. Recommendations for the technical conditions of the recording are also enhanced to include post hoc review parameters and type of EEG recording. Sleep feature documentation is also expanded upon. More descriptive terms are included for background features and interictal discharges that are concordant with efforts to standardize terminology. In the clinical correlation section, examples of common clinical scenarios are now provided that encourages uniformity in reporting. Including digital samples of abnormal waveforms is now re",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "33958570",
+  "title": "American Clinical Neurophysiology Society Guideline 1: Minimum Technical Requirements for Performing Clinical Electroencephalography: ERRATUM",
+  "authors": "undefined",
+  "journal": "J Clin Neurophysiol",
+  "year": 2021,
+  "doi": "10.1097/wnp.0000000000000817",
+  "pmid": "33958570",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "17042154",
+  "title": "Guideline 3: minimum technical standards for EEG recording in suspected cerebral death",
+  "authors": "American Clinical Neurophysiology Society.",
+  "journal": "Am J Electroneurodiagnostic Technol",
+  "year": 2006,
+  "doi": "10.1080/1086508x.2006.11079578",
+  "pmid": "17042154",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "EEG",
+   "Brain death"
+  ],
+  "retired": false
+ },
+ {
+  "id": "27482794",
+  "title": "American Clinical Neurophysiology Society Guideline 2: Guidelines for Standard Electrode Position Nomenclature",
+  "authors": "Acharya JN, Hani A, Cheek J et al.",
+  "journal": "J Clin Neurophysiol",
+  "year": 2016,
+  "doi": "10.1097/wnp.0000000000000316",
+  "pmid": "27482794",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "This revision to the EEG Guidelines is an update incorporating current electroencephalography technology and practice and was previously published as Guideline 5. While the 10-10 system of electrode position nomenclature has been accepted internationally for almost two decades, it has not been used universally. The reasons for this and clinical scenarios when the 10-10 system provides additional localizing information are discussed in this revision. In addition, situations in which AF1/2, AF5/6, PO1/2 and PO5/6 electrode positions may be utilized for EEG recording are discussed.",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "25626778",
+  "title": "Consensus statement on continuous EEG in critically ill adults and children, part I: indications",
+  "authors": "Herman ST, Abend NS, Bleck TP et al.",
+  "journal": "J Clin Neurophysiol",
+  "year": 2015,
+  "doi": "10.1097/wnp.0000000000000166",
+  "pmid": "25626778",
+  "pmcid": "PMC4435533",
+  "openAccess": true,
+  "abstract": "IntroductionCritical Care Continuous EEG (CCEEG) is a common procedure to monitor brain function in patients with altered mental status in intensive care units. There is significant variability in patient populations undergoing CCEEG and in technical specifications for CCEEG performance.MethodsThe Critical Care Continuous EEG Task Force of the American Clinical Neurophysiology Society developed expert consensus recommendations on the use of CCEEG in critically ill adults and children.RecommendationsThe consensus panel recommends CCEEG for diagnosis of nonconvulsive seizures, nonconvulsive status epilepticus, and other paroxysmal events, and for assessment of the efficacy of therapy for seizures and status epilepticus. The consensus panel suggests CCEEG for identification of ischemia in patients at high risk for cerebral ischemia; for assessment of level of consciousness in patients receiving intravenous sedation or pharmacologically induced coma; and for prognostication in patients after cardiac arrest. For each indication, the consensus panel describes the patient populations for which CCEEG is indicated, evidence supporting use of CCEEG, utility of video and quantitative EEG tren",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "ICU-EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "25626777",
+  "title": "Consensus statement on continuous EEG in critically ill adults and children, part II: personnel, technical specifications, and clinical practice",
+  "authors": "Herman ST, Abend NS, Bleck TP et al.",
+  "journal": "J Clin Neurophysiol",
+  "year": 2015,
+  "doi": "10.1097/wnp.0000000000000165",
+  "pmid": "25626777",
+  "pmcid": "PMC4434600",
+  "openAccess": true,
+  "abstract": "IntroductionCritical Care Continuous EEG (CCEEG) is a common procedure to monitor brain function in patients with altered mental status in intensive care units. There is significant variability in patient populations undergoing CCEEG and in technical specifications for CCEEG performance.MethodsThe Critical Care Continuous EEG Task Force of the American Clinical Neurophysiology Society developed expert consensus recommendations on the use of CCEEG in critically ill adults and children.RecommendationsThe consensus panel describes the qualifications and responsibilities of CCEEG personnel including neurodiagnostic technologists and interpreting physicians. The panel outlines required equipment for CCEEG, including electrodes, EEG machine and amplifier specifications, equipment for polygraphic data acquisition, EEG and video review machines, central monitoring equipment, and network, remote access, and data storage equipment. The consensus panel also describes how CCEEG should be acquired, reviewed and interpreted. The panel suggests methods for patient selection and triage; initiation of CCEEG; daily maintenance of CCEEG; electrode removal and infection control; quantitative EEG techn",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "ICU-EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "23545767",
+  "title": "American clinical neurophysiology society standardized EEG terminology and categorization for the description of continuous EEG monitoring in neonates: report of the American Clinical Neurophysiology Society critical care monitoring committee",
+  "authors": "Tsuchida TN, Wusthoff CJ, Shellhaas RA et al.",
+  "journal": "J Clin Neurophysiol",
+  "year": 2013,
+  "doi": "10.1097/wnp.0b013e3182872b24",
+  "pmid": "23545767",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "EEG",
+   "Neonatal"
+  ],
+  "retired": false
+ },
+ {
+  "id": "30214992",
+  "title": "A revised glossary of terms most commonly used by clinical electroencephalographers and updated proposal for the report format of the EEG findings. Revision 2017",
+  "authors": "Kane N, Acharya J, Benickzy S et al.",
+  "journal": "Clin Neurophysiol Pract",
+  "year": 2017,
+  "doi": "10.1016/j.cnp.2017.07.002",
+  "pmid": "30214992",
+  "pmcid": "PMC6123891",
+  "openAccess": true,
+  "abstract": "",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "28838815",
+  "title": "Standardized computer-based organized reporting of EEG: SCORE - Second version",
+  "authors": "Beniczky S, Aurlien H, Brøgger JC et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2017,
+  "doi": "10.1016/j.clinph.2017.07.418",
+  "pmid": "28838815",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Standardized terminology for computer-based assessment and reporting of EEG has been previously developed in Europe. The International Federation of Clinical Neurophysiology established a taskforce in 2013 to develop this further, and to reach international consensus. This work resulted in the second, revised version of SCORE (Standardized Computer-based Organized Reporting of EEG), which is presented in this paper. The revised terminology was implemented in a software package (SCORE EEG), which was tested in clinical practice on 12,160 EEG recordings. Standardized terms implemented in SCORE are used to report the features of clinical relevance, extracted while assessing the EEGs. Selection of the terms is context sensitive: initial choices determine the subsequently presented sets of additional choices. This process automatically generates a report and feeds these features into a database. In the end, the diagnostic significance is scored, using a standardized list of terms. SCORE has specific modules for scoring seizures (including seizure semiology and ictal EEG patterns), neonatal recordings (including features specific for this age group), and for Critical Care EEG Terminology",
+  "societies": [
+   "IFCN",
+   "ILAE"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "24001066",
+  "title": "Unified EEG terminology and criteria for nonconvulsive status epilepticus",
+  "authors": "Beniczky S, Hirsch LJ, Kaplan PW et al.",
+  "journal": "Epilepsia",
+  "year": 2013,
+  "doi": "10.1111/epi.12270",
+  "pmid": "24001066",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "The diagnosis of nonconvulsive status epilepticus (NCSE) relies largely on electroencephalography (EEG) findings. The lack of a unified EEG terminology, and of evidence-based EEG criteria, leads to varying criteria for and ability to diagnose NCSE. We propose a unified terminology and classification system for NCSE, using, as a template, the Standardised Computer-based Organised Reporting of EEG (SCORE). This approach integrates the terminology recently proposed for the rhythmic and periodic patterns in critically ill patients, the electroclinical classification of NCSE (type of NCSE) and the context for the pathologic conditions and age-related epilepsy syndromes. We propose flexible EEG criteria that employ the SCORE system to assemble a database for determining evidence-based EEG criteria for NCSE.",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "EEG",
+   "ICU-EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "36762397",
+  "title": "Routine and sleep EEG: Minimum recording standards of the International Federation of Clinical Neurophysiology and the International League Against Epilepsy",
+  "authors": "Peltola ME, Leitinger M, Halford JJ et al.",
+  "journal": "Epilepsia",
+  "year": 2023,
+  "doi": "10.1111/epi.17448",
+  "pmid": "36762397",
+  "pmcid": "PMC10006292",
+  "openAccess": true,
+  "abstract": "This article provides recommendations on the minimum standards for recording routine (\"standard\") and sleep electroencephalography (EEG). The joint working group of the International Federation of Clinical Neurophysiology (IFCN) and the International League Against Epilepsy (ILAE) developed the standards according to the methodology suggested for epilepsy-related clinical practice guidelines by the Epilepsy Guidelines Working Group. We reviewed the published evidence using the Preferred Reporting Items for Systematic Review and Meta-Analysis (PRISMA) statement. The quality of evidence for sleep induction methods was assessed by the Grading of Recommendations, Assessment, Development and Evaluations (GRADE) method. A tool for Quality Assessment of Diagnostic Studies (QUADAS-2) was used to assess the risk of bias in technical and methodological studies. Where high-quality published evidence was lacking, we used modified Delphi technique to reach expert consensus. The GRADE system was used to formulate the recommendations. The quality of evidence was low or moderate. We formulated 16 consensus-based recommendations for minimum standards for recording routine and sleep EEG. The recomme",
+  "societies": [
+   "IFCN",
+   "ILAE"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "29483017",
+  "title": "Clinical utility of EEG in diagnosing and monitoring epilepsy in adults",
+  "authors": "Tatum WO, Rubboli G, Kaplan PW et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2018,
+  "doi": "10.1016/j.clinph.2018.01.019",
+  "pmid": "29483017",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Electroencephalography (EEG) remains an essential diagnostic tool for people with epilepsy (PWE). The International Federation of Clinical Neurophysiology produces new guidelines as an educational service for clinicians to address gaps in knowledge in clinical neurophysiology. The current guideline was prepared in response to gaps present in epilepsy-related neurophysiological assessment and is not intended to replace sound clinical judgement in the care of PWE. Furthermore, addressing specific pathophysiological conditions of the brain that produce epilepsy is of primary importance though is beyond the scope of this guideline. Instead, our goal is to summarize the scientific evidence for the utility of EEG when diagnosing and monitoring PWE.",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "33678577",
+  "title": "Automated seizure detection using wearable devices: A clinical practice guideline of the International League Against Epilepsy and the International Federation of Clinical Neurophysiology",
+  "authors": "Beniczky S, Wiebe S, Jeppesen J et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2021,
+  "doi": "10.1016/j.clinph.2020.12.009",
+  "pmid": "33678577",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "The objective of this clinical practice guideline (CPG) is to provide recommendations for healthcare personnel working with patients with epilepsy, on the use of wearable devices for automated seizure detection in patients with epilepsy, in outpatient, ambulatory settings. The Working Group of the International League Against Epilepsy and the International Federation of Clinical Neurophysiology developed the CPG according to the methodology proposed by the ILAE Epilepsy Guidelines Working Group. We reviewed the published evidence using The Preferred Reporting Items for Systematic Review and Meta-Analysis (PRISMA) statement and evaluated the evidence and formulated the recommendations following the Grading of Recommendations Assessment, Development and Evaluation (GRADE) system. We found high level of evidence for the accuracy of automated detection of generalized tonic-clonic seizures (GTCS) and focal-to-bilateral tonic-clonic seizures (FBTCS) and recommend use of wearable automated seizure detection devices for selected patients when accurate detection of GTCS and FBTCS is recommended as a clinical adjunct. We also found moderate level of evidence for seizure types without GTCs or",
+  "societies": [
+   "ILAE",
+   "IFCN"
+  ],
+  "modalities": [
+   "EEG",
+   "Wearables"
+  ],
+  "retired": false
+ },
+ {
+  "id": "29724661",
+  "title": "IFCN-endorsed practical guidelines for clinical magnetoencephalography (MEG)",
+  "authors": "Hari R, Baillet S, Barnes G et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2018,
+  "doi": "10.1016/j.clinph.2018.03.042",
+  "pmid": "29724661",
+  "pmcid": "PMC6045462",
+  "openAccess": true,
+  "abstract": "Magnetoencephalography (MEG) records weak magnetic fields outside the human head and thereby provides millisecond-accurate information about neuronal currents supporting human brain function. MEG and electroencephalography (EEG) are closely related complementary methods and should be interpreted together whenever possible. This manuscript covers the basic physical and physiological principles of MEG and discusses the main aspects of state-of-the-art MEG data analysis. We provide guidelines for best practices of patient preparation, stimulus presentation, MEG data collection and analysis, as well as for MEG interpretation in routine clinical examinations. In 2017, about 200 whole-scalp MEG devices were in operation worldwide, many of them located in clinical environments. Yet, the established clinical indications for MEG examinations remain few, mainly restricted to the diagnostics of epilepsy and to preoperative functional evaluation of neurosurgical patients. We are confident that the extensive ongoing basic MEG research indicates potential for the evaluation of neurological and psychiatric syndromes, developmental disorders, and the integrity of cortical brain networks after stro",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "MEG"
+  ],
+  "retired": false
+ },
+ {
+  "id": "28276060",
+  "title": "Operational classification of seizure types by the International League Against Epilepsy: Position Paper of the ILAE Commission for Classification and Terminology",
+  "authors": "Fisher RS, Cross JH, French JA et al.",
+  "journal": "Epilepsia",
+  "year": 2017,
+  "doi": "10.1111/epi.13670",
+  "pmid": "28276060",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "The International League Against Epilepsy (ILAE) presents a revised operational classification of seizure types. The purpose of such a revision is to recognize that some seizure types can have either a focal or generalized onset, to allow classification when the onset is unobserved, to include some missing seizure types, and to adopt more transparent names. Because current knowledge is insufficient to form a scientifically based classification, the 2017 Classification is operational (practical) and based on the 1981 Classification, extended in 2010. Changes include the following: (1) \"partial\" becomes \"focal\"; (2) awareness is used as a classifier of focal seizures; (3) the terms dyscognitive, simple partial, complex partial, psychic, and secondarily generalized are eliminated; (4) new focal seizure types include automatisms, behavior arrest, hyperkinetic, autonomic, cognitive, and emotional; (5) atonic, clonic, epileptic spasms, myoclonic, and tonic seizures can be of either focal or generalized onset; (6) focal to bilateral tonic-clonic seizure replaces secondarily generalized seizure; (7) new generalized seizure types are absence with eyelid myoclonia, myoclonic absence, myoclon",
+  "societies": [
+   "ILAE"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "retired": false
+ },
+ {
+  "id": "28276062",
+  "title": "ILAE classification of the epilepsies: Position paper of the ILAE Commission for Classification and Terminology",
+  "authors": "Scheffer IE, Berkovic S, Capovilla G et al.",
+  "journal": "Epilepsia",
+  "year": 2017,
+  "doi": "10.1111/epi.13709",
+  "pmid": "28276062",
+  "pmcid": "PMC5386840",
+  "openAccess": true,
+  "abstract": "The International League Against Epilepsy (ILAE) Classification of the Epilepsies has been updated to reflect our gain in understanding of the epilepsies and their underlying mechanisms following the major scientific advances that have taken place since the last ratified classification in 1989. As a critical tool for the practicing clinician, epilepsy classification must be relevant and dynamic to changes in thinking, yet robust and translatable to all areas of the globe. Its primary purpose is for diagnosis of patients, but it is also critical for epilepsy research, development of antiepileptic therapies, and communication around the world. The new classification originates from a draft document submitted for public comments in 2013, which was revised to incorporate extensive feedback from the international epilepsy community over several rounds of consultation. It presents three levels, starting with seizure type, where it assumes that the patient is having epileptic seizures as defined by the new 2017 ILAE Seizure Classification. After diagnosis of the seizure type, the next step is diagnosis of epilepsy type, including focal epilepsy, generalized epilepsy, combined generalized,",
+  "societies": [
+   "ILAE"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "retired": false
+ },
+ {
+  "id": "26336950",
+  "title": "A definition and classification of status epilepticus--Report of the ILAE Task Force on Classification of Status Epilepticus",
+  "authors": "Trinka E, Cock H, Hesdorffer D et al.",
+  "journal": "Epilepsia",
+  "year": 2015,
+  "doi": "10.1111/epi.13121",
+  "pmid": "26336950",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "The Commission on Classification and Terminology and the Commission on Epidemiology of the International League Against Epilepsy (ILAE) have charged a Task Force to revise concepts, definition, and classification of status epilepticus (SE). The proposed new definition of SE is as follows: Status epilepticus is a condition resulting either from the failure of the mechanisms responsible for seizure termination or from the initiation of mechanisms, which lead to abnormally, prolonged seizures (after time point t1 ). It is a condition, which can have long-term consequences (after time point t2 ), including neuronal death, neuronal injury, and alteration of neuronal networks, depending on the type and duration of seizures. This definition is conceptual, with two operational dimensions: the first is the length of the seizure and the time point (t1 ) beyond which the seizure should be regarded as \"continuous seizure activity.\" The second time point (t2 ) is the time of ongoing seizure activity after which there is a risk of long-term consequences. In the case of convulsive (tonic-clonic) SE, both time points (t1 at 5 min and t2 at 30 min) are based on animal experiments and clinical resea",
+  "societies": [
+   "ILAE"
+  ],
+  "modalities": [
+   "EEG",
+   "ICU-EEG",
+   "Epilepsy"
+  ],
+  "retired": false
+ },
+ {
+  "id": "40264351",
+  "title": "Updated classification of epileptic seizures: Position paper of the International League Against Epilepsy",
+  "authors": "Beniczky S, Trinka E, Wirrell E et al.",
+  "journal": "Epilepsia",
+  "year": 2025,
+  "doi": "10.1111/epi.18338",
+  "pmid": "40264351",
+  "pmcid": "PMC12169392",
+  "openAccess": true,
+  "abstract": "The International League Against Epilepsy (ILAE) has updated the operational classification of epileptic seizures, building upon the framework established in 2017. This revision, informed by the implementation experience, involved a working group appointed by the ILAE Executive Committee. Comprising 37 members from all ILAE regions, the group utilized a modified Delphi process, requiring a consensus threshold of more than two thirds for any proposal. Following public comments, the Executive Committee appointed seven additional experts to the revision task force to address and incorporate the issues raised, as appropriate. The updated classification maintains four main seizure classes: Focal, Generalized, Unknown (whether focal or generalized), and Unclassified. Taxonomic rules distinguish classifiers, which are considered to reflect biological classes and directly impact clinical management, from descriptors, which indicate other important seizure characteristics. Focal seizures and those of unknown origin are further classified by the patient's state of consciousness (impaired or preserved) during the seizure, defined operationally through clinical assessment of awareness and resp",
+  "societies": [
+   "ILAE"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "retired": false
+ },
+ {
+  "id": "32108358",
+  "title": "Proper Performance and Interpretation of Electrodiagnostic Studies",
+  "authors": "undefined",
+  "journal": "Muscle Nerve",
+  "year": 2020,
+  "doi": "10.1002/mus.26835",
+  "pmid": "32108358",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "AANEM"
+  ],
+  "modalities": [
+   "EMG/NCS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "12058083",
+  "title": "Practice parameter: Electrodiagnostic studies in carpal tunnel syndrome [RETIRED]. Report of the American Association of Electrodiagnostic Medicine, American Academy of Neurology, and the American Academy of Physical Medicine and Rehabilitation",
+  "authors": "Jablecki CK, Andary MT, Floeter MK et al.",
+  "journal": "Neurology",
+  "year": 2002,
+  "doi": "10.1212/wnl.58.11.1589",
+  "pmid": "12058083",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "AANEM",
+   "AAN"
+  ],
+  "modalities": [
+   "EMG/NCS",
+   "Carpal tunnel"
+  ],
+  "retired": true
+ },
+ {
+  "id": "22806381",
+  "title": "Evidence-based guideline: neuromuscular ultrasound for the diagnosis of carpal tunnel syndrome",
+  "authors": "Cartwright MS, Hobson-Webb LD, Boon AJ et al.",
+  "journal": "Muscle Nerve",
+  "year": 2012,
+  "doi": "10.1002/mus.23389",
+  "pmid": "22806381",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "IntroductionThe purpose of this study was to develop an evidence-based guideline for the use of neuromuscular ultrasound in the diagnosis of carpal tunnel syndrome (CTS).MethodsTwo questions were asked: (1) What is the accuracy of median nerve cross-sectional area enlargement as measured with ultrasound for the diagnosis of CTS? (2) What added value, if any, does neuromuscular ultrasound provide over electrodiagnostic studies alone for the diagnosis of CTS? A systematic review was performed, and studies were classified according to American Academy of Neurology criteria for rating articles of diagnostic accuracy (question 1) and for screening articles (question 2).ResultsNeuromuscular ultrasound measurement of median nerve cross-sectional area at the wrist is accurate and may be offered as a diagnostic test for CTS (Level A). Neuromuscular ultrasound probably adds value to electrodiagnostic studies when diagnosing CTS and should be considered in screening for structural abnormalities at the wrist in those with CTS (Level B).",
+  "societies": [
+   "AANEM"
+  ],
+  "modalities": [
+   "Nerve ultrasound",
+   "Carpal tunnel"
+  ],
+  "retired": false
+ },
+ {
+  "id": "16921634",
+  "title": "Guidelines in electrodiagnostic medicine. Practice parameter for electrodiagnostic studies in ulnar neuropathy at the elbow",
+  "authors": "American Association of Electrodiagnostic Medicine, Campbell WW.",
+  "journal": "Muscle Nerve Suppl",
+  "year": 1999,
+  "doi": null,
+  "pmid": "16921634",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "AANEM",
+   "AAN"
+  ],
+  "modalities": [
+   "EMG/NCS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "15668414",
+  "title": "Distal symmetric polyneuropathy: a definition for clinical research: report of the American Academy of Neurology, the American Association of Electrodiagnostic Medicine, and the American Academy of Physical Medicine and Rehabilitation",
+  "authors": "England JD, Gronseth GS, Franklin G et al.",
+  "journal": "Neurology",
+  "year": 2005,
+  "doi": "10.1212/01.wnl.0000149522.32823.ea",
+  "pmid": "15668414",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "The objective of this report was to develop a case definition of distal symmetric polyneuropathy to standardize and facilitate clinical research and epidemiologic studies. A formalized consensus process was employed to reach agreement after a systematic review and classification of evidence from the literature. The literature indicates that symptoms alone have relatively poor diagnostic accuracy in predicting the presence of polyneuropathy; signs are better predictors of polyneuropathy than symptoms; and single abnormalities on examination are less sensitive than multiple abnormalities in predicting the presence of polyneuropathy. The combination of neuropathic symptoms, signs, and electrodiagnostic findings provides the most accurate diagnosis of distal symmetric polyneuropathy. A set of case definitions was rank ordered by likelihood of disease. The highest likelihood of polyneuropathy (useful for clinical trials) occurs with a combination of multiple symptoms, multiple signs, and abnormal electrodiagnostic studies. A modest likelihood of polyneuropathy (useful for field or epidemiologic studies) occurs with a combination of multiple symptoms and multiple signs when the results o",
+  "societies": [
+   "AAN",
+   "AANEM"
+  ],
+  "modalities": [
+   "EMG/NCS",
+   "Polyneuropathy"
+  ],
+  "retired": false
+ },
+ {
+  "id": "35014115",
+  "title": "European Academy of Neurology/Peripheral Nerve Society guideline on diagnosis and treatment of chronic inflammatory demyelinating polyradiculoneuropathy: Report of a joint Task Force-Second revision",
+  "authors": "undefined",
+  "journal": "J Peripher Nerv Syst",
+  "year": 2022,
+  "doi": "10.1111/jns.12479",
+  "pmid": "35014115",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "EAN",
+   "PNS"
+  ],
+  "modalities": [
+   "EMG/NCS",
+   "Polyneuropathy"
+  ],
+  "retired": false
+ },
+ {
+  "id": "37814552",
+  "title": "European Academy of Neurology/Peripheral Nerve Society Guideline on diagnosis and treatment of Guillain-Barré syndrome",
+  "authors": "van Doorn PA, Van den Bergh PYK, Hadden RDM et al.",
+  "journal": "Eur J Neurol",
+  "year": 2023,
+  "doi": "10.1111/ene.16073",
+  "pmid": "37814552",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Guillain-Barré syndrome (GBS) is an acute polyradiculoneuropathy. Symptoms may vary greatly in presentation and severity. Besides weakness and sensory disturbances, patients may have cranial nerve involvement, respiratory insufficiency, autonomic dysfunction and pain. To develop an evidence-based guideline for the diagnosis and treatment of GBS, using Grading of Recommendations, Assessment, Development and Evaluation (GRADE) methodology a Task Force (TF) of the European Academy of Neurology (EAN) and the Peripheral Nerve Society (PNS) constructed 14 Population/Intervention/Comparison/Outcome questions (PICOs) covering diagnosis, treatment and prognosis of GBS, which guided the literature search. Data were extracted and summarised in GRADE Summaries of Findings (for treatment PICOs) or Evidence Tables (for diagnostic and prognostic PICOs). Statements were prepared according to GRADE Evidence-to-Decision (EtD) frameworks. For the six intervention PICOs, evidence-based recommendations are made. For other PICOs, good practice points (GPPs) are formulated. For diagnosis, the principal GPPs are: GBS is more likely if there is a history of recent diarrhoea or respiratory infection; CSF ex",
+  "societies": [
+   "EAN",
+   "PNS"
+  ],
+  "modalities": [
+   "EMG/NCS",
+   "Polyneuropathy"
+  ],
+  "retired": false
+ },
+ {
+  "id": "16879289",
+  "title": "European Federation of Neurological Societies/Peripheral Nerve Society guideline on management of multifocal motor neuropathy",
+  "authors": "European Federation of Neurological Societies, Peripheral Nerve Society, van Schaik IN et al.",
+  "journal": "Eur J Neurol",
+  "year": 2006,
+  "doi": "10.1111/j.1468-1331.2006.01466.x",
+  "pmid": "16879289",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Several diagnostic criteria for multifocal motor neuropathy have been proposed in recent years and a beneficial effect of intravenous immunoglobulin (IVIg) and various other immunomodulatory drugs has been suggested in several trials and uncontrolled studies. The objectives were to prepare consensus guidelines on the definition, investigation and treatment of multifocal motor neuropathy. Disease experts and a patient representative considered references retrieved from MEDLINE and the Cochrane Library in July 2004 and prepared statements which were agreed in an iterative fashion. The Task Force agreed good practice points to define clinical and electrophysiological diagnostic criteria for multifocal motor neuropathy and investigations to be considered. The principal recommendations and good practice points were: (i) IVIg (2 g/kg given over 2-5 days) should be considered as the first line treatment (level A recommendation) when disability is sufficiently severe to warrant treatment. (ii) Corticosteroids are not recommended (good practice point). (iii) If initial treatment with IVIg is effective, repeated IVIg treatment should be considered (level C recommendation). The frequency of I",
+  "societies": [
+   "EFNS",
+   "PNS"
+  ],
+  "modalities": [
+   "EMG/NCS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "32387049",
+  "title": "A proposal for new diagnostic criteria for ALS",
+  "authors": "Shefner JM, Al-Chalabi A, Baker MR et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2020,
+  "doi": "10.1016/j.clinph.2020.04.005",
+  "pmid": "32387049",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "EMG/NCS",
+   "ALS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "18164242",
+  "title": "Electrodiagnostic criteria for diagnosis of ALS",
+  "authors": "de Carvalho M, Dengler R, Eisen A et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2008,
+  "doi": "10.1016/j.clinph.2007.09.143",
+  "pmid": "18164242",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "A consensus meeting was held to determine the best use and interpretation of electrophysiological data in the diagnosis of ALS. The utility of needle EMG and nerve conduction studies was affirmed. It is recommended that electrophysiological evidence for chronic neurogenic change should be taken as equivalent to clinical information in the recognition of involvement of individual muscles in a limb. In addition, in the context of a suspected clinical diagnosis of ALS, fasciculation potentials should be taken as equivalent to fibrillation potentials and positive sharp waves in recognising denervation. The importance of searching for instability in fasciculation potentials and in motor unit potentials in ALS is stressed. These changes in the interpretation of electrophysiological data render obsolete the category Probable Laboratory-Supported ALS in the modified El Escorial diagnostic criteria for ALS. Methods for detection of upper motor neuron abnormality appear sensitive but require further study, particularly regarding their value when clinical signs of upper motor neuron lesion are uncertain.",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "EMG/NCS",
+   "ALS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "18486546",
+  "title": "Recommendations for the clinical use of somatosensory-evoked potentials",
+  "authors": "Cruccu G, Aminoff MJ, Curio G et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2008,
+  "doi": "10.1016/j.clinph.2008.03.016",
+  "pmid": "18486546",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "The International Federation of Clinical Neurophysiology (IFCN) is in the process of updating its Recommendations for clinical practice published in 1999. These new recommendations dedicated to somatosensory-evoked potentials (SEPs) update the methodological aspects and general clinical applications of standard SEPs, and introduce new sections dedicated to the anatomical-functional organization of the somatosensory system and to special clinical applications, such as intraoperative monitoring, recordings in the intensive care unit, pain-related evoked potentials, and trigeminal and pudendal SEPs. Standard SEPs have gained an established role in the health system, and the special clinical applications we describe here are drawing increasing interest. However, to prove clinically useful each of them requires a dedicated knowledge, both technical and pathophysiological. In this article we give technical advice, report normative values, and discuss clinical applications.",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "Evoked potentials"
+  ],
+  "retired": false
+ },
+ {
+  "id": "27443562",
+  "title": "ISCEV standard for clinical visual evoked potentials: (2016 update)",
+  "authors": "Odom JV, Bach M, Brigell M et al.",
+  "journal": "Doc Ophthalmol",
+  "year": 2016,
+  "doi": "10.1007/s10633-016-9553-y",
+  "pmid": "27443562",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Visual evoked potentials (VEPs) can provide important diagnostic information regarding the functional integrity of the visual system. This document updates the ISCEV standard for clinical VEP testing and supersedes the 2009 standard. The main changes in this revision are the acknowledgment that pattern stimuli can be produced using a variety of technologies with an emphasis on the need for manufacturers to ensure that there is no luminance change during pattern reversal or pattern onset/offset. The document is also edited to bring the VEP standard into closer harmony with other ISCEV standards. The ISCEV standard VEP is based on a subset of stimulus and recording conditions that provide core clinical information and can be performed by most clinical electrophysiology laboratories throughout the world. These are: (1) Pattern-reversal VEPs elicited by checkerboard stimuli with large 1 degree (°) and small 0.25° checks. (2) Pattern onset/offset VEPs elicited by checkerboard stimuli with large 1° and small 0.25° checks. (3) Flash VEPs elicited by a flash (brief luminance increment) which subtends a visual field of at least 20°. The ISCEV standard VEP protocols are defined for a single ",
+  "societies": [
+   "ISCEV"
+  ],
+  "modalities": [
+   "Evoked potentials"
+  ],
+  "retired": false
+ },
+ {
+  "id": "17042160",
+  "title": "Guideline 9A: guidelines on evoked potentials",
+  "authors": "American Clinical Neurophysiology Society.",
+  "journal": "Am J Electroneurodiagnostic Technol",
+  "year": 2006,
+  "doi": "10.1080/1086508x.2006.11079584",
+  "pmid": "17042160",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "",
+  "societies": [
+   "ACNS"
+  ],
+  "modalities": [
+   "Evoked potentials"
+  ],
+  "retired": false
+ },
+ {
+  "id": "30470625",
+  "title": "Recommendations of the International Society of Intraoperative Neurophysiology for intraoperative somatosensory evoked potentials",
+  "authors": "MacDonald DB, Dong C, Quatrale R et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2019,
+  "doi": "10.1016/j.clinph.2018.10.008",
+  "pmid": "30470625",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Intraoperative somatosensory evoked potentials (SEPs) provide dorsal somatosensory system functional and localizing information, and complement motor evoked potentials. Correct application and interpretation require in-depth knowledge of relevant anatomy, electrophysiology, and techniques. It is advisable to facilitate cortical SEPs with total intravenous propofol-opioid or similarly favorable anesthesia. Moreover, SEP optimization is recommended to enhance surgical feedback speed and accuracy by maximizing signal-to-noise ratio (SNR); it consists of selecting highest-SNR peripheral and cortical derivations while omitting low-SNR channels. Confounding factors causing non-surgical SEP reduction should be excluded before issuing a warning. It is advisable to facilitate their identification with peripheral SEP controls and cortical SEP systemic controls whenever possible. Warning criteria should adjust for baseline drift and reproducibility. The recommended adaptive warning criterion is visually obvious amplitude reduction from recent pre-change values and clearly exceeding trial-to-trial variability, particularly when abrupt and focal. Acquisition and interpretation should be done by",
+  "societies": [
+   "ISIN"
+  ],
+  "modalities": [
+   "IONM",
+   "Evoked potentials"
+  ],
+  "retired": false
+ },
+ {
+  "id": "24055297",
+  "title": "Intraoperative motor evoked potential monitoring - a position statement by the American Society of Neurophysiological Monitoring",
+  "authors": "Macdonald DB, Skinner S, Shils J et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2013,
+  "doi": "10.1016/j.clinph.2013.07.025",
+  "pmid": "24055297",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "The following intraoperative MEP recommendations can be made on the basis of current evidence and expert opinion: (1) Acquisition and interpretation should be done by qualified personnel. (2) The methods are sufficiently safe using appropriate precautions. (3) MEPs are an established practice option for cortical and subcortical mapping and for monitoring during surgeries risking motor injury in the brain, brainstem, spinal cord or facial nerve. (4) Intravenous anesthesia usually consisting of propofol and opioid is optimal for muscle MEPs. (5) Interpretation should consider limitations and confounding factors. (6) D-wave warning criteria consider amplitude reduction having no confounding factor explanation: >50% for intramedullary spinal cord tumor surgery, and >30-40% for peri-Rolandic surgery. (7) Muscle MEP warning criteria are tailored to the type of surgery and based on deterioration clearly exceeding variability with no confounding factor explanation. Disappearance is always a major criterion. Marked amplitude reduction, acute threshold elevation or morphology simplification could be additional minor or moderate spinal cord monitoring criteria depending on the type of surgery",
+  "societies": [
+   "ASNM"
+  ],
+  "modalities": [
+   "IONM"
+  ],
+  "retired": false
+ },
+ {
+  "id": "22349304",
+  "title": "A practical guide to diagnostic transcranial magnetic stimulation: report of an IFCN committee",
+  "authors": "Groppa S, Oliviero A, Eisen A et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2012,
+  "doi": "10.1016/j.clinph.2012.01.010",
+  "pmid": "22349304",
+  "pmcid": "PMC4890546",
+  "openAccess": true,
+  "abstract": "Transcranial magnetic stimulation (TMS) is an established neurophysiological tool to examine the integrity of the fast-conducting corticomotor pathways in a wide range of diseases associated with motor dysfunction. This includes but is not limited to patients with multiple sclerosis, amyotrophic lateral sclerosis, stroke, movement disorders, disorders affecting the spinal cord, facial and other cranial nerves. These guidelines cover practical aspects of TMS in a clinical setting. We first discuss the technical and physiological aspects of TMS that are relevant for the diagnostic use of TMS. We then lay out the general principles that apply to a standardized clinical examination of the fast-conducting corticomotor pathways with single-pulse TMS. This is followed by a detailed description of how to examine corticomotor conduction to the hand, leg, trunk and facial muscles in patients. Additional sections cover safety issues, the triple stimulation technique, and neuropediatric aspects of TMS.",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "TMS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "33243615",
+  "title": "Safety and recommendations for TMS use in healthy subjects and patient populations, with updates on training, ethical and regulatory issues: Expert Guidelines",
+  "authors": "Rossi S, Antal A, Bestmann S et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2021,
+  "doi": "10.1016/j.clinph.2020.10.003",
+  "pmid": "33243615",
+  "pmcid": "PMC9094636",
+  "openAccess": true,
+  "abstract": "This article is based on a consensus conference, promoted and supported by the International Federation of Clinical Neurophysiology (IFCN), which took place in Siena (Italy) in October 2018. The meeting intended to update the ten-year-old safety guidelines for the application of transcranial magnetic stimulation (TMS) in research and clinical settings (Rossi et al., 2009). Therefore, only emerging and new issues are covered in detail, leaving still valid the 2009 recommendations regarding the description of conventional or patterned TMS protocols, the screening of subjects/patients, the need of neurophysiological monitoring for new protocols, the utilization of reference thresholds of stimulation, the managing of seizures and the list of minor side effects. New issues discussed in detail from the meeting up to April 2020 are safety issues of recently developed stimulation devices and pulse configurations; duties and responsibility of device makers; novel scenarios of TMS applications such as in the neuroimaging context or imaging-guided and robot-guided TMS; TMS interleaved with transcranial electrical stimulation; safety during paired associative stimulation interventions; and ris",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "TMS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "31901449",
+  "title": "Evidence-based guidelines on the therapeutic use of repetitive transcranial magnetic stimulation (rTMS): An update (2014-2018)",
+  "authors": "Lefaucheur JP, Aleman A, Baeken C et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2020,
+  "doi": "10.1016/j.clinph.2019.11.002",
+  "pmid": "31901449",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "A group of European experts reappraised the guidelines on the therapeutic efficacy of repetitive transcranial magnetic stimulation (rTMS) previously published in 2014 [Lefaucheur et al., Clin Neurophysiol 2014;125:2150-206]. These updated recommendations take into account all rTMS publications, including data prior to 2014, as well as currently reviewed literature until the end of 2018. Level A evidence (definite efficacy) was reached for: high-frequency (HF) rTMS of the primary motor cortex (M1) contralateral to the painful side for neuropathic pain; HF-rTMS of the left dorsolateral prefrontal cortex (DLPFC) using a figure-of-8 or a H1-coil for depression; low-frequency (LF) rTMS of contralesional M1 for hand motor recovery in the post-acute stage of stroke. Level B evidence (probable efficacy) was reached for: HF-rTMS of the left M1 or DLPFC for improving quality of life or pain, respectively, in fibromyalgia; HF-rTMS of bilateral M1 regions or the left DLPFC for improving motor impairment or depression, respectively, in Parkinson's disease; HF-rTMS of ipsilesional M1 for promoting motor recovery at the post-acute stage of stroke; intermittent theta burst stimulation targeted to ",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "TMS"
+  ],
+  "retired": false
+ },
+ {
+  "id": "28162150",
+  "title": "Clinical Practice Guideline for Diagnostic Testing for Adult Obstructive Sleep Apnea: An American Academy of Sleep Medicine Clinical Practice Guideline",
+  "authors": "Kapur VK, Auckley DH, Chowdhuri S et al.",
+  "journal": "J Clin Sleep Med",
+  "year": 2017,
+  "doi": "10.5664/jcsm.6506",
+  "pmid": "28162150",
+  "pmcid": "PMC5337595",
+  "openAccess": true,
+  "abstract": "IntroductionThis guideline establishes clinical practice recommendations for the diagnosis of obstructive sleep apnea (OSA) in adults and is intended for use in conjunction with other American Academy of Sleep Medicine (AASM) guidelines on the evaluation and treatment of sleep-disordered breathing in adults.MethodsThe AASM commissioned a task force of experts in sleep medicine. A systematic review was conducted to identify studies, and the Grading of Recommendations Assessment, Development, and Evaluation (GRADE) process was used to assess the evidence. The task force developed recommendations and assigned strengths based on the quality of evidence, the balance of benefits and harms, patient values and preferences, and resource use. In addition, the task force adopted foundational recommendations from prior guidelines as \"good practice statements\", that establish the basis for appropriate and effective diagnosis of OSA. The AASM Board of Directors approved the final recommendations.RecommendationsThe following recommendations are intended as a guide for clinicians diagnosing OSA in adults. Under GRADE, a STRONG recommendation is one that clinicians should follow under most circumst",
+  "societies": [
+   "AASM"
+  ],
+  "modalities": [
+   "PSG/Sleep"
+  ],
+  "retired": false
+ },
+ {
+  "id": "23066376",
+  "title": "Rules for scoring respiratory events in sleep: update of the 2007 AASM Manual for the Scoring of Sleep and Associated Events. Deliberations of the Sleep Apnea Definitions Task Force of the American Academy of Sleep Medicine",
+  "authors": "Berry RB, Budhiraja R, Gottlieb DJ et al.",
+  "journal": "J Clin Sleep Med",
+  "year": 2012,
+  "doi": "10.5664/jcsm.2172",
+  "pmid": "23066376",
+  "pmcid": "PMC3459210",
+  "openAccess": true,
+  "abstract": "The American Academy of Sleep Medicine (AASM) Sleep Apnea Definitions Task Force reviewed the current rules for scoring respiratory events in the 2007 AASM Manual for the Scoring and Sleep and Associated Events to determine if revision was indicated. The goals of the task force were (1) to clarify and simplify the current scoring rules, (2) to review evidence for new monitoring technologies relevant to the scoring rules, and (3) to strive for greater concordance between adult and pediatric rules. The task force reviewed the evidence cited by the AASM systematic review of the reliability and validity of scoring respiratory events published in 2007 and relevant studies that have appeared in the literature since that publication. Given the limitations of the published evidence, a consensus process was used to formulate the majority of the task force recommendations concerning revisions.The task force made recommendations concerning recommended and alternative sensors for the detection of apnea and hypopnea to be used during diagnostic and positive airway pressure (PAP) titration polysomnography. An alternative sensor is used if the recommended sensor fails or the signal is inaccurate.",
+  "societies": [
+   "AASM"
+  ],
+  "modalities": [
+   "PSG/Sleep"
+  ],
+  "retired": false
+ },
+ {
+  "id": "15700727",
+  "title": "Practice parameters for clinical use of the multiple sleep latency test and the maintenance of wakefulness test",
+  "authors": "Littner MR, Kushida C, Wise M et al.",
+  "journal": "Sleep",
+  "year": 2005,
+  "doi": "10.1093/sleep/28.1.113",
+  "pmid": "15700727",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Characterization of excessive sleepiness is an important task for the sleep clinician, and assessment requires a thorough history and in many cases, objective assessment in the sleep laboratory. These practice parameters were developed to guide the sleep clinician on appropriate clinical use of the Multiple Sleep Latency Test (MSLT), and the Maintenance of Wakefulness Test (MWT). These recommendations replace those published in 1992 in a position paper produced by the American Sleep Disorders Association. A Task Force of content experts was appointed by the American Academy of Sleep Medicine to perform a comprehensive review of the scientific literature and grade the evidence regarding the clinical use of the MSLT and the MWT. Practice parameters were developed based on this review and in most cases evidence based methods were used to support recommendations. When data were insufficient or inconclusive, the collective opinion of experts was used to support recommendations. These recommendations were developed by the Standards of Practice Committee and reviewed and approved by the Board of Directors of the American Academy of Sleep Medicine. The MSLT is indicated as part of the eval",
+  "societies": [
+   "AASM"
+  ],
+  "modalities": [
+   "PSG/Sleep"
+  ],
+  "retired": false
+ },
+ {
+  "id": "39324694",
+  "title": "Treatment of restless legs syndrome and periodic limb movement disorder: an American Academy of Sleep Medicine clinical practice guideline",
+  "authors": "Winkelman JW, Berkowski JA, DelRosso LM et al.",
+  "journal": "J Clin Sleep Med",
+  "year": 2025,
+  "doi": "10.5664/jcsm.11390",
+  "pmid": "39324694",
+  "pmcid": "PMC11701286",
+  "openAccess": true,
+  "abstract": "IntroductionThis guideline establishes clinical practice recommendations for treatment of restless legs syndrome (RLS) and periodic limb movement disorder (PLMD) in adults and pediatric patients.MethodsThe American Academy of Sleep Medicine (AASM) commissioned a task force of experts in sleep medicine to develop recommendations and assign strengths based on a systematic review of the literature and an assessment of the evidence using the grading of recommendations assessment, development, and evaluation methodology. The task force provided a summary of the relevant literature and the certainty of evidence, the balance of benefits and harms, patient values and preferences, and resource use considerations that support the recommendations. The AASM Board of Directors approved the final recommendations.Good practice statementThe following good practice statement is based on expert consensus, and its implementation is necessary for the appropriate and effective management of patients with RLS.1. In all patients with clinically significant RLS, clinicians should regularly test serum iron studies including ferritin and transferrin saturation (calculated from iron and total iron binding ca",
+  "societies": [
+   "AASM"
+  ],
+  "modalities": [
+   "PSG/Sleep"
+  ],
+  "retired": false
+ },
+ {
+  "id": "32761206",
+  "title": "Determination of Brain Death/Death by Neurologic Criteria: The World Brain Death Project",
+  "authors": "Greer DM, Shemie SD, Lewis A et al.",
+  "journal": "JAMA",
+  "year": 2020,
+  "doi": "10.1001/jama.2020.11586",
+  "pmid": "32761206",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "ImportanceThere are inconsistencies in concept, criteria, practice, and documentation of brain death/death by neurologic criteria (BD/DNC) both internationally and within countries.ObjectiveTo formulate a consensus statement of recommendations on determination of BD/DNC based on review of the literature and expert opinion of a large multidisciplinary, international panel.ProcessRelevant international professional societies were recruited to develop recommendations regarding determination of BD/DNC. Literature searches of the Cochrane, Embase, and MEDLINE databases included January 1, 1992, through April 2020 identified pertinent articles for review. Because of the lack of high-quality data from randomized clinical trials or large observational studies, recommendations were formulated based on consensus of contributors and medical societies that represented relevant disciplines, including critical care, neurology, and neurosurgery.Evidence synthesisBased on review of the literature and consensus from a large multidisciplinary, international panel, minimum clinical criteria needed to determine BD/DNC in various circumstances were developed.RecommendationsPrior to evaluating a patient",
+  "societies": [
+   "WFSICCM",
+   "WFN"
+  ],
+  "modalities": [
+   "Brain death"
+  ],
+  "retired": false
+ },
+ {
+  "id": "30309740",
+  "title": "Indications for neuromuscular ultrasound: Expert opinion and review of the literature",
+  "authors": "Walker FO, Cartwright MS, Alter KE et al.",
+  "journal": "Clin Neurophysiol",
+  "year": 2018,
+  "doi": "10.1016/j.clinph.2018.09.013",
+  "pmid": "30309740",
+  "pmcid": null,
+  "openAccess": false,
+  "abstract": "Over the last two decades, dozens of applications have emerged for ultrasonography in neuromuscular disorders. We wanted to measure its impact on practice in laboratories where the technique is in frequent use. After identifying experts in neuromuscular ultrasound and electrodiagnosis, we assessed their use of ultrasonography for different indications and their expectations for its future evolution. We then identified the earliest papers to provide convincing evidence of the utility of ultrasound for particular indications and analyzed the relationship of their date of publication with expert usage. We found that experts use ultrasonography often for inflammatory, hereditary, traumatic, compressive and neoplastic neuropathies, and somewhat less often for neuronopathies and myopathies. Usage significantly correlated with the timing of key publications in the field. We review these findings and the extensive evidence supporting the value of neuromuscular ultrasound. Advancement of the field of clinical neurophysiology depends on widespread translation of these findings.",
+  "societies": [
+   "IFCN"
+  ],
+  "modalities": [
+   "Nerve ultrasound"
+  ],
+  "retired": false
+ }
+]
