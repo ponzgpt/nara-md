@@ -45,7 +45,7 @@ const STOP = new Set(("the of and for in on a an to with by what is are how whic
   "der die das und ist sind fur fuer mit ein eine wie welche bei von zur zum nicht oder sollte " +
   // words of the question, not of the topic ("how should I structure an EEG report" is not about crystal structure)
   "difference differences distinguish structure guidance written interpret findings apply applies use used using define defined regarding update updated " +
-  "spain uk germany japan china usa recommended recommend need needed tell useful beyond precautions exist exists any also other others recommends recomienda recomiendan existen ").split(" "));
+  "spain uk germany japan china usa recommended recommend need needed tell useful beyond precautions exist exists any also other others recommends recomienda recomiendan existen recomendaciones recomendacion guia guias documento documentos ").split(" "));
 
 // Words that appear in almost every guideline title (including the two commonest modalities, which the chips scope anyway).
 // They refine a match but can't make one on their own:

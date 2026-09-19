@@ -131,6 +131,7 @@ test("Spanish and English questions reach the same document", () => {
     ["magnetoencephalography guidelines", "recomendaciones para la magnetoencefalografía", /magnetoencephalography/],
     ["magnetoencephalography guidelines", "magnetoencefalografía clínica recomendaciones", /magnetoencephalography/],
   ];
+  assert.doesNotMatch(rank(lib, "magnetoencefalografía clínica recomendaciones").slice(0, 3).map((e) => e.title).join("|"), /SENFC|consentimiento/); // "recomendaciones" is filler, not a topic
   for (const [en, es, re] of pairs) { assert.match(first(en), re, en); assert.match(first(es), re, es); }
 });
 
