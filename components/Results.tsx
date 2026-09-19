@@ -7,6 +7,7 @@ import { citationHref, CONNECTORS } from "@/lib/catalog";
 import type { Entry } from "@/lib/search";
 import type { AskResponse } from "@/lib/types";
 import { Answer } from "@/components/Answer";
+import { AnswerPending } from "@/components/AnswerPending";
 import { StandardsList } from "@/components/StandardsList";
 
 type Props = { q: string; entries: Entry[]; result: AskResponse | null; asking: boolean; proxy: string; papers: string; region: string; missing: string[] };
@@ -16,10 +17,11 @@ const key = (x: { doi: string | null; pmid: string | null }) => x.doi ?? x.pmid 
 export function Results({ q, entries, result, asking, proxy, papers, region, missing }: Props) {
   const cited = new Map(result?.sources.filter((s) => s.kind === "guideline").map((s) => [key(s), s.n]));
   const literature = result?.sources.filter((s) => s.kind === "literature");
-  const status = result?.error ?? (result && !result.answer ? result.note : undefined);
+  const status = result?.error ?? (result && !result.pending && !result.answer ? result.note : undefined);
 
   return (
     <div aria-live="polite">
+      {result?.pending && result.provider !== "none" && <AnswerPending provider={result.provider} sources={result.sources.length} />}
       {result?.answer && <Answer text={result.answer} sources={result.sources} proxy={proxy} />}
       {status && <p className="status">{status}</p>}
 
@@ -31,7 +33,7 @@ export function Results({ q, entries, result, asking, proxy, papers, region, mis
 
         <section className="col" aria-labelledby="col-literature">
           <h2 id="col-literature" className="col-title">Literature {literature && <span>{literature.length}</span>}</h2>
-          {asking ? (
+          {asking && !result ? (
             <div className="card skeleton" aria-label="Searching the literature"><i /><i /><i /></div>
           ) : literature?.length ? (
             <ul className="list">
@@ -44,7 +46,7 @@ export function Results({ q, entries, result, asking, proxy, papers, region, mis
               ))}
             </ul>
           ) : (
-            <p className="empty">{literature ? "No matching papers." : <>Press <kbd>Enter</kbd> to search {papers} papers in Europe PMC.</>}</p>
+            <p className="empty">{literature ? "No matching papers." : <>Ask a question to search {papers} papers in Europe PMC.</>}</p>
           )}
           <p className="handoff">
             Also ask

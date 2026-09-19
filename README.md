@@ -22,6 +22,8 @@ Answers are written by the first available provider, so NaraMD works with no set
 | Free OpenRouter models | `OPENROUTER_API_KEY` (free key from [openrouter.ai/keys](https://openrouter.ai/keys)). Models tried in order: DeepSeek V4 Flash → Gemma 4 31B → Qwen 3.8; override with `OPENROUTER_MODELS` | Free, but needs the key |
 | Pollinations (keyless) | Nothing. It's the fallback when no key is set. `LLM_KEYLESS=off` disables it | Anonymous third-party service, so treat it as a stopgap, not a dependency |
 
+**Speed:** Claude and OpenRouter answer in a few seconds. The keyless tier is a single anonymous reasoning model and takes 10 to 35 s, whatever the settings (measured). The page shows the sources first and says so while the answer is pending, but for a real launch, set a key.
+
 Whatever the provider, the server checks the answer before showing it (`lib/answer.ts`): plain text only, every claim carries a `[n]` that points to a real source, and any sentence without one is dropped. If nothing survives, NaraMD says it couldn't write a cited answer and shows the sources. Small free models do skip citations and add claims of their own, which is why this is enforced in code rather than trusted to the prompt.
 
 ## How it works
@@ -30,13 +32,14 @@ Whatever the provider, the server checks the answer before showing it (`lib/answ
 question ─┬─ lib/search.ts ───────── curated library (data/library.json), jargon-aware, scoped by modality, boosted by region
           └─ lib/connectors/europepmc.ts ── live literature (title + abstract)
                      │
-          app/api/ask/route.ts ── numbered sources ──► lib/llm.ts (OpenRouter free / Claude) ──► answer [n] + "Bottom line"
+          app/api/ask/route.ts ── streams: sources (~1 s) ──► then lib/llm.ts (OpenRouter free / Claude) ──► answer [n] + "Bottom line"
 ```
 
 | Path | Role |
 |---|---|
 | `app/page.tsx` | `/`: the home page *is* the tool. The search is the hero; the marketing below it (`components/Marketing.tsx`) shows only while idle. `/search` redirects here |
-| `components/Home.tsx` | Tool state and hero: headline, live metrics, search, rotating examples (`Examples`), modality chips. The logo returns to idle |
+| `components/Home.tsx` | Tool state and hero: headline, live metrics, search, rotating examples, modality chips. Keeps what's *typed* (`q`) apart from what was *asked* (`asked`), reads the streamed response, and re-asks when region or scope change. The logo returns to idle |
+| `components/Suggestions.tsx`, `AnswerPending.tsx` | The typing dropdown ("↵ Ask…" + matching standards) and the answer placeholder with timer |
 | `components/Results.tsx` | Answer, then **Standards** (grouped by document type) and **Literature** side by side, then hand-offs. Numbers match the `[n]` citations |
 | `lib/llm.ts`, `lib/answer.ts` | Answer synthesis (Anthropic, OpenRouter or keyless) and the citation check that every answer must pass |
 | `components/` | `Answer`, `StandardsList`, `RegionMenu`, `ThemeToggle`, `SourcesSheet` (sources + library proxy) |

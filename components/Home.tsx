@@ -7,8 +7,9 @@ import { LIBRARY } from "@/lib/library";
 import { rank } from "@/lib/search";
 import { boostFor, DOC_TYPES, missingLocal, MODALITIES } from "@/lib/catalog";
 import { useStored } from "@/lib/use-stored";
-import type { AskResponse } from "@/lib/types";
+import type { AskEvent, AskResponse } from "@/lib/types";
 import { Results } from "@/components/Results";
+import { Suggestions } from "@/components/Suggestions";
 import { Examples } from "@/components/Examples";
 import { RegionMenu } from "@/components/RegionMenu";
 import { SourcesSheet } from "@/components/SourcesSheet";
@@ -21,11 +22,14 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
   const [region, setRegion] = useStored("nara.region", "global");
   const [scope, setScope] = useStored<string[]>("nara.scope", []);
   const [proxy, setProxy] = useStored("nara.proxy", "");
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState("");                 // what's in the box
+  const [asked, setAsked] = useState<string | null>(null); // what was last submitted: results belong to this, not to `q`
   const [result, setResult] = useState<AskResponse | null>(null);
   const [asking, setAsking] = useState(false);
+  const [focused, setFocused] = useState(false);
   const input = useRef<HTMLInputElement>(null);
   const sources = useRef<HTMLDialogElement>(null);
+  const run = useRef(0); // id of the latest request, so a slow older answer can't overwrite a newer one
 
   useEffect(() => {
     const focus = (e: KeyboardEvent) => {
@@ -36,23 +40,21 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
   }, []);
 
   const missing = useMemo(() => missingLocal(region, LIBRARY), [region]);
-  const entries = useMemo(() => rank(LIBRARY, q, { modalities: scope, ...boostFor(region) }), [q, scope, region]);
-  const active = Boolean(q.trim() || result || asking || scope.length);
-  // An answer is written for a region (it's in the prompt), so a region change re-asks the same question.
-  const [answeredFor, setAnsweredFor] = useState(region);
-  useEffect(() => {
-    if (region !== answeredFor && result && !asking) ask(q);
-  }, [region]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Two different rankings: `entries` is the results page (for the submitted question); `matches` is only the typing dropdown.
+  const entries = useMemo(() => rank(LIBRARY, asked ?? "", { modalities: scope, ...boostFor(region) }), [asked, scope, region]);
+  const typed = useMemo(() => rank(LIBRARY, q, { modalities: scope, ...boostFor(region) }), [q, scope, region]);
+  const active = asked !== null || scope.length > 0;
+  const suggesting = focused && q.trim().length > 0 && q.trim() !== asked;
   const toggle = (m: string) => setScope(scope.includes(m) ? scope.filter((x) => x !== m) : [...scope, m]);
-  const reset = () => { setQ(""); setResult(null); setScope([]); scrollTo({ top: 0 }); };
-  const edit = (v: string) => { setQ(v); setResult(null); }; // a new query invalidates the last answer
+  const reset = () => { run.current++; setQ(""); setAsked(null); setResult(null); setAsking(false); setScope([]); scrollTo({ top: 0 }); };
 
   async function ask(question: string) {
-    if (!question.trim() || asking) return;
-    setQ(question);
+    question = question.trim();
+    if (!question) return;
+    const id = ++run.current;
+    setQ(question); setAsked(question); setFocused(false); input.current?.blur();
     scrollTo({ top: 0 });
     setAsking(true);
-    setAnsweredFor(region);
     setResult(null);
     try {
       const res = await fetch("/api/ask", {
@@ -60,13 +62,42 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ q: question, region, modalities: scope }),
       });
-      setResult(await res.json());
+      if (!res.body || !(res.headers.get("content-type") ?? "").includes("ndjson")) {
+        const err = await res.json().catch(() => ({}));
+        return setResult({ answer: null, sources: [], error: err.error ?? "Something went wrong. The standards below still work." });
+      }
+      // Events arrive as the server finishes each phase: sources first, then the written answer.
+      const reader = res.body.getReader(), dec = new TextDecoder();
+      let buf = "";
+      for (;;) {
+        const { value, done } = await reader.read();
+        if (value) buf += dec.decode(value, { stream: true });
+        for (let nl = buf.indexOf("\n"); nl >= 0; nl = buf.indexOf("\n")) {
+          const line = buf.slice(0, nl); buf = buf.slice(nl + 1);
+          if (!line.trim() || id !== run.current) continue;
+          const ev: AskEvent = JSON.parse(line);
+          if (ev.type === "sources") setResult({ answer: null, sources: ev.sources, provider: ev.provider, pending: true });
+          else setResult((r) => ({ sources: r?.sources ?? [], provider: r?.provider, answer: ev.answer, note: ev.note }));
+        }
+        if (done) break;
+      }
     } catch {
-      setResult({ answer: null, sources: [], error: "Network error. The standards below still work." });
+      if (id === run.current) setResult((r) => ({ answer: null, sources: r?.sources ?? [], error: "Network error. The standards below still work." }));
     } finally {
-      setAsking(false);
+      if (id === run.current) setAsking(false);
     }
   }
+
+  // The answer is written for a region and a scope (both are in the prompt), so changing either re-asks the same question.
+  const key = `${region}|${scope.join(",")}`;
+  const lastKey = useRef(key);
+  useEffect(() => {
+    if (key === lastKey.current) return;
+    lastKey.current = key;
+    if (!asked) return;
+    const t = setTimeout(() => ask(asked), 600); // debounce: people toggle several chips in a row
+    return () => clearTimeout(t);
+  }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -93,12 +124,19 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
             <li><b>{SOCIETIES}</b> societies</li>
             <li><b>{papers}</b> papers</li>
           </ul>
-          <form onSubmit={(e) => { e.preventDefault(); ask(q); }} className="search" role="search">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-            <input ref={input} value={q} onChange={(e) => edit(e.target.value)} autoFocus
-              placeholder="Ask about a standard, criterion or protocol" aria-label="Ask about a standard, criterion or protocol" />
-            <button type="submit" disabled={!q.trim() || asking}>{asking ? "Reading…" : "Ask"}</button>
-          </form>
+          <div className="search-wrap" onFocus={() => setFocused(true)} onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false); }}>
+            <form onSubmit={(e) => { e.preventDefault(); ask(q); }} className="search" role="search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+              <input ref={input} value={q} onChange={(e) => { setQ(e.target.value); setFocused(true); }} autoFocus autoComplete="off"
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") setFocused(false);
+                  if (e.key === "ArrowDown") { e.preventDefault(); document.querySelector<HTMLElement>(".suggest [data-nav]")?.focus(); }
+                }}
+                placeholder="Ask a question about a standard, criterion or protocol" aria-label="Ask a question about a standard, criterion or protocol" />
+              <button type="submit" disabled={!q.trim() || asking}>{asking ? "Reading…" : "Ask"}</button>
+            </form>
+            {suggesting && <Suggestions q={q.trim()} matches={typed.slice(0, 5)} total={typed.length} proxy={proxy} onAsk={() => ask(q)} />}
+          </div>
           <Examples onPick={ask} />
           <div className="chips" role="group" aria-label="Scope to modalities">
             {MODALITIES.map((m) => (
@@ -109,7 +147,7 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
         </section>
 
         {active
-          ? <Results q={q} entries={entries} result={result} asking={asking} proxy={proxy} papers={papers} region={region} missing={missing} />
+          ? <Results q={asked ?? ""} entries={entries} result={result} asking={asking} proxy={proxy} papers={papers} region={region} missing={missing} />
           : children}
       </main>
 

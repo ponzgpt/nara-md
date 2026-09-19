@@ -12,6 +12,14 @@ const FREE_MODELS = (process.env.OPENROUTER_MODELS ??
 export type Synthesis = { text: string | null; refused?: boolean };
 type Chat = { system: string; user: string };
 
+/** Which provider `synthesize` will use, so the UI can set expectations (the keyless tier takes 10-35 s). */
+export type Provider = "anthropic" | "openrouter" | "keyless" | "none";
+export function provider(): Provider {
+  if (process.env.ANTHROPIC_API_KEY) return "anthropic";
+  if (process.env.OPENROUTER_API_KEY) return "openrouter";
+  return process.env.LLM_KEYLESS === "off" ? "none" : "keyless";
+}
+
 export async function synthesize(system: string, user: string): Promise<Synthesis> {
   const chat = { system, user };
   if (process.env.ANTHROPIC_API_KEY) return claude(chat);

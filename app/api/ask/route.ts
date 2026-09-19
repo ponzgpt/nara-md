@@ -5,9 +5,9 @@ import { rank, tokens } from "@/lib/search";
 import { boostFor, MODALITIES, REGIONS } from "@/lib/catalog";
 import { searchLiterature } from "@/lib/connectors/europepmc";
 import { allow } from "@/lib/rate-limit";
-import { synthesize } from "@/lib/llm";
+import { provider, synthesize } from "@/lib/llm";
 import { cleanAnswer } from "@/lib/answer";
-import type { AskResponse, Source } from "@/lib/types";
+import type { AskEvent, AskResponse, Source } from "@/lib/types";
 
 const SYSTEM = `You help clinical neurophysiologists (EEG, EMG/NCS, evoked potentials, sleep, IONM) work out which standard, criteria, terminology or protocol applies to their question.
 Use ONLY the numbered sources provided. Society guidelines and consensus statements outrank single studies; name the society and year.
@@ -36,38 +36,51 @@ export async function POST(req: Request) {
   const modalities = (Array.isArray(body.modalities) ? body.modalities : []).filter((m: unknown) => MODALITIES.includes(String(m)));
   if (!question) return reply({ answer: null, sources: [], error: "Empty question." }, 400);
 
-  const guidelines = rank(LIBRARY, question, { modalities, ...boostFor(region) }).slice(0, 6);
-  // Short jargon queries ("fnd criteria") go to Europe PMC as expanded phrases; full sentences go as written.
-  // ponytail: word-count heuristic; letting the LLM write the literature query is the upgrade.
-  // If the expansion is too strict (e.g. "Awaji vs Gold Coast"), retry with the user's own words, which
-  // for comparisons finds exactly the papers that discuss both sides.
-  const short = question.split(/\s+/).length <= 4;
-  let literature = await searchLiterature(short ? tokens(question) : question);
-  if (short && !literature.length) literature = await searchLiterature(question.replace(/\b(vs|versus|or)\b/gi, " "));
-  const sources: Source[] = [
-    ...guidelines.map((e) => ({
-      kind: "guideline" as const, title: e.title, meta: `${e.societies.join(" · ")} · ${e.journal} ${e.year}`,
-      doi: e.doi, pmid: e.pmid, url: e.url, openAccess: e.openAccess,
-      abstract: e.titleEn ? `[${e.lang?.toUpperCase()} document, English title: ${e.titleEn}] ${e.abstract}` : e.abstract,
-    })),
-    ...literature,
-  ].map((s, i) => ({ ...s, n: i + 1 }));
+  // Stream two events so the page can show sources in ~1 s instead of waiting up to 30 s for the written answer.
+  // "no-transform" stops Next's gzip from buffering the chunks.
+  const enc = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const send = (e: AskEvent) => controller.enqueue(enc.encode(JSON.stringify(e) + "\n"));
+      try {
+        const guidelines = rank(LIBRARY, question, { modalities, ...boostFor(region) }).slice(0, 6);
+        // Short jargon queries ("fnd criteria") go to Europe PMC as expanded phrases; full sentences go as written.
+        // ponytail: word-count heuristic; letting the LLM write the literature query is the upgrade.
+        // If the expansion is too strict (e.g. "Awaji vs Gold Coast"), retry with the user's own words, which
+        // for comparisons finds exactly the papers that discuss both sides.
+        const short = question.split(/\s+/).length <= 4;
+        let literature = await searchLiterature(short ? tokens(question) : question);
+        if (short && !literature.length) literature = await searchLiterature(question.replace(/\b(vs|versus|or)\b/gi, " "));
+        const sources: Source[] = [
+          ...guidelines.map((e) => ({
+            kind: "guideline" as const, title: e.title, meta: `${e.societies.join(" · ")} · ${e.journal} ${e.year}`,
+            doi: e.doi, pmid: e.pmid, url: e.url, openAccess: e.openAccess,
+            abstract: e.titleEn ? `[${e.lang?.toUpperCase()} document, English title: ${e.titleEn}] ${e.abstract}` : e.abstract,
+          })),
+          ...literature,
+        ].map((s, i) => ({ ...s, n: i + 1 }));
+        send({ type: "sources", sources, provider: provider() });
 
-  const context = sources.map((s) => `[${s.n}] (${s.kind}) ${s.title} — ${s.meta}\n${s.abstract || "(no abstract)"}`).join("\n\n");
-  const prompt = `Region: ${REGIONS[region].label}. Scope: ${modalities.join(", ") || "all modalities"}.\n\nSources:\n${context}\n\nQuestion: ${question}`;
-  try {
-    let out = await synthesize(SYSTEM, prompt);
-    if (out.refused) return reply({ answer: null, sources, note: "No written answer for this question. Sources are below." });
-    if (!out.text) return reply({ answer: null, sources, note: "Showing ranked sources. Written answers are not enabled on this server." });
-    let answer = cleanAnswer(out.text, sources.length);
-    if (!answer) { // small models sometimes skip citations: one retry with the rule restated, then give up honestly
-      out = await synthesize(SYSTEM, `${prompt}\n\nReminder: cite every sentence with [n] from the sources above, plain text only.`);
-      answer = out.text ? cleanAnswer(out.text, sources.length) : null;
-    }
-    if (!answer) return reply({ answer: null, sources, note: "Couldn't write a properly cited answer this time. The sources below are the evidence." });
-    return reply({ answer, sources });
-  } catch (err) {
-    console.error("llm:", err instanceof Error ? err.message : err); // never log the question
-    return reply({ answer: null, sources, note: "The answer service is busy right now. Sources are below." });
-  }
+        // Trim abstracts for the prompt: less to read means a faster answer, and the opening is what matters.
+        const context = sources.map((s) => `[${s.n}] (${s.kind}) ${s.title} — ${s.meta}\n${s.abstract.slice(0, 700) || "(no abstract)"}`).join("\n\n");
+        const prompt = `Region: ${REGIONS[region].label}. Scope: ${modalities.join(", ") || "all modalities"}.\n\nSources:\n${context}\n\nQuestion: ${question}`;
+
+        let out = await synthesize(SYSTEM, prompt);
+        if (out.refused) return send({ type: "answer", answer: null, note: "No written answer for this question. Sources are below." });
+        if (!out.text) return send({ type: "answer", answer: null, note: "Showing ranked sources. Written answers are not enabled on this server." });
+        let answer = cleanAnswer(out.text, sources.length);
+        if (!answer) { // small models sometimes skip citations: one retry with the rule restated, then give up honestly
+          out = await synthesize(SYSTEM, `${prompt}\n\nReminder: cite every sentence with [n] from the sources above, plain text only.`);
+          answer = out.text ? cleanAnswer(out.text, sources.length) : null;
+        }
+        send(answer ? { type: "answer", answer } : { type: "answer", answer: null, note: "Couldn't write a properly cited answer this time. The sources below are the evidence." });
+      } catch (err) {
+        console.error("ask:", err instanceof Error ? err.message : err); // never log the question
+        send({ type: "answer", answer: null, note: "The answer service is busy right now. The sources below are still the evidence." });
+      } finally {
+        controller.close();
+      }
+    },
+  });
+  return new Response(stream, { headers: { "content-type": "application/x-ndjson; charset=utf-8", "cache-control": "no-store, no-transform" } });
 }
