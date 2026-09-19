@@ -47,7 +47,28 @@ async function claude({ system, user }: Chat): Promise<Synthesis> {
   return { text: msg.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join("") };
 }
 
-async function openaiCompatible(url: string, { system, user }: Chat, opts: { headers: Record<string, string>; body: object }): Promise<Synthesis> {
+// The anonymous keyless tier allows about one request at a time and answers 429 to the rest (measured: 3 parallel
+// questions, 3 failures). Serialise its calls and retry 429 with a wait, so simultaneous users queue instead of failing.
+// ponytail: in-process queue. A second replica would double the pressure; a real key removes the problem.
+let keylessQueue: Promise<unknown> = Promise.resolve();
+const isKeyless = (url: string) => url.includes("pollinations");
+
+async function openaiCompatible(url: string, chat: Chat, opts: { headers: Record<string, string>; body: object }): Promise<Synthesis> {
+  if (!isKeyless(url)) return openaiCall(url, chat, opts);
+  const turn = keylessQueue.then(async () => {
+    for (let attempt = 0; ; attempt++) {
+      try { return await openaiCall(url, chat, opts); }
+      catch (e) {
+        if (attempt >= 3 || !(e instanceof Error) || !e.message.endsWith(" 429")) throw e;
+        await new Promise((r) => setTimeout(r, 7000 * (attempt + 1)));
+      }
+    }
+  });
+  keylessQueue = turn.catch(() => {}); // a failure must not block the next person in line
+  return turn;
+}
+
+async function openaiCall(url: string, { system, user }: Chat, opts: { headers: Record<string, string>; body: object }): Promise<Synthesis> {
   const res = await fetch(url, {
     method: "POST",
     signal: AbortSignal.timeout(45_000),

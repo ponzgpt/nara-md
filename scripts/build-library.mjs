@@ -25,9 +25,10 @@ for (const s of seeds) {
     pmid: h.pmid ?? null,
     pmcid: h.pmcid ?? null,
     openAccess: h.isOpenAccess === "Y" || !!h.pmcid,
-    abstract: (h.abstractText ?? "").replace(/<[^>]+>/g, "").slice(0, 1200),
+    abstract: (h.abstractText ?? "").replace(/<[^>]+>/g, "").slice(0, 3200),
     societies: s.soc,
     type: s.type,
+    keywords: s.kw,
     modalities: s.mod,
     retired: /\[RETIRED\]/i.test(h.title),
   });

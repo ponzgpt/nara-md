@@ -23,7 +23,7 @@ for (const s of seeds) {
     if (!res.ok || !(res.headers.get("content-type") ?? "").includes("pdf")) throw new Error(`HTTP ${res.status}`);
     writeFileSync(file, Buffer.from(await res.arrayBuffer()));
     const text = execFileSync("pdftotext", ["-l", "2", file, "-"], { encoding: "utf8" });
-    const excerpt = text.replace(/\s+/g, " ").trim().slice(0, 1400);
+    const excerpt = text.replace(/\s+/g, " ").trim().slice(0, 2600);
     if (excerpt.length < 200) throw new Error("no extractable text");
     out.push({
       id: s.key, title: s.title, titleEn: s.titleEn, authors: s.source, journal: s.source, year: s.year, approxYear: s.approxYear,

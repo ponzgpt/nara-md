@@ -1,7 +1,8 @@
 // POST /api/ask — retrieve (curated guidelines + Europe PMC), then synthesize a cited answer (lib/llm.ts).
 // With no LLM key configured it returns the ranked sources only, so the product works with zero secrets.
 import { LIBRARY } from "@/lib/library";
-import { rank, tokens } from "@/lib/search";
+import { literatureAttempts, rank } from "@/lib/search";
+import { detectLang, LANG_NAME } from "@/lib/lang";
 import { boostFor, MODALITIES, REGIONS } from "@/lib/catalog";
 import { searchLiterature } from "@/lib/connectors/europepmc";
 import { allow } from "@/lib/rate-limit";
@@ -13,11 +14,13 @@ const SYSTEM = `You help clinical neurophysiologists (EEG, EMG/NCS, evoked poten
 Use ONLY the numbered sources provided. Society guidelines and consensus statements outrank single studies; name the society and year.
 When sources disagree, or a newer version supersedes an older one, say so and cite both. Mention regional differences in one line when relevant.
 If the sources do not settle the question, say that plainly instead of filling the gap.
+State only what the source text says. If an excerpt does not reveal a detail (which scale is recommended, what a threshold is, how many grades there are), say the excerpt does not specify it: never supply it from memory.
 
 RULES
 - Every sentence that states a fact ends with its source number in square brackets, like [1] or [2, 4]. An answer without citations is rejected.
+- Write the answer in the language of the question (English, Spanish or German). The sources are mostly English: translate what you use, and keep guideline names and abbreviations as they are.
 - Plain text only. No markdown, no bold, no headings, no bullet points.
-- 2 to 5 sentences, then one final line starting exactly with "Bottom line:" (one sentence, also cited).
+- 2 to 5 sentences, then one final line starting exactly with "Bottom line:" (one sentence, also cited). Keep the label "Bottom line:" in English even when answering in another language.
 
 EXAMPLE
 The 2021 ACNS terminology names periodic patterns by location, so lateralized periodic discharges are LPDs and generalized ones are GPDs [1]. The 2012 version used different modifiers and is superseded [1, 2].
@@ -44,13 +47,14 @@ export async function POST(req: Request) {
       const send = (e: AskEvent) => controller.enqueue(enc.encode(JSON.stringify(e) + "\n"));
       try {
         const guidelines = rank(LIBRARY, question, { modalities, ...boostFor(region) }).slice(0, 6);
-        // Short jargon queries ("fnd criteria") go to Europe PMC as expanded phrases; full sentences go as written.
-        // ponytail: word-count heuristic; letting the LLM write the literature query is the upgrade.
-        // If the expansion is too strict (e.g. "Awaji vs Gold Coast"), retry with the user's own words, which
-        // for comparisons finds exactly the papers that discuss both sides.
-        const short = question.split(/\s+/).length <= 4;
-        let literature = await searchLiterature(short ? tokens(question) : question);
-        if (short && !literature.length) literature = await searchLiterature(question.replace(/\b(vs|versus|or)\b/gi, " "));
+        // Europe PMC is English and matches literally, so it gets the question's key concepts (translated if needed),
+        // strict first, relaxed until something comes back. ponytail: glossary + heuristics; an LLM query rewriter is the
+        // upgrade, at 10-30 s on the free tier.
+        let literature: Awaited<ReturnType<typeof searchLiterature>> = [];
+        for (const attempt of literatureAttempts(question)) {
+          literature = await searchLiterature(attempt);
+          if (literature.length >= 3) break;
+        }
         const sources: Source[] = [
           ...guidelines.map((e) => ({
             kind: "guideline" as const, title: e.title, meta: `${e.societies.join(" · ")} · ${e.journal} ${e.year}`,
@@ -61,17 +65,22 @@ export async function POST(req: Request) {
         ].map((s, i) => ({ ...s, n: i + 1 }));
         send({ type: "sources", sources, provider: provider() });
 
-        // Trim abstracts for the prompt: less to read means a faster answer, and the opening is what matters.
-        const context = sources.map((s) => `[${s.n}] (${s.kind}) ${s.title} — ${s.meta}\n${s.abstract.slice(0, 700) || "(no abstract)"}`).join("\n\n");
-        const prompt = `Region: ${REGIONS[region].label}. Scope: ${modalities.join(", ") || "all modalities"}.\n\nSources:\n${context}\n\nQuestion: ${question}`;
+        // The model reads at most 5 documents and 4 papers, in full where possible. When an abstract must be cut, keep its start
+        // AND its end: conclusions sit at the end, and cutting them is how the model ends up guessing what a guideline recommends.
+        const fit = (t: string, max: number) => (t.length <= max ? t : `${t.slice(0, Math.floor(max * 0.55))} […] ${t.slice(-Math.floor(max * 0.45))}`);
+        const prompted = sources.filter((s) => (s.kind === "guideline" ? s.n <= 5 : s.n <= guidelines.length + 4));
+        const context = prompted.map((s) => `[${s.n}] (${s.kind}) ${s.title} — ${s.meta}\n${fit(s.abstract, s.kind === "guideline" ? 2400 : 1500) || "(no abstract)"}`).join("\n\n");
+        const lang = LANG_NAME[detectLang(question)];
+        const prompt = `Question language: ${lang}. Region: ${REGIONS[region].label}. Scope: ${modalities.join(", ") || "all modalities"}.\n\nSources:\n${context}\n\nQuestion: ${question}`;
 
         let out = await synthesize(SYSTEM, prompt);
         if (out.refused) return send({ type: "answer", answer: null, note: "No written answer for this question. Sources are below." });
         if (!out.text) return send({ type: "answer", answer: null, note: "Showing ranked sources. Written answers are not enabled on this server." });
-        let answer = cleanAnswer(out.text, sources.length);
+        const texts = sources.map((s) => `${s.title} ${s.meta} ${s.abstract}`);
+        let answer = cleanAnswer(out.text, texts);
         if (!answer) { // small models sometimes skip citations: one retry with the rule restated, then give up honestly
           out = await synthesize(SYSTEM, `${prompt}\n\nReminder: cite every sentence with [n] from the sources above, plain text only.`);
-          answer = out.text ? cleanAnswer(out.text, sources.length) : null;
+          answer = out.text ? cleanAnswer(out.text, texts) : null;
         }
         send(answer ? { type: "answer", answer } : { type: "answer", answer: null, note: "Couldn't write a properly cited answer this time. The sources below are the evidence." });
       } catch (err) {

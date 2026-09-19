@@ -82,15 +82,64 @@ test("national documents are verifiable and honest about their year", () => {
   }
 });
 
-test("cleanAnswer keeps cited plain text and rejects uncited or fake-cited answers", async () => {
+test("cleanAnswer keeps cited, supported plain text and rejects the rest", async () => {
   const { cleanAnswer } = await import("./answer.ts");
-  const ok = cleanAnswer("**Direct answer**\n\nGold Coast is more sensitive [1][2].\n\n**Bottom line:** Use Gold Coast [1].", 3)!;
+  const texts = ["Gold Coast criteria (2020) are more sensitive than Awaji. AANEM.", "Awaji 2008 requires fasciculation potentials.", "Unrelated."];
+  const ok = cleanAnswer("**Direct answer**\n\nGold Coast is more sensitive [1][2].\n\n**Bottom line:** Use Gold Coast [1].", texts)!;
   assert.doesNotMatch(ok, /\*\*|Direct answer/);
   assert.match(ok, /\[1, 2\]/);
   assert.match(ok, /\n\nBottom line: Use Gold Coast \[1\]\./);
-  assert.equal(cleanAnswer("Gold Coast is more sensitive.", 3), null);        // no citations
-  assert.equal(cleanAnswer("Gold Coast is more sensitive [9].", 3), null);     // cites a source that doesn't exist
-  assert.equal(cleanAnswer("Fine [1]. Also [9].", 3), "Fine [1].");           // fake ref removed, its sentence dropped
-  const mixed = cleanAnswer("Sourced claim [1]. Invented claim with no source. Another sourced one [2].\n\nBottom line: No cite here.", 3)!;
-  assert.equal(mixed, "Sourced claim [1]. Another sourced one [2].");         // uncited sentences and uncited bottom line dropped
+  assert.equal(cleanAnswer("Gold Coast is more sensitive.", texts), null);         // no citations
+  assert.equal(cleanAnswer("Gold Coast is more sensitive [9].", texts), null);      // cites a source that doesn't exist
+  assert.equal(cleanAnswer("Fine [1]. Also [9].", texts), "Fine [1].");             // fake ref removed, its sentence dropped
+  const mixed = cleanAnswer("Sourced claim [1]. Invented claim with no source. Another sourced one [2].\n\nBottom line: No cite here.", texts)!;
+  assert.equal(mixed, "Sourced claim [1]. Another sourced one [2].");              // uncited sentences and uncited bottom line dropped
+  // Invented specifics under a real citation: numbers and acronyms must appear in the cited source.
+  assert.equal(cleanAnswer("Gold Coast has 4 grades [1].", texts), null);           // "4" isn't in source 1
+  assert.equal(cleanAnswer("It measures the CMAP amplitude [1].", texts), null);    // "CMAP" isn't in source 1
+  assert.match(cleanAnswer("Published in 2020 by AANEM [1].", texts)!, /2020 by AANEM/); // both are in source 1
+  assert.match(cleanAnswer("Awaji dates from 2008 [2]. Gold Coast dates from 2020 [1].", texts)!, /2008.*2020/);
+  assert.match(cleanAnswer("Awaji dates from 2020 [2]. Gold Coast dates from 2020 [1].", texts)!, /^Gold Coast dates from 2020 \[1\]\.$/); // right year, wrong source: dropped
+});
+
+
+test("language detection and glossary", async () => {
+  const { detectLang, translate, cognate } = await import("./lang.ts");
+  assert.equal(detectLang("¿Cómo se gradúa el túnel carpiano?"), "es");
+  assert.equal(detectLang("Wie sollen EEG-Ableitungen bei Kindern durchgeführt werden?"), "de");
+  assert.equal(detectLang("Awaji vs Gold Coast"), "en");
+  assert.equal(detectLang("How should I grade carpal tunnel severity?"), "en");
+  assert.deepEqual(translate("How do I grade carpal tunnel?"), []);              // English input is never "translated"
+  assert.ok(translate("túnel carpiano").flat().includes("carpal tunnel"));        // accents optional
+  assert.ok(translate("tunel carpiano").flat().includes("carpal tunnel"));
+  const vocab = ["magnetoencephalography", "demyelinating", "standardized", "electroencephalography"];
+  assert.equal(cognate("magnetoencefalografía", vocab), "magnetoencephalography"); // Latin/Greek cognates need no glossary entry
+  assert.equal(cognate("desmielinizante", vocab), "demyelinating");
+  assert.equal(cognate("estandarizado", vocab), "standardized");
+  assert.equal(cognate("piernas", vocab), null);                                  // short or unrelated words are left alone
+});
+
+test("Spanish and English questions reach the same document", () => {
+  const first = (q: string) => rank(lib, q)[0]?.title ?? "";
+  const pairs: [string, string, RegExp][] = [
+    ["How should I grade carpal tunnel severity?", "¿Cómo se gradúa la gravedad del túnel carpiano?", /Grading the Severity of Carpal Tunnel/],
+    ["hypopnea scoring 3% or 4%", "¿Cómo puntúo las hipopneas al 3% o 4%?", /respiratory events/],
+    ["multiple sleep latency test criteria", "criterios del test de latencia múltiple del sueño", /multiple sleep latency/],
+    ["status epilepticus definition ILAE", "definición de estatus epiléptico según la ILAE", /status epilepticus/],
+    ["magnetoencephalography guidelines", "recomendaciones para la magnetoencefalografía", /magnetoencephalography/],
+  ];
+  for (const [en, es, re] of pairs) { assert.match(first(en), re, en); assert.match(first(es), re, es); }
+});
+
+test("questions the library can't answer return nothing instead of neighbours", () => {
+  assert.equal(rank(lib, "What is the recommended insulin regimen for type 2 diabetes?").length, 0);
+  assert.equal(rank(lib, "¿Qué papel tiene el EEG en el diagnóstico de la enfermedad de Alzheimer?").length, 0);
+});
+
+test("literature queries carry English concepts only, never the question's filler", async () => {
+  const { literatureAttempts } = await import("./search.ts");
+  const flat = (q: string) => literatureAttempts(q)[0].flat().join(" ");
+  assert.doesNotMatch(flat("How should I structure an EEG report?"), /structure|should/);
+  assert.match(flat("¿Cuál es la clasificación de las epilepsias de la ILAE?"), /epilepsy/);
+  assert.doesNotMatch(flat("¿Cuál es la clasificación de las epilepsias de la ILAE?"), /clasificaci|epilepsias/); // no Spanish leaks to Europe PMC
 });

@@ -6,9 +6,12 @@ const API = "https://www.ebi.ac.uk/europepmc/webservices/rest/search";
 
 const clean = (t: string) => t.replace(/[():"]/g, " ").trim();
 
-/** `q` is either the user's sentence, or match units (words/phrases) that must all appear, phrases verbatim. */
-export async function searchLiterature(q: string | string[], size = 6): Promise<Omit<Source, "n">[]> {
-  const terms = Array.isArray(q) ? q.map((u) => (u.includes(" ") ? `"${clean(u)}"` : clean(u))).join(" AND ") : clean(q);
+const term = (u: string) => (u.includes(" ") ? `"${clean(u)}"` : clean(u));
+
+/** `q` is a sentence, or groups of alternatives that must each appear: [["als","amyotrophic lateral sclerosis"],["criteria"]]
+ *  becomes (als OR "amyotrophic lateral sclerosis") AND criteria. */
+export async function searchLiterature(q: string | string[][], size = 6): Promise<Omit<Source, "n">[]> {
+  const terms = Array.isArray(q) ? q.map((g) => (g.length > 1 ? `(${g.map(term).join(" OR ")})` : term(g[0]))).join(" AND ") : clean(q);
   // Title+abstract only: whole-text matching on PMC articles drags in unrelated papers.
   const query = `TITLE_ABS:(${terms}) AND HAS_ABSTRACT:y AND (SRC:MED OR SRC:PMC)`;
   try {

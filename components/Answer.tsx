@@ -31,6 +31,7 @@ export function Answer({ text, sources, proxy }: { text: string; sources: Source
           <button className="ghost" onClick={() => navigator.clipboard.writeText(stripCites(bottom.trim()))}>Copy</button>
         </div>
       )}
+      <p className="ai-note">Written by AI from the source excerpts below. Check the cited source before you rely on it.</p>
     </article>
   );
 }

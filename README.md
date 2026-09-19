@@ -85,6 +85,31 @@ Estimate: about **40–60k physicians** worldwide read neurophysiology, plus rou
 
 **Global vs local:** a global core (IFCN, ILAE, WFN, ISIN, ISCEV) plus a region layer that ranks local bodies higher: US (ACNS, AANEM, AASM, ASNM), UK (BSCN), Spain (SENFC), Germany (DGKN), Japan (JSCN), EU (EAN/PNS).
 
+## Languages and how well it works
+
+NaraMD accepts questions in **English, Spanish and German** (the library holds English documents plus German DGKN and Spanish SENFC ones). A question in Spanish or German is turned into English search terms by `lib/lang.ts`: a field glossary, plus automatic matching of Latin/Greek cognates against the library's own vocabulary (*magnetoencefalografía → magnetoencephalography*). The answer is written in the language of the question. The interface itself is English.
+
+Measured with `npm run eval` (`evals/README.md`). Scores are retrieval + literature only, 0-100, on questions written after the engine was tuned and scored once before any fix:
+
+| Set (first look) | English | Spanish |
+|---|---|---|
+| First held-out set (glossary only) | 88 | 51 |
+| Fresh set, after adding cognates and a wider glossary | 90 | 65 |
+| Fresh set, after fixing two bugs in the "unknown vocabulary" rule | 84 | 87 |
+
+Read the first row as the honest one for any new Spanish phrasing: a hand-written glossary does not generalise, which is why cognates were added. After tuning, all four sets score 89-100 in English and 87-93 in Spanish, but those sets have been used to tune and overstate how it will do on new questions. The ceiling is spelling: a Spanish word that isn't a cognate and isn't in the glossary ("agujas", "codo") is dropped until someone adds it. Letting an LLM rewrite the query would fix that, at a cost of 10-30 s on the keyless tier.
+
+**Answer quality is not measured yet.** Scoring written answers needs the LLM, which on the keyless tier serves about one answer every 30 s. A full run takes 12 minutes, and correctness still needs a clinician reading them.
+
+### What the free model gets wrong
+
+Reading real answers found the failure that matters most: the keyless model **invented a detail under a valid citation** ("a four-grade scale: mild, moderately severe, severe, very severe" for the AANEM carpal tunnel guideline). Two causes were fixed:
+
+1. Only the first 700-1200 characters of each abstract were kept, so conclusions were cut and the model guessed what a guideline recommends. Abstracts are now stored whole and, when they must be shortened for the prompt, keep both start and end.
+2. The citation check only verified that `[n]` exists. It now also requires every number and acronym in a sentence to appear in the source it cites (`lib/answer.ts`), and the prompt tells the model to say when an excerpt doesn't specify something.
+
+That is a floor, not a guarantee: it catches invented numbers and acronyms, not every invented sentence. Every answer now says it was written by AI from excerpts and to check the source. For anything a clinician might act on, use Claude (`ANTHROPIC_API_KEY`) and re-run the eval.
+
 ## National coverage (audited Sept 2026)
 
 Regions only mean something if the library has that region's documents. Each society's own guideline index was checked, and every document below was downloaded and read before being added:
