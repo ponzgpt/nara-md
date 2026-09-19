@@ -108,6 +108,8 @@ test("language detection and glossary", async () => {
   assert.equal(detectLang("¿Cómo se gradúa el túnel carpiano?"), "es");
   assert.equal(detectLang("Wie sollen EEG-Ableitungen bei Kindern durchgeführt werden?"), "de");
   assert.equal(detectLang("Awaji vs Gold Coast"), "en");
+  assert.equal(detectLang("magnetoencefalografía clínica recomendaciones"), "es"); // keywords only: accents and endings decide
+  assert.equal(detectLang("electroencephalography recommendations"), "en");         // English "-graphy" is not Spanish "-grafía"
   assert.equal(detectLang("How should I grade carpal tunnel severity?"), "en");
   assert.deepEqual(translate("How do I grade carpal tunnel?"), []);              // English input is never "translated"
   assert.ok(translate("túnel carpiano").flat().includes("carpal tunnel"));        // accents optional
@@ -127,6 +129,7 @@ test("Spanish and English questions reach the same document", () => {
     ["multiple sleep latency test criteria", "criterios del test de latencia múltiple del sueño", /multiple sleep latency/],
     ["status epilepticus definition ILAE", "definición de estatus epiléptico según la ILAE", /status epilepticus/],
     ["magnetoencephalography guidelines", "recomendaciones para la magnetoencefalografía", /magnetoencephalography/],
+    ["magnetoencephalography guidelines", "magnetoencefalografía clínica recomendaciones", /magnetoencephalography/],
   ];
   for (const [en, es, re] of pairs) { assert.match(first(en), re, en); assert.match(first(es), re, es); }
 });

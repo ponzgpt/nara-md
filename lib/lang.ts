@@ -21,7 +21,11 @@ const only = (table: [RegExp, string[]][], t: string) => table.filter(([re, out]
 
 export function detectLang(q: string): Lang {
   const t = norm(q), en = (t.match(EN_WORDS) ?? []).length;
-  const es = (t.match(WORDS.es) ?? []).length + only(GLOSS_ES, t), de = (t.match(WORDS.de) ?? []).length + only(GLOSS_DE, t);
+  // Letters and endings English doesn't have: "magnetoencefalografía clínica recomendaciones" has no function word, but it is Spanish.
+  const words = q.toLowerCase().split(/\s+/);
+  const esMarks = words.filter((w) => /[áéíóúñ¿¡]/.test(w) || /(ciones|cion|logia|grafia|patia|dades)$/.test(norm(w))).length;
+  const deMarks = words.filter((w) => /[äöüß]/.test(w)).length;
+  const es = (t.match(WORDS.es) ?? []).length + only(GLOSS_ES, t) + esMarks, de = (t.match(WORDS.de) ?? []).length + only(GLOSS_DE, t) + deMarks;
   const spanishOnly = /[¿¡ñ]/.test(q); // no other language in this product uses them
   if ((es > en || (spanishOnly && es >= en)) && es >= de) return "es";
   if (de > en && de >= es) return "de";
