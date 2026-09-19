@@ -5,6 +5,7 @@
 - URL: `https://neuronara.technoir.cloud`
 - Runtime: Next.js standalone server (`node server.js`) in `node:24-alpine`, container port `3000`
 - Edge: Hostinger VPS (`hoid`) → Traefik (Dokploy) → Swarm service `neuronara` on `dokploy-network`
+- Former name: `naramd.technoir.cloud` (the product was called NaraMD) permanently redirects, path and query included, to the new domain through `/etc/dokploy/traefik/dynamic/nara-md.yml` on the VPS. Keep that file for as long as old links may exist
 - DNS: `*.technoir.cloud` is a wildcard record pointing at the VPS, so no DNS change is needed
 
 ## Local verification
