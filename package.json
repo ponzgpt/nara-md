@@ -14,7 +14,8 @@
     "test": "node --test lib/search.test.ts",
     "library": "node scripts/build-library.mjs",
     "library:national": "node scripts/build-national.mjs",
-    "eval": "node scripts/eval.mjs"
+    "eval": "node scripts/eval.mjs",
+    "verify:links": "node scripts/verify-links.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.126.0",

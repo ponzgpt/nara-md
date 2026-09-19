@@ -7,6 +7,9 @@ APP=neuronara
 DOMAIN=${DOMAIN:-neuronara.technoir.cloud}
 SHA=$(git rev-parse --short HEAD)
 
+# A wrong link (ISIN once pointed at a securities body) is a shipping bug: verify every external link first.
+node scripts/verify-links.mjs || { echo "Link verification failed: fix before deploying." >&2; exit 1; }
+
 [ -z "$(git status --porcelain)" ] || { echo "Commit or stash changes first: deploys are tied to a SHA." >&2; exit 1; }
 
 echo "→ shipping $APP:$SHA to $HOST"

@@ -172,3 +172,15 @@ test("a Spanish sentence about a named anatomical variant reaches Europe PMC wit
   assert.match(first, /median nerve|nerve conduction/);
   assert.doesNotMatch(first, /neurograf|nervio|afecta/);   // no Spanish leaks through
 });
+
+test("every society link has an identity check, and no link is added from memory", async () => {
+  const { SOCIETY_SITES, SITE_IDENTITY, CONNECTORS, REGIONS } = await import("./catalog.ts");
+  for (const k of Object.keys(SOCIETY_SITES)) assert.ok(SITE_IDENTITY[k], `${k} has a URL but no identity regex: run npm run verify:links`);
+  for (const k of Object.keys(SITE_IDENTITY)) assert.ok(SOCIETY_SITES[k], `${k} has an identity but no URL`);
+  for (const c of CONNECTORS.filter((x) => x.url)) assert.ok(c.identity, `${c.id} has a URL but no identity regex`);
+  // Never a securities/finance/casino identity by accident.
+  for (const [k, url] of Object.entries(SOCIETY_SITES)) assert.doesNotMatch(url, /isin\.org|senfc\.org/, `${k}: known wrong domain`);
+  // Every society a region promotes should be reachable, or be listed here on purpose as having no site yet.
+  const noSite = new Set(["WFSICCM", "EFNS", "CNS", "SCCM", "AAP"]);
+  for (const r of Object.values(REGIONS)) for (const s of r.societies) assert.ok(SOCIETY_SITES[s] || noSite.has(s), `${s} is in a region but has no verified site`);
+});

@@ -12,6 +12,7 @@ Awaji or Gold Coast? ACNS terminology from 2012 or 2021? Whose minimum EEG stand
 npm install
 npm run dev        # http://localhost:3000
 npm test           # ranking, scoping and library-integrity checks
+npm run verify:links   # every external link is live AND is the organisation it claims to be
 ```
 
 Answers are written by the first available provider, so Neuronara works with no setup and improves as you add keys (`.env.local`, see `.env.example`):
@@ -42,7 +43,7 @@ question ─┬─ lib/search.ts ───────── curated library (da
 | `components/Suggestions.tsx`, `AnswerPending.tsx` | The typing dropdown ("↵ Ask…" + matching standards) and the answer placeholder with timer |
 | `components/Results.tsx` | Answer, then **Standards** (grouped by document type) and **Literature** side by side, then hand-offs. Numbers match the `[n]` citations |
 | `lib/llm.ts`, `lib/answer.ts` | Answer synthesis (Anthropic, OpenRouter or keyless) and the citation check that every answer must pass |
-| `components/` | `Answer`, `StandardsList`, `RegionMenu`, `ThemeToggle`, `DatabasesSheet` (databases searched + library proxy) |
+| `components/` | `Answer`, `StandardsList`, `RegionMenu`, `ThemeToggle`, `DatabasesSheet` (databases searched + library proxy; a bottom sheet on phones with × / tap-outside / swipe-down / Escape to close) |
 | `app/api/ask/route.ts` | Retrieval and synthesis. Validates input, rate-limits per IP, and never logs the question |
 | `lib/search.ts` | Ranking. Shorthand (CIDP, LPD, MSLT…) expands to phrases and weighs double. Generic words ("criteria", "standards") refine a match but can't make one. Documents covering more of the question's concepts win |
 | `lib/catalog.ts` | Modalities, regions and their societies, document types (the results ontology), rotating examples, connectors, citation links. **Adding a country or a source only means editing this data** |
@@ -60,6 +61,10 @@ Add `{"q": "<exact title>", "soc": ["ACNS"], "mod": ["EEG"], "type": "criteria|t
 ### Why filtering runs in the browser
 
 The curated library ships with the page as about 60 KB of JSON. Search, modality scope and region ordering run client-side, instantly and with no request, using the same `lib/search.ts` the server uses to pick the answer's sources. The server is called only to search the literature and write the answer. Move library filtering behind an API when either (a) the library reaches thousands of documents, or (b) it includes licensed content that can't be shipped to the browser, which will happen with the paid connectors.
+
+## Link integrity
+
+Every external link (society sites, databases, national PDFs, DOIs) is checked by `npm run verify:links`, which fetches each page and requires it to **name the right organisation**, not merely respond. A site that answers with someone else's page fails: `isin.org` (the securities-identification body) and `senfc.org` (a Florida events network) were both shipped as neuroscience societies once, and this check is what would have caught them. Each site's expected identity lives next to its URL in `lib/catalog.ts` (`SITE_IDENTITY`), and a test fails if a URL is added without one. `scripts/deploy.sh` runs the check first and refuses to ship on any failure. Three sites block scripts (ILAE, Consensus, OpenEvidence); they were opened in a real browser and are recorded with a date in `VERIFIED_BY_HAND`, and the check warns when that date is over 180 days old. Never add a link from memory: search for it, open it, and add its identity.
 
 ## Databases and access
 
