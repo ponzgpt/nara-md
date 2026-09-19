@@ -19,9 +19,9 @@ const SOCIETIES = new Set(LIBRARY.flatMap((e) => e.societies)).size;
 const COUNTS = DOC_TYPES.map((t) => ({ ...t, n: LIBRARY.filter((e) => e.type === t.id).length }));
 
 export function Home({ papers, children }: { papers: string; children: React.ReactNode }) {
-  const [region, setRegion] = useStored("nara.region", "global");
-  const [scope, setScope] = useStored<string[]>("nara.scope", []);
-  const [proxy, setProxy] = useStored("nara.proxy", "");
+  const [region, setRegion] = useStored("neuronara.region", "global");
+  const [scope, setScope] = useStored<string[]>("neuronara.scope", []);
+  const [proxy, setProxy] = useStored("neuronara.proxy", "");
   const [q, setQ] = useState("");                 // what's in the box
   const [asked, setAsked] = useState<string | null>(null); // what was last submitted: results belong to this, not to `q`
   const [result, setResult] = useState<AskResponse | null>(null);
@@ -102,9 +102,9 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
   return (
     <>
       <header className="bar">
-        <a href="/" className="brand" aria-label="NaraMD home" onClick={(e) => { e.preventDefault(); reset(); }}>
+        <a href="/" className="brand" aria-label="Neuronara home" onClick={(e) => { e.preventDefault(); reset(); }}>
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" /><path d="M5 17h5l2-6 3 12 3-15 2 9h7" /></svg>
-          <span>Nara<b>MD</b></span>
+          <span>Neuro<b>nara</b></span>
         </a>
         <nav>
           <button className="pill" onClick={() => sources.current?.showModal()} title="Sources and library access" aria-label="Sources and library access">
@@ -119,7 +119,7 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
       <main className={active ? "home active" : "home"}>
         <section className="hero">
           <h1><span>Every standard in clinical neurophysiology.</span> <span>One question away.</span></h1>
-          <ul className="stats" aria-label="What NaraMD searches">
+          <ul className="stats" aria-label="What Neuronara searches">
             {COUNTS.map((c) => <li key={c.id}><b>{c.n}</b> {c.short}</li>)}
             <li><b>{SOCIETIES}</b> societies</li>
             <li><b>{papers}</b> papers</li>
@@ -152,8 +152,8 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
       </main>
 
       <footer className="foot">
-        NaraMD answers from published sources and does not replace clinical judgement ·{" "}
-        <a href="https://github.com/ponzgpt/nara-md" target="_blank" rel="noreferrer">Source</a>
+        Neuronara answers from published sources and does not replace clinical judgement ·{" "}
+        <a href="https://github.com/ponzgpt/neuronara" target="_blank" rel="noreferrer">Source</a>
       </footer>
 
       <SourcesSheet ref={sources} region={region} proxy={proxy} onProxy={setProxy} />

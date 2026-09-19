@@ -2,7 +2,7 @@
 import { Home } from "@/components/Home";
 import { Marketing } from "@/components/Marketing";
 
-// Size of the open literature NaraMD searches, refreshed daily. Falls back to a floor if Europe PMC is down.
+// Size of the open literature Neuronara searches, refreshed daily. Falls back to a floor if Europe PMC is down.
 async function literatureSize(): Promise<number> {
   try {
     const res = await fetch("https://www.ebi.ac.uk/europepmc/webservices/rest/search?format=json&pageSize=1&query=(SRC:MED%20OR%20SRC:PMC)",

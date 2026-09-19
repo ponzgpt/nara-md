@@ -1,6 +1,6 @@
 // Caps /api/ask per client so a public deployment can't burn the Anthropic key.
 // ponytail: in-memory fixed window, per process. Resets on deploy and doesn't share across replicas;
-// move to Redis (already running under Dokploy) if NaraMD ever runs more than one replica.
+// move to Redis (already running under Dokploy) if Neuronara ever runs more than one replica.
 
 const hits = new Map<string, { count: number; reset: number }>();
 

@@ -1,4 +1,4 @@
-// Turns raw model output into something NaraMD is willing to show: plain text, every claim cited against a
+// Turns raw model output into something Neuronara is willing to show: plain text, every claim cited against a
 // real source number, one "Bottom line". Small models ignore instructions and sometimes add uncited claims of their own,
 // so both are enforced here rather than trusted. This is a floor, not proof of faithfulness: it catches invented numbers
 // and acronyms, not every invented sentence. A stronger model (Claude) is the real fix.

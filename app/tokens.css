@@ -1,4 +1,4 @@
-/* NaraMD design tokens — the single source of truth for colour. See docs/DESIGN.md.
+/* Neuronara design tokens — the single source of truth for colour. See docs/DESIGN.md.
    Palette: "Sterile Aqua" (media.io medical palettes) + blush from "Neonatal Hush".
    Two layers:
      1. Primitives (--p-*)  raw palette values. Never used directly by components.

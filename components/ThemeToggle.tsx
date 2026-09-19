@@ -8,7 +8,7 @@ export function ThemeToggle() {
   const flip = () => {
     const next = dark ? "light" : "dark";
     document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("nara.theme", next); } catch {}
+    try { localStorage.setItem("neuronara.theme", next); } catch {}
     setDark(!dark);
   };
   return (

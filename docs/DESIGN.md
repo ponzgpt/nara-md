@@ -1,6 +1,6 @@
-# NaraMD design standard
+# Neuronara design standard
 
-NaraMD helps clinical neurophysiologists work out which standard, criterion or protocol applies. The interface should feel clinical, calm and trustworthy. The question is the product, so everything else stays out of the way.
+Neuronara helps clinical neurophysiologists work out which standard, criterion or protocol applies. The interface should feel clinical, calm and trustworthy. The question is the product, so everything else stays out of the way.
 
 ## 1. Colour
 
@@ -43,7 +43,7 @@ NaraMD helps clinical neurophysiologists work out which standard, criterion or p
 | `--primary-hover` | Hover on primary | aqua-800 | aqua-200 |
 | `--on-primary` | Text on primary | white | night-950 |
 | `--accent` | **Decoration only**: gradients, rules, large icons | aqua-400 | aqua-400 |
-| `--blush` / `--on-blush` | Secondary: society names, kicker, guideline tags, "MD" in the wordmark | blush-100 / rose-700 | blush-900 / rose-300 |
+| `--blush` / `--on-blush` | Secondary: society names, kicker, guideline tags, "nara" in the wordmark | blush-100 / rose-700 | blush-900 / rose-300 |
 | `--warn-bg` / `--warn` | Retired guidance | amber | amber |
 | `--wash-a` / `--wash-b` | Hero background wash | aqua-200 / blush-100 | night-800 / blush-900 |
 
@@ -69,7 +69,7 @@ NaraMD helps clinical neurophysiologists work out which standard, criterion or p
 
 - **Figtree**, self-hosted through `next/font`, with a system-font fallback. It's humanist and legible at small sizes.
 - **Scale:** hero 2.3–3.9rem / 800. Section headings 1.7–2.4rem / 700. Body 16.5px / 1.55. Meta text 0.8rem.
-- **Wordmark:** "Nara" in `--text` plus "MD" in `--on-blush`, set as one word, **NaraMD**. The product is never called "Nara" on its own or "Nara MD".
+- **Wordmark:** "Neuro" in `--text` plus "nara" in `--on-blush`, set as one word, **Neuronara** (capital N, no space). The product is never written "Nara", "NaraMD" or "Neuro Nara".
 
 ## 3. Shape and depth
 
@@ -97,4 +97,4 @@ NaraMD helps clinical neurophysiologists work out which standard, criterion or p
 
 ## 5. Voice
 
-UK English and plain words. Sound like a colleague, not a brochure: short sentences, concrete examples (Awaji vs Gold Coast, ACNS 2012 vs 2021), and honesty about limits ("If the sources don't settle it, NaraMD says so"). The core promise is **clarity between standards, criteria and protocols**. Reports, papers and teaching are downstream uses, not the headline.
+UK English and plain words. Sound like a colleague, not a brochure: short sentences, concrete examples (Awaji vs Gold Coast, ACNS 2012 vs 2021), and honesty about limits ("If the sources don't settle it, Neuronara says so"). The core promise is **clarity between standards, criteria and protocols**. Reports, papers and teaching are downstream uses, not the headline.

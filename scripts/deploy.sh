@@ -3,8 +3,8 @@
 set -euo pipefail
 
 HOST=${HOST:-hoid}
-APP=nara-md
-DOMAIN=${DOMAIN:-naramd.technoir.cloud}
+APP=neuronara
+DOMAIN=${DOMAIN:-neuronara.technoir.cloud}
 SHA=$(git rev-parse --short HEAD)
 
 [ -z "$(git status --porcelain)" ] || { echo "Commit or stash changes first: deploys are tied to a SHA." >&2; exit 1; }

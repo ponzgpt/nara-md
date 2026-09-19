@@ -24,7 +24,7 @@ export async function synthesize(system: string, user: string): Promise<Synthesi
   const chat = { system, user };
   if (process.env.ANTHROPIC_API_KEY) return claude(chat);
   if (process.env.OPENROUTER_API_KEY) return openaiCompatible("https://openrouter.ai/api/v1/chat/completions", chat, {
-    headers: { authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`, "http-referer": "https://naramd.technoir.cloud", "x-title": "NaraMD" },
+    headers: { authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`, "http-referer": "https://neuronara.technoir.cloud", "x-title": "Neuronara" },
     body: { models: FREE_MODELS, max_tokens: 1500 }, // `models` makes OpenRouter fall through when a free model is busy or gone
   });
   if (process.env.LLM_KEYLESS === "off") return { text: null };

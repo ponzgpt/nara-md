@@ -22,7 +22,7 @@ export function Suggestions({ q, matches, total, proxy, onAsk }: Props) {
     <div className="suggest" onKeyDown={move}>
       <button type="button" className="suggest-ask" data-nav onClick={onAsk}>
         <span className="enter" aria-hidden="true">↵</span>
-        <span>Ask NaraMD: <b>{q}</b></span>
+        <span>Ask Neuronara: <b>{q}</b></span>
         <small>standards + literature + a cited answer</small>
       </button>
       {matches.length > 0 && (

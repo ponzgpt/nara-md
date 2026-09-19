@@ -2,9 +2,9 @@
 
 ## Target
 
-- URL: `https://naramd.technoir.cloud`
+- URL: `https://neuronara.technoir.cloud`
 - Runtime: Next.js standalone server (`node server.js`) in `node:24-alpine`, container port `3000`
-- Edge: Hostinger VPS (`hoid`) → Traefik (Dokploy) → Swarm service `nara-md` on `dokploy-network`
+- Edge: Hostinger VPS (`hoid`) → Traefik (Dokploy) → Swarm service `neuronara` on `dokploy-network`
 - DNS: `*.technoir.cloud` is a wildcard record pointing at the VPS, so no DNS change is needed
 
 ## Local verification
@@ -25,10 +25,10 @@ Images are built on the VPS and tagged with the git SHA, the same way as `nousre
 
 The script:
 
-1. Copies the committed tree to `/opt/nara-md/<sha>`.
-2. Runs `docker build -t nara-md:<sha>` on the server.
+1. Copies the committed tree to `/opt/neuronara/<sha>`.
+2. Runs `docker build -t neuronara:<sha>` on the server.
 3. Creates the Swarm service the first time, and after that runs `docker service update --image`.
-4. Writes the Traefik route to `/etc/dokploy/traefik/dynamic/nara-md.yml` (HTTP→HTTPS redirect, Let's Encrypt).
+4. Writes the Traefik route to `/etc/dokploy/traefik/dynamic/neuronara.yml` (HTTP→HTTPS redirect, Let's Encrypt).
 
 ## Secrets
 
@@ -39,7 +39,7 @@ Answers work with no key at all (a keyless fallback; see the provider table in `
 ./scripts/set-llm-key.sh anthropic    # Claude Opus 5, takes precedence when both are set
 ```
 
-To turn the keyless fallback off (no key = no written answers): `ssh hoid 'docker service update --env-add LLM_KEYLESS=off nara-md'`.
+To turn the keyless fallback off (no key = no written answers): `ssh hoid 'docker service update --env-add LLM_KEYLESS=off neuronara'`.
 
 Env vars survive `scripts/deploy.sh`, because it only swaps the image.
 
@@ -48,14 +48,14 @@ Env vars survive `scripts/deploy.sh`, because it only swaps the image.
 ## Rollback
 
 ```bash
-ssh hoid 'docker service rollback nara-md'
+ssh hoid 'docker service rollback neuronara'
 # or pin a previous build:
-ssh hoid 'docker service update --image nara-md:<older-sha> nara-md'
+ssh hoid 'docker service update --image neuronara:<older-sha> neuronara'
 ```
 
 ## Public checks
 
 ```bash
-curl -fsS https://naramd.technoir.cloud/healthz
-curl -fsS https://naramd.technoir.cloud/api/ask -H 'content-type: application/json' -d '{"q":"MSLT"}' | head -c 300
+curl -fsS https://neuronara.technoir.cloud/healthz
+curl -fsS https://neuronara.technoir.cloud/api/ask -H 'content-type: application/json' -d '{"q":"MSLT"}' | head -c 300
 ```

@@ -11,5 +11,5 @@ esac
 read -rs -p "$VAR: " KEY; echo
 [ -n "$KEY" ] || { echo "empty key" >&2; exit 1; }
 # The key travels over ssh stdin, not argv, so it never shows up in `ps` on either machine.
-printf '%s' "$KEY" | ssh "$HOST" "read -r K; docker service update --quiet --env-add $VAR=\"\$K\" nara-md"
-echo "✓ $VAR set on nara-md (the service restarts)"
+printf '%s' "$KEY" | ssh "$HOST" "read -r K; docker service update --quiet --env-add $VAR=\"\$K\" neuronara"
+echo "✓ $VAR set on neuronara (the service restarts)"

@@ -1,4 +1,4 @@
-/* NaraMD base styles. Colours come only from semantic tokens in app/tokens.css. */
+/* Neuronara base styles. Colours come only from semantic tokens in app/tokens.css. */
 * { box-sizing: border-box; }
 body {
   margin: 0; min-height: 100vh; color: var(--text); background: var(--bg);
@@ -144,7 +144,7 @@ h1 { font-size: clamp(2.1rem, 5.6vw, 3.5rem); line-height: 1.06; letter-spacing:
 .faq p { color: var(--text-muted); font-size: 1rem !important; margin: .6rem 0 0 !important; }
 @media (max-width: 520px) {  }
 
-/* Wordmark: "NaraMD", MD set in the secondary colour */
+/* Wordmark: "Neuronara", with "nara" set in the secondary colour */
 .brand { display: flex; align-items: center; gap: .55rem; color: var(--text); font-weight: 700; font-size: 1.15rem; letter-spacing: -.02em; }
 .brand:hover { text-decoration: none; }
 .brand b { color: var(--on-blush); font-weight: 800; }

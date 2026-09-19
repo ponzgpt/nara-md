@@ -1,10 +1,10 @@
-# NaraMD
+# Neuronara
 
-**Every standard in your field, one question away.** NaraMD helps clinical neurophysiologists find their way through the standards, criteria, terminology and protocols of EEG, EMG/NCS, evoked potentials, sleep and IONM.
+**Every standard in your field, one question away.** Neuronara helps clinical neurophysiologists find their way through the standards, criteria, terminology and protocols of EEG, EMG/NCS, evoked potentials, sleep and IONM.
 
-**Live:** https://naramd.technoir.cloud
+**Live:** https://neuronara.technoir.cloud
 
-Awaji or Gold Coast? ACNS terminology from 2012 or 2021? Whose minimum EEG standard applies? The answers are scattered across societies, journals and decades. NaraMD searches a curated library of society guidance (IFCN, ACNS, AANEM, ILAE, AASM, EAN/PNS, ISIN…) and the open literature (Europe PMC, which includes MEDLINE/PubMed). It says which standard applies, where they differ and where each comes from, and ends with a one-line bottom line. Reports, protocols, audits and teaching are the downstream uses.
+Awaji or Gold Coast? ACNS terminology from 2012 or 2021? Whose minimum EEG standard applies? The answers are scattered across societies, journals and decades. Neuronara searches a curated library of society guidance (IFCN, ACNS, AANEM, ILAE, AASM, EAN/PNS, ISIN…) and the open literature (Europe PMC, which includes MEDLINE/PubMed). It says which standard applies, where they differ and where each comes from, and ends with a one-line bottom line. Reports, protocols, audits and teaching are the downstream uses.
 
 ## Quick start
 
@@ -14,7 +14,7 @@ npm run dev        # http://localhost:3000
 npm test           # ranking, scoping and library-integrity checks
 ```
 
-Answers are written by the first available provider, so NaraMD works with no setup and improves as you add keys (`.env.local`, see `.env.example`):
+Answers are written by the first available provider, so Neuronara works with no setup and improves as you add keys (`.env.local`, see `.env.example`):
 
 | Provider | Setup | Notes |
 |---|---|---|
@@ -24,7 +24,7 @@ Answers are written by the first available provider, so NaraMD works with no set
 
 **Speed:** Claude and OpenRouter answer in a few seconds. The keyless tier is a single anonymous reasoning model and takes 10 to 35 s, whatever the settings (measured). The page shows the sources first and says so while the answer is pending, but for a real launch, set a key.
 
-Whatever the provider, the server checks the answer before showing it (`lib/answer.ts`): plain text only, every claim carries a `[n]` that points to a real source, and any sentence without one is dropped. If nothing survives, NaraMD says it couldn't write a cited answer and shows the sources. Small free models do skip citations and add claims of their own, which is why this is enforced in code rather than trusted to the prompt.
+Whatever the provider, the server checks the answer before showing it (`lib/answer.ts`): plain text only, every claim carries a `[n]` that points to a real source, and any sentence without one is dropped. If nothing survives, Neuronara says it couldn't write a cited answer and shows the sources. Small free models do skip citations and add claims of their own, which is why this is enforced in code rather than trusted to the prompt.
 
 ## How it works
 
@@ -65,7 +65,7 @@ The curated library ships with the page as about 60 KB of JSON. Search, modality
 
 | Kind | Sources | How |
 |---|---|---|
-| Live | NaraMD library, Europe PMC | Queried on every question |
+| Live | Neuronara library, Europe PMC | Queried on every question |
 | Via your library | Cochrane, Embase, MEDLINE Complete | Paywalled DOIs open through the clinician's EZproxy/OpenAthens prefix (set in **Sources**) |
 | Hand-off | PubMed, OpenEvidence, Consensus, AASM Scoring Manual | Opened with the question prefilled where the site supports it. OpenEvidence has no public API |
 
@@ -80,14 +80,14 @@ Nobody publishes a global headcount. These anchors are published figures:
 Estimate: about **40–60k physicians** worldwide read neurophysiology, plus roughly twice as many technologists. At $150–300 per physician per year that is **about $6–18M ARR**. Three decisions follow from how small that is:
 
 1. **Global from day one.** No single country is big enough.
-2. **Sell to departments and institutions**, not only to individuals. The proxy bridge lets NaraMD ride on the Embase/Cochrane licences they already pay for.
-3. **Win on depth, not breadth.** NaraMD focuses on society guidance, criteria, terminology and regional differences. Reports and papers are second-order uses. Broad questions are handed off to Consensus and OpenEvidence rather than competing with them.
+2. **Sell to departments and institutions**, not only to individuals. The proxy bridge lets Neuronara ride on the Embase/Cochrane licences they already pay for.
+3. **Win on depth, not breadth.** Neuronara focuses on society guidance, criteria, terminology and regional differences. Reports and papers are second-order uses. Broad questions are handed off to Consensus and OpenEvidence rather than competing with them.
 
 **Global vs local:** a global core (IFCN, ILAE, WFN, ISIN, ISCEV) plus a region layer that ranks local bodies higher: US (ACNS, AANEM, AASM, ASNM), UK (BSCN), Spain (SENFC), Germany (DGKN), Japan (JSCN), EU (EAN/PNS).
 
 ## Languages and how well it works
 
-NaraMD accepts questions in **English, Spanish and German** (the library holds English documents plus German DGKN and Spanish SENFC ones). A question in Spanish or German is turned into English search terms by `lib/lang.ts`: a field glossary, plus automatic matching of Latin/Greek cognates against the library's own vocabulary (*magnetoencefalografía → magnetoencephalography*). The answer is written in the language of the question. The interface itself is English.
+Neuronara accepts questions in **English, Spanish and German** (the library holds English documents plus German DGKN and Spanish SENFC ones). A question in Spanish or German is turned into English search terms by `lib/lang.ts`: a field glossary, plus automatic matching of Latin/Greek cognates against the library's own vocabulary (*magnetoencefalografía → magnetoencephalography*). The answer is written in the language of the question. The interface itself is English.
 
 Measured with `npm run eval` (`evals/README.md`). Scores are retrieval + literature only, 0-100, on questions written after the engine was tuned and scored once before any fix:
 
@@ -127,7 +127,7 @@ Years marked "c." come from the PDF's metadata because the document prints no da
 
 - More national guidance: JSCN (Japan), Chinese societies, and Latin American bodies (none verifiable yet), plus the DGKN evoked-potential and IONM training documents if wanted.
 - NCS normative values by age and height as structured data. This is where most report questions end up.
-- Direct connectors for paid sources (Ovid/EBSCO/Elsevier APIs with institutional tokens), and NaraMD exposed as an MCP server.
+- Direct connectors for paid sources (Ovid/EBSCO/Elsevier APIs with institutional tokens), and Neuronara exposed as an MCP server.
 - Accounts and institutional SSO (OpenAthens/Shibboleth) once institutional pilots start.
 
 ## Privacy

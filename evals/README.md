@@ -1,12 +1,12 @@
-# NaraMD evaluation
+# Neuronara evaluation
 
-A repeatable benchmark of whether NaraMD gives a clinician the right document, the right papers and a faithful cited answer. Questions are phrased the way a neurophysiologist would ask them, in **English, Spanish and German**.
+A repeatable benchmark of whether Neuronara gives a clinician the right document, the right papers and a faithful cited answer. Questions are phrased the way a neurophysiologist would ask them, in **English, Spanish and German**.
 
 ```bash
 npm run dev                                   # in one terminal
 NOLLM=1 npm run eval                          # retrieval + literature only (fast; run the server with LLM_KEYLESS=off)
 SET=heldout3 npm run eval                     # full run including written answers (slow on the keyless tier: ~30 s each, serial)
-BASE=https://naramd.technoir.cloud npm run eval
+BASE=https://neuronara.technoir.cloud npm run eval
 LANGS=es ONLY=cidp,mslt npm run eval          # a subset
 ```
 

@@ -11,7 +11,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const seeds = JSON.parse(readFileSync("data/national-seeds.json", "utf8"));
-const dir = mkdtempSync(join(tmpdir(), "nara-"));
+const dir = mkdtempSync(join(tmpdir(), "neuronara-"));
 // Some society sites (SENFC) refuse requests that don't look like a browser navigating from their own page.
 const UA = "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/126 Safari/537.36";
 

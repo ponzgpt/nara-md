@@ -1,6 +1,6 @@
 // Fitness benchmark: real clinician questions in English and Spanish, scored against the documents and facts they should hit.
 //   npm run eval                       # against a dev server on :3217
-//   BASE=https://naramd.technoir.cloud npm run eval
+//   BASE=https://neuronara.technoir.cloud npm run eval
 //   LANGS=es ONLY=cidp,mslt npm run eval
 // NOLLM=1 scores retrieval + literature only (0.67/0.33).
 // Score per question = 0.4 retrieval + 0.2 literature + 0.4 answer (0-100). Questions with no gold document
