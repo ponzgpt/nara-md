@@ -4,6 +4,8 @@
 import { citationHref, DOC_TYPES, REGIONS, SOCIETY_SITES, TIER_ORDER, tierOf } from "@/lib/catalog";
 import type { Entry } from "@/lib/search";
 
+const LANG = { en: "English", de: "Deutsch", es: "Español" };
+
 type Props = { entries: Entry[]; proxy: string; region: string; missing: string[]; citeNo: (e: Entry) => number | undefined };
 
 export function StandardsList({ entries, proxy, region, missing, citeNo }: Props) {
@@ -35,10 +37,12 @@ export function StandardsList({ entries, proxy, region, missing, citeNo }: Props
                 return (
                   <li key={e.id} className="row">
                     {n && <span className="cite-no" aria-label={`Source ${n}`}>{n}</span>}
-                    <a className="title" href={citationHref(e, proxy)} target="_blank" rel="noreferrer">{e.title}</a>
+                    <a className="title" href={citationHref(e, proxy)} target="_blank" rel="noreferrer" lang={e.lang}>{e.title}</a>
+                    {e.titleEn && <p className="title-en">{e.titleEn}</p>}
                     <div className="meta">
                       <span className="soc">{e.societies.join(" · ")}</span>
-                      <span>{e.journal} {e.year}</span>
+                      <span>{e.journal} {e.approxYear ? "c. " : ""}{e.year}</span>
+                      {e.lang && e.lang !== "en" && <span className="tag lang" title="Language of the document">{LANG[e.lang]}</span>}
                       {region !== "global" && tier === "local" && <span className="tag local">{short}</span>}
                       {tier === "international" && <span className="tag intl">International</span>}
                       {e.openAccess && <span className="tag open">Open access</span>}

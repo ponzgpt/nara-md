@@ -209,3 +209,5 @@ button.icon:hover svg { transform: rotate(-15deg); }
 .tag.local { background: var(--blush); color: var(--on-blush); }
 .tag.intl { background: transparent; color: var(--text-muted); border: 1px solid var(--divider); }
 .region-note { font-size: .85rem; color: var(--text-muted); background: var(--tint-soft); border: 1px dashed var(--border); border-radius: 12px; padding: .7rem .9rem; margin: 0 0 1rem; }
+.title-en { margin: .15rem 0 0; font-size: .86rem; color: var(--text-muted); font-style: italic; }
+.tag.lang { background: var(--tint); color: var(--primary); }

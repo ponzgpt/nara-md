@@ -7,6 +7,7 @@ export type Source = {
   meta: string;
   doi: string | null;
   pmid: string | null;
+  url?: string;
   openAccess: boolean;
   abstract: string;
 };

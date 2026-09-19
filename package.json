@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "test": "node --test lib/search.test.ts",
-    "library": "node scripts/build-library.mjs"
+    "library": "node scripts/build-library.mjs",
+    "library:national": "node scripts/build-national.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.126.0",

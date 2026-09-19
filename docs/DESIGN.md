@@ -88,6 +88,7 @@ NaraMD helps clinical neurophysiologists work out which standard, criterion or p
    - **Elsewhere**: hand-offs to PubMed, OpenEvidence and Consensus, at the foot of the literature column.
 
    The two columns sit side by side at 960px and wider, and stack below that. Numbered badges match the `[n]` citations in the answer.
+   Documents outside journals show their language (`Deutsch`, `Español`) with the original title and an italic English gloss, and "c." before years taken from file metadata.
 6. **Header controls are one family:** Sources (pill), region (pill that opens a menu) and theme (round). All three are 36px high with the same border, a tint on hover and a press scale. On narrow screens, Sources collapses to its icon.
 7. **Region** reorders documents *within* each group: first the user's region (tagged with its code, e.g. `US`), then international bodies (`International`), then other regions' societies. It never lets a less relevant document jump ahead of a more relevant one from the same tier, and never changes group membership. If the region's societies have no documents in the library yet, a notice says so and links to them. An existing answer is re-asked, because the region is part of the prompt.
 8. Modality chips, region and theme apply immediately and persist in the browser. There is no settings page. The library proxy lives in **Sources**.

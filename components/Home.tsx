@@ -3,8 +3,8 @@
 // show only while idle. As soon as there's a query, an answer or a modality scope, results take over.
 // The logo returns to the idle state.
 import { useEffect, useMemo, useRef, useState } from "react";
-import library from "@/data/library.json";
-import { rank, type Entry } from "@/lib/search";
+import { LIBRARY } from "@/lib/library";
+import { rank } from "@/lib/search";
 import { boostFor, DOC_TYPES, missingLocal, MODALITIES } from "@/lib/catalog";
 import { useStored } from "@/lib/use-stored";
 import type { AskResponse } from "@/lib/types";
@@ -14,7 +14,6 @@ import { RegionMenu } from "@/components/RegionMenu";
 import { SourcesSheet } from "@/components/SourcesSheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const LIBRARY = library as Entry[];
 const SOCIETIES = new Set(LIBRARY.flatMap((e) => e.societies)).size;
 const COUNTS = DOC_TYPES.map((t) => ({ ...t, n: LIBRARY.filter((e) => e.type === t.id).length }));
 
@@ -37,7 +36,7 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
   }, []);
 
   const missing = useMemo(() => missingLocal(region, LIBRARY), [region]);
-  const entries = useMemo(() => rank(LIBRARY, q, { modalities: scope, boostSocieties: boostFor(region) }), [q, scope, region]);
+  const entries = useMemo(() => rank(LIBRARY, q, { modalities: scope, ...boostFor(region) }), [q, scope, region]);
   const active = Boolean(q.trim() || result || asking || scope.length);
   // An answer is written for a region (it's in the prompt), so a region change re-asks the same question.
   const [answeredFor, setAnsweredFor] = useState(region);

@@ -5,6 +5,10 @@
 export type Entry = {
   id: string; title: string; authors: string; journal: string; year: number;
   doi: string | null; pmid: string | null; pmcid: string | null; openAccess: boolean;
+  url?: string;          // documents outside journals (society PDFs) link here instead of a DOI
+  lang?: "en" | "de" | "es"; // language of the document itself; absent means English
+  titleEn?: string;      // English gloss for non-English titles, searched and shown beside the original
+  approxYear?: boolean;  // year taken from the file's metadata, not printed in the document
   abstract: string; societies: string[]; modalities: string[]; retired?: boolean;
   type: "criteria" | "terminology" | "technical" | "practice";
 };
@@ -33,10 +37,12 @@ const SYNONYMS: Record<string, string[]> = {
 
 const STOP = new Set("the of and for in on a an to with by what is are how which when does do vs versus or".split(" "));
 
-// Words that appear in almost every guideline title. They refine a match but can't make one on their own:
+// Words that appear in almost every guideline title (including the two commonest modalities, which the chips scope anyway).
+// They refine a match but can't make one on their own:
 // "fnd criteria" must not return brain-death criteria just because both say "criteria".
 const GENERIC = new Set(("criteria criterion standard standards guideline guidelines recommendations recommended diagnosis " +
-  "diagnostic protocol classification definition minimum technical requirements update consensus statement practice clinical").split(" "));
+  "diagnostic protocol classification definition minimum technical requirements update consensus statement practice clinical " +
+  "eeg electroencephalograph electromyograph").split(" "));
 
 /** Query → match units: single words, or phrases from the shorthand table. Shorthand is usually
  *  the subject of the question ("CIDP criteria"), so its expansions weigh double. */
@@ -56,26 +62,31 @@ const matcher = (unit: string) => new RegExp("\\b" + unit.split(" ").map((w) => 
 
 export function rank(
   entries: Entry[], q: string,
-  opts: { modalities?: string[]; boostSocieties?: string[] } = {},
+  opts: { modalities?: string[]; boostSocieties?: string[]; localSocieties?: string[] } = {},
 ): Entry[] {
   const mods = opts.modalities ?? [];
   const pool = mods.length ? entries.filter((e) => e.modalities.some((m) => mods.includes(m))) : entries;
   const us = units(q).map((u) => ({ re: matcher(u.text), generic: isGeneric(u.text), weight: u.weight }));
   const boost = new Set(opts.boostSocieties ?? []);
+  const local = new Set(opts.localSocieties ?? []);
   if (!us.length) return [...pool].sort((a, b) => b.year - a.year);
   const needsSpecific = us.some((u) => !u.generic);
   return pool
     .map((e) => {
       const tags = [...e.modalities, ...e.societies].join(" ");
+      const title = `${e.title} ${e.titleEn ?? ""}`;
       let s = 0, covered = 0;
       for (const u of us) {
-        const hit = (u.re.test(e.title) ? 3 : 0) + (u.re.test(tags) ? 2 : 0) + (u.re.test(e.abstract) ? 1 : 0);
+        const hit = (u.re.test(title) ? 3 : 0) + (u.re.test(tags) ? 2 : 0) + (u.re.test(e.abstract) ? 1 : 0);
         if (hit && !u.generic) covered += u.weight;
         s += hit * (u.generic ? 0.25 : u.weight);
       }
       if (needsSpecific && !covered) return { e, s: 0 };
       s += 10 * covered; // covering more of the question's concepts beats repeating one of them
-      if (s && e.societies.some((x) => boost.has(x))) s += 1.5;
+      // A document from the user's own societies is worth reading first; international bodies get a smaller nudge.
+      // Capped by the base score, so a region can reorder good matches but can't lift a weak one over a strong one.
+      if (e.societies.some((x) => local.has(x))) s += Math.min(4, s * 0.4);
+      else if (e.societies.some((x) => boost.has(x))) s += Math.min(1.5, s * 0.15);
       if (e.retired) s *= 0.5;
       return { e, s };
     })

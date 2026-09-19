@@ -10,7 +10,7 @@ export const GLOBAL_SOCIETIES = ["IFCN", "ILAE", "WFN", "ISCEV", "ISIN", "WFSICC
 export const REGIONS: Record<string, { label: string; short: string; societies: string[] }> = {
   global: { label: "Global", short: "Global", societies: [] },
   us: { label: "United States", short: "US", societies: ["ACNS", "AANEM", "AAN", "AASM", "ASNM"] },
-  uk: { label: "United Kingdom", short: "UK", societies: ["BSCN", "EAN"] },
+  uk: { label: "United Kingdom", short: "UK", societies: ["BSCN", "ANS", "EAN"] },
   es: { label: "Spain", short: "ES", societies: ["SENFC", "EAN"] },
   de: { label: "Germany", short: "DE", societies: ["DGKN", "EAN"] },
   eu: { label: "Europe (other)", short: "EU", societies: ["EAN", "EFNS", "PNS"] },
@@ -41,7 +41,7 @@ export const SOCIETY_SITES: Record<string, string> = {
   ILAE: "https://www.ilae.org", AASM: "https://aasm.org", BSCN: "https://www.bscn.org.uk",
   JSCN: "https://square.umin.ac.jp/JSCN/english/", SENFC: "https://senfc.org", DGKN: "https://dgkn.de",
   EAN: "https://www.ean.org", ASNM: "https://www.asnm.org", ISIN: "https://www.isin.org",
-  ISCEV: "https://www.iscev.org", WFN: "https://www.wfneurology.org",
+  ISCEV: "https://www.iscev.org", ANS: "https://ansuk.org", WFN: "https://www.wfneurology.org",
 };
 
 // How each source reaches the clinician:
@@ -61,7 +61,8 @@ export const CONNECTORS: Connector[] = [
   { id: "aasm-manual", name: "AASM Scoring Manual", kind: "link", access: "Subscription", note: "Scoring rules live behind AASM login.", url: "https://aasm.org/clinical-resources/scoring-manual/" },
 ];
 
-export const boostFor = (region: string) => [...GLOBAL_SOCIETIES, ...(REGIONS[region]?.societies ?? [])];
+// Retrieval boosts for a region: its own societies weigh most, the international bodies a little.
+export const boostFor = (region: string) => ({ boostSocieties: GLOBAL_SOCIETIES, localSocieties: REGIONS[region]?.societies ?? [] });
 
 // How a document relates to the user's region: issued by one of its societies, by an international body, or neither.
 export type Tier = "local" | "international" | "other";
@@ -76,8 +77,9 @@ export const TIER_ORDER: Record<Tier, number> = { local: 0, international: 1, ot
 export const missingLocal = (region: string, library: { societies: string[] }[]) =>
   (REGIONS[region]?.societies ?? []).filter((s) => !library.some((e) => e.societies.includes(s)));
 
-// Where a citation opens: DOI (through the user's library proxy unless open access), else PubMed.
-export function citationHref(s: { doi: string | null; pmid: string | null; openAccess: boolean }, proxy: string): string {
+// Where a citation opens: the document's own URL, else its DOI (through the user's library proxy unless open access), else PubMed.
+export function citationHref(s: { doi: string | null; pmid: string | null; url?: string; openAccess: boolean }, proxy: string): string {
+  if (s.url) return s.url; // society documents are public PDFs; no proxy needed
   if (!s.doi) return `https://pubmed.ncbi.nlm.nih.gov/${s.pmid}/`;
   const doi = `https://doi.org/${s.doi}`;
   return proxy && !s.openAccess ? proxy + encodeURIComponent(doi) : doi;

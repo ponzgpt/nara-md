@@ -1,5 +1,5 @@
 // What NaraMD does, shown below the search while the page is idle. Copy: UK English, plain, direct.
-import library from "@/data/library.json";
+import { LIBRARY } from "@/lib/library";
 
 const FEATURES = [
   { title: "Every standard in one place", body: "Diagnostic criteria, terminology, technical standards and protocols from the societies that write them. Each one is linked to its source." },
@@ -14,7 +14,7 @@ const SOCIETIES = ["IFCN", "ILAE", "ACNS", "AANEM", "AASM", "BSCN", "EAN", "PNS"
 
 const FAQ = [
   { q: "Is it free?", a: "Yes, while NaraMD is in pilot. There's no account and nothing to install." },
-  { q: "Where do the answers come from?", a: `From a curated library of ${library.length} society guidelines and consensus papers, each checked against its DOI or PubMed record, plus a live search of Europe PMC, which includes MEDLINE. An AI model writes the answer from those sources only and shows you every one.` },
+  { q: "Where do the answers come from?", a: `From a curated library of ${LIBRARY.length} society guidelines and consensus papers, each checked against its DOI or PubMed record, plus a live search of Europe PMC, which includes MEDLINE. An AI model writes the answer from those sources only and shows you every one.` },
   { q: "Does it replace OpenEvidence or Consensus?", a: "No. They cover all of medicine; NaraMD covers one specialty in depth. When your question is broad, NaraMD passes it to them in one click." },
   { q: "What happens to my question?", a: "It goes to Europe PMC, and to an AI provider that writes the answer. NaraMD stores nothing. Some free AI providers may keep prompts, which is one more reason never to type patient details." },
   { q: "Who is it for?", a: "Consultants, trainees and clinical physiologists in neurophysiology, and neurologists who carry out their own studies." },

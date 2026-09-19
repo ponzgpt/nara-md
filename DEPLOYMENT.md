@@ -32,13 +32,14 @@ The script:
 
 ## Secrets
 
-The LLM key is optional; without one, NaraMD returns ranked sources only. Set it on the server, never in the repo. For the MVP, use a free OpenRouter key (https://openrouter.ai/keys):
+Answers work with no key at all (a keyless fallback; see the provider table in `README.md`). To improve them, add a key. **Set it yourself on the server so it never passes through chat or the repo.** `scripts/set-llm-key.sh` prompts for the key without echoing it, updates the service and never writes it to disk or shell history:
 
 ```bash
-ssh hoid 'docker service update --env-add OPENROUTER_API_KEY=sk-or-... nara-md'
-# later, for Claude Opus 5 (takes precedence):
-ssh hoid 'docker service update --env-add ANTHROPIC_API_KEY=sk-ant-... nara-md'
+./scripts/set-llm-key.sh openrouter   # free key from https://openrouter.ai/keys
+./scripts/set-llm-key.sh anthropic    # Claude Opus 5, takes precedence when both are set
 ```
+
+To turn the keyless fallback off (no key = no written answers): `ssh hoid 'docker service update --env-add LLM_KEYLESS=off nara-md'`.
 
 Env vars survive `scripts/deploy.sh`, because it only swaps the image.
 

@@ -1,0 +1,561 @@
+[
+ {
+  "id": "uk-ans-bscn-v14",
+  "title": "ANS-BSCN recommendations, guidelines and minimum standards for the practice of clinical neurophysiology in the United Kingdom (version 14)",
+  "authors": "BSCN / ANS",
+  "journal": "BSCN / ANS",
+  "year": 2024,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://bscn.org.uk/data/files/Guidelines/ANS%20BSCN%20%20Neurophys%20Guidelines%20V14%20final%202026.pdf",
+  "openAccess": true,
+  "lang": "en",
+  "abstract": "Version 14 (31/01/2024) ANS-BSCN RECOMMENDATIONS AND GUIDELINES FOR THE PRACTICE OF CLINICAL NEUROPHYSIOLOGY IN THE UNITED KINGDOM Terms of Reference The Association of Neurophysiological Scientists (ANS) and British Society for Clinical Neurophysiology (BSCN), as the Professional Bodies for Clinical Neurophysiology of the UK have a responsibility to provide robust and reliable advice on professional standards and workforce planning. This document has been drafted by the Clinical Neurophysiology Leadership Group (CNLG) comprising senior members of ANS and BSCN for discussion at a joint meeting of the councils of each organisation prior to tabling the council approved document at a joint general meeting of both organisations. The purpose of this document is to review and update recommendations and guidelines for the provision of Clinical Neurophysiology Services in the United Kingdom. It should inform decision of commissioners and healthcare planners and guide service designs, the implementation of new services, and job planning. Introduction Clinical Neurophysiology Service Neurophysiology is primarily a diagnostic speciality. It provides diagnostic and other services to a wide spectrum of the patient population across acute, mental health and community settings and direct access, including:  Neurophysiology investigations of the central and peripheral nervous systems  Provis",
+  "societies": [
+   "BSCN",
+   "ANS"
+  ],
+  "modalities": [
+   "EEG",
+   "EMG/NCS",
+   "Evoked potentials",
+   "Nerve ultrasound"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "uk-referral",
+  "title": "BSCN/ANS guidance on appropriate/inappropriate referral for neurophysiological testing",
+  "authors": "BSCN / ANS",
+  "journal": "BSCN / ANS",
+  "year": 2025,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://bscn.org.uk/data/files/Guidelines/ANS-BSCN%20referal%20guidance%20V2%20final%202025%20x.pdf",
+  "openAccess": true,
+  "lang": "en",
+  "abstract": "BSCN/ANS Guidance on appropriate/inappropriate referral for neurophysiological testing INTRODUCTION/CONTEXT The growing demand for healthcare services, particularly in specialised areas, has led to significant challenges in ensuring that patients receive timely and appropriate investigations. As patient numbers increase, healthcare systems are increasingly facing the dual pressures of rising demand and limited capacity. This imbalance often results in delays, misallocation of resources, and referrals which have a low probability of contributing usefully to patient management. To address these challenges, it is essential to explore innovative approaches to working practices that can make best use of available resources and improve patient outcomes. An important approach to the problem is referral management. By providing guidance to referrers on the importance of accurate and appropriate referrals, we can ensure that patients are seen in the most appropriate clinics and receive the most suitable tests at the right time. These guidelines provide a ‘menu’ of ideas and options which services can customise to their own particular circumstances. They are drawn from wide consultation but especially with departments that have successfully employed these approaches to shorten waiting lists and improve the yield of useful findings from their investigations. These recommendations may be u",
+  "societies": [
+   "BSCN",
+   "ANS"
+  ],
+  "modalities": [
+   "EEG",
+   "EMG/NCS"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "uk-hv",
+  "title": "ANS/BSCN guidelines for hyperventilation during EEG recordings",
+  "authors": "BSCN / ANS",
+  "journal": "BSCN / ANS",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "http://www.bscn.org.uk/data/files/Guidelines/Hypervent.pdf",
+  "openAccess": true,
+  "lang": "en",
+  "abstract": "ANS/BSCN Guidelines for Hyperventilation During EEG Recordings Hyperventilation (HV) is an activation technique used during EEG recording to elicit epileptiform abnormalities, and in some cases seizures, in order to enhance the diagnostic sensitivity of EEG. It is considered reasonably safe but carries a small risk of inducing potentially ‘adverse events’, including seizures, cardiac, respiratory and cerebrovascular. In the prospective 2012 National Audit of an unselected population of 3,475 patients, from a wide age range, there were less than 3% of reported events, two thirds of which were seizures. When the clinical diagnosis of epilepsy or possible epilepsy was considered as a subgroup of 3,170 patients, there were 69 provoked seizures (2.2%), of which 56 were absences (81.2% of the total seizures), but only 1 (0.03%) was a Generalised Tonic Clonic Seizure. Other potential adverse events include dizziness, distress, confusion, paraesthesias, tetany and prolonged over breathing; but there were no reported significant cardiac, respiratory or cerebrovascular complications or sequelae thereof. These Guidelines have been informed by that Audit, other EEG Guidelines and a review of the literature on hyperventilation, with an emphasis on safety. Its principle role during EEG is in the diagnosis of epilepsy, and these Guidelines are intended for that application only. The diagnosti",
+  "societies": [
+   "BSCN",
+   "ANS"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "uk-photic",
+  "title": "ANS/BSCN guidelines for photic stimulation during EEG recordings",
+  "authors": "BSCN / ANS",
+  "journal": "BSCN / ANS",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "http://www.bscn.org.uk/data/files/Guidelines/Photic.pdf",
+  "openAccess": true,
+  "lang": "en",
+  "abstract": "ANS/BSCN Guidelines for Photic Stimulation during EEG Recordings Photic stimulation (PS) is an activation technique used during EEG recording to elicit epileptiform abnormalities, and may in some cases result in seizures. It is considered to enhance the diagnostic sensitivity of the EEG and in laboratory conditions be reasonably safe; nevertheless it carries a small risk of inducing potentially ‘adverse events’, principally generalised tonic clonic seizures. A prospective study of an unselected population of 5383 patients undergoing PS from a wide age group was performed by the National Audit Group in 2013. 0.7% had epileptic seizures elicited by PS including 0.04% who had a generalised tonic clonic seizure. 0.9% had non epileptic attacks. 1.5% had their only inter-ictal discharge elicited by PS i.e. a photoparoxysmal response consisting of generalised spike and wave discharges. Thus the total yield of helpful diagnostic information from PS was 3.1%. These Guidelines have been informed by that Audit, other EEG Guidelines and a review of the literature on PS, with an emphasis on safety. Its principle role during EEG is in the diagnosis of epilepsy, and these Guidelines are intended for that application only. Standard 1: PS is performed with consent in all age groups referred with a provisional diagnosis of epilepsy or non-epileptic attack disorder. Guideline: PS is usually perfo",
+  "societies": [
+   "BSCN",
+   "ANS"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "uk-melatonin",
+  "title": "ANS/BSCN guidelines for use of melatonin to induce sleep for paediatric EEG",
+  "authors": "BSCN / ANS",
+  "journal": "BSCN / ANS",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "http://www.bscn.org.uk/data/files/Guidelines/Melatonin.pdf",
+  "openAccess": true,
+  "lang": "en",
+  "abstract": "ANS/BSCN Guidelines for use of Melatonin to induce sleep for paediatric EEG Sleep EEGs can add diagnostically useful information for the identification and classification of seizures and epileptic syndromes. Natural sleep may be achieved unaided, but sleep promotion is often required: sleep deprivation and administration of Melatonin are methods commonly used, sometimes in combination. In the 2013 National Audit Project, departments across the UK were surveyed about their current practice in performing paediatric sleep EEGs. A prospective service evaluation was performed to assess the efficacy of Sleep deprivation and Melatonin in inducing sleep and eliciting EEG abnormalities and seizures. An unselected population of 711 patients from 51 participating Neurophysiology centres were included in the study. The findings from the prospective study showed that sleep was achieved in 79% of all patients. Melatonin combined with sleep deprivation proved to be more effective in promoting sleep in comparison with either melatonin or sleep deprivation alone. Sleep effectively improved diagnostic yield with unequivocally epileptiform activity not seen in the routine records of 20% of patients becoming apparent in their sleep records. There was no major difference in yield between the sleep methods used. The following standards have been developed from the evidence obtained from this prospec",
+  "societies": [
+   "BSCN",
+   "ANS"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "uk-vt",
+  "title": "BSCN/ANS safety guidelines for video EEG telemetry investigation",
+  "authors": "BSCN / ANS",
+  "journal": "BSCN / ANS",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "http://www.bscn.org.uk/data/files/Guidelines/Telemetry.pdf",
+  "openAccess": true,
+  "lang": "en",
+  "abstract": "BSCN/ANS Safety Guidelines for Video EEG Telemetry investigation Video EEG telemetry is widely performed in the UK to help diagnose paroxysmal attacks and to plan surgery in patients with intractable epilepsy. It is performed in both adults and children. An in patient stay is required and anticonvulsant medication is often reduced or stopped to promote the occurrence of seizures. Serious untoward incidents may occur during seizures including injury and death. A recent ANS/BSCN survey showed that there is concern amongst over half of video telemetry units about the level of patient surveillance. A national service evaluation has shown that half of all seizures occurring in VT units across the country are not attended to by a healthcare professional and only a quarter are attended to within an appropriate time of half a minute. Although there are existing American standards for Video EEG telemetry monitoring they do not specifically address the question of levels of patient surveillance. The proposed standards below hope to address this issue and improve patient safety within VT units. Standard 1: All VT units have 24 hour surveillance by healthcare professionals (HCP). Guideline: Direct observation of the patient may improve nurse attendance but other methods of observation such as the use of video monitors and nurse alarms are acceptable Standard 2: The level of HCP surveillanc",
+  "societies": [
+   "BSCN",
+   "ANS"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "uk-nead",
+  "title": "Standards for EEG performed when NEAD forms part of the differential diagnosis (v1.2)",
+  "authors": "BSCN / ANS",
+  "journal": "BSCN / ANS",
+  "year": 2017,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "http://www.bscn.org.uk/data/files/Guidelines/NEAD%20standards%20v1.2%2016_02_17.pdf",
+  "openAccess": true,
+  "lang": "en",
+  "abstract": "Standards for EEG performed when NEAD forms part of the differential diagnosis Video-EEG is the gold standard investigation for diagnosing non epileptic attack disorder (NEAD) and differentiating it from epilepsy. It can demonstrate the presence or absence of interictal epileptiform activity but is particularly helpful if it captures a typical attack. To enhance the diagnostic value of the test, it is therefore important to increase the chance of attacks occurring during the EEG recording. A UK survey conducted by the BSCN/ANS national audit group in 2016 showed significant variation in the use of stimulation and suggestion techniques when video-EEG is performed in patients in whom the differential diagnosis included epilepsy and NEAD. The prospective national audit project, based on data of 371 NEA recordings, showed that verbal suggestion had a marked effect in inducing NEAs and did not elicit non-habitual attacks. The more times suggestion was used, the higher the yield of attacks, with maximum seizure induction seen when suggestion was used three or more times. Clearly a balance must be struck between encouraging the patient to have a typical event without being untruthful or precipitating nonhabitual attacks. These standards attempt to provide guidance on how to do this. The standards are intended for use where the EEG referral includes the possibility of NEAD (sometimes r",
+  "societies": [
+   "BSCN",
+   "ANS"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "de-eeg-adults",
+  "title": "Empfehlungen für die Durchführung von EEG-Ableitungen in Klinik und Praxis bei Erwachsenen",
+  "titleEn": "Recommendations for performing EEG recordings in clinic and practice: adults",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2024,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/2024_RL4_EEG_Empfehlung_Durchfuehrung_Erwachsene_out.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "4. Empfehlungen für die Durchführung von EEG-Ableitungen in Klinik und Praxis bei Erwachsenen 1. Digitale EEG-Geräte in Klinik und Praxis müssen mindestens 16 simultan darstellbare Kanäle (je Ableitprogramm) umfassen. Analoge EEG-Geräte müssen in der Klinik mindestens 16 simultan darstellbare Kanäle (je Ableitprogramm) umfassen. Zusätzlich sind bei allen Geräten Ableitmöglichkeiten für EKG erforderlich. 2. Geräte mit weniger Kanälen können für spezielle Indikationen im Rettungsdienst, in einer Nothilfe oder für Dauerableitungen auf einer Intensivstation verwendet werden, ersetzen aber nicht die Geräte mit Verwendung eines vollen 10-20-Elektrodensatzes und einer Darstellung wie unter 1. aufgeführt. 3. Die Elektrodenplatzierung muss nach dem Internationalen 10/20-System erfolgen. Kommerziell hergestellte Oberflächenelektroden sind zu bevorzugen. Wenn überhaupt, sollen Nadelelektroden nur bei komatösen Patienten auf der Intensivstation eingesetzt werden. 4. Die Elektrodenübergangswiderstände müssen vor, nach und ggf. während (bei Artefakten) der Ableitung dokumentiert werden. Die Elektrodenübergangswiderstände sollen möglichst gleichmäßig sein und 1 kOhm nicht unter- und 10kOhm nicht überschreiten. 5. Die eigentliche Registrierung erfolgt bei digitalen Geräten ohne zusätzliche Filter. Die parallele Darstellung während der Ableitung soll mit einem Tieffrequenzfilter (Hochpassfilter",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "de-eeg-children",
+  "title": "Empfehlungen für die Durchführung von EEG-Ableitungen in Klinik und Praxis bei Kindern",
+  "titleEn": "Recommendations for performing EEG recordings in clinic and practice: children",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2024,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/2024_RL5_EEG_Empfehlung_Durchfuehrung_bei_Kindern_out.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "5. Empfehlungen für die Durchführung von EEG-Ableitungen in Klinik und Praxis bei Kindern Diese Richtlinien für das klinische pädiatrische EEG sind als Ergänzung der „Mindestanforderungen für die Durchführung von EEG-Ableitungen in Klinik und Praxis bei Erwachsenen“ der DGKN zu verstehen. Die dort formulierten Grundsätze gelten auch für das Kindesalter. Hier werden nur die Aspekte behandelt, die bei Neugeborenen, Säuglingen und jungen Kindern Besonderheiten darstellen. Ältere Kinder und Jugendliche sollen wie Erwachsene untersucht werden. Neugeborene und junge Säuglinge Bei Frühgeborenen mit sehr kleinen Köpfen und bei schwer kranken Neugeborenen kann aus zeitlichen Gründen und zur Reduzierung der Belastung des Kindes mit reduzierter Elektrodenzahl abgeleitet werden. Bei reifen gesunden Neugeborenen ist die volle Elektrodenzahl nach dem 10/20System anzustreben. Auch bei Neugeborenen müssen die Elektrodenpositionen nach dem 10/20-System ausgemessen werden. Es sollten mindestens die folgenden Elektroden gesetzt werden: Fp1, Fp2, C3, C4, Cz, T7(T3), T8(T4), O1, O2. Für Referenzschaltungen können Ohrelektroden (A1, A2) oder Mastoidelektroden (M1, M2) verwendet werden. Wenn z. B. wegen einer in einer Schädelvene angelegten Infusion von einer der definierten Elektrodenpositionen abgewichen werden muss, sollte die kontralaterale Elektrode zur Einhaltung der Symmetrie entsprechend atyp",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG",
+   "Neonatal"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "de-montages",
+  "title": "Empfehlung zu EEG-Ableiteprogrammen",
+  "titleEn": "Recommendation on EEG montages",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2024,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/2024_RL6_EEG_Empfehlung_zu_EEG-Ableiteprogrammen_out.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "6. Empfehlung zu EEG-Ableiteprogrammen Die folgenden EEG-Ableiteprogramme (Montagen) sind als Grundlage für die EEG-Registrierung in Klinik und Praxis zu verstehen. Im klinischen Alltag ist eine Vielfalt unterschiedlicher EEG-Montagen gebräuchlich. Viele dieser Montagen sind nicht geeignet, das EEG angemessen darzustellen. Darüber hinaus erschwert die Fülle der verschiedenen Montagen die Kommunikation zwischen EEG-Auswertenden. Die folgenden Empfehlungen sind als Mindestanforderung anzusehen. Je nach Fragestellung können zusätzliche Montagen ergänzt werden. Montagen für Sondersituationen, wie für die Feststellung des irreversiblen Hirnfunktionsausfalls, sind dort geregelt. Moderne EEG-Geräte registrieren in digitaler Form. Dies bedeutet, dass das EEG von allen Elektroden des 10/20-Systems simultan aufgezeichnet wird. So ist gewährleistet, dass alle im Verstärkereingang geschalteten Elektroden für nachfolgende Umschaltungen (Reformatierungen) in andere EEG-Montagen zur Verfügung stehen. EEG-Montagen, die zur Auswertung des EEG benutzt werden, sollen bipolare, wie z.B. Längsreihen (siehe unten), sowie Referenzableitungen, wie z.B. die CZ-Montage (siehe unten), beinhalten. Die Ableiteprogramme basieren auf dem internationalen 10/20- bzw. 10/10-System zur Elektrodenplatzierung (Klem et al., 1999). Die Terminologie folgt der Empfehlung der Internationalen Föderation der Gesellschaft",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "de-eeg-describe",
+  "title": "Empfehlungen zur Beschreibung und Beurteilung des EEG",
+  "titleEn": "Recommendations for describing and interpreting the EEG: terminology and reporting",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2024,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/2024_RL7_EEG_Empfehlung_Beschreibung-Beurteilung-EEG_out.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "7. Empfehlungen zur Beschreibung und Beurteilung des EEG Die Befundung eines EEGs teilt sich in Beschreibung (auch: Befund) und Beurteilung (Interpretation im klinischen Kontext). Die Verwendung einer einheitlichen Nomenklatur ist für die Vergleichbarkeit von Befunden entscheidend. Die Terminologie für klinische Elektroenzephalographie wurde ins Deutsche übertragen (Glossar; Noachtar et al. Klin Neurophysiol 2004, 35: 5-21 oder Z Epileptol 2005, 18: 78-97). Seit diesen grundlegenden Bearbeitungen sind noch die Nomenklatur der EEG-Muster bei kritisch kranken Patientinnen und Patienten (Version 2021 Hirsch et al. J Clin Neurophysiol 2021;38:1-29. Deutsche Übersetzung der Terminologie: Rémi&Noachtar 2020; 51(04): e1-e17) und eine Empfehlung der IFCN zur systematischen Beschreibung hinzugekommen (Beniczky et al Clin Neurophysiol 2017;128:2334-2346). Die Terminologie dieser Empfehlungen soll verwendet werden. Ältere, noch teils verwendete Begriffe wie „Allgemeinveränderung“ oder „Herd“ sollen nicht mehr verwendet werden. Die in den folgenden Richtlinien zur Beschreibung und Beurteilung des EEG vorgeschlagenen Formulierungen sollen als allgemeine Anleitung gelten und können zur Erfassung besonderer Situationen entsprechend angepasst werden. A. Beschreibung des EEG Die Beschreibung des EEG erfasst alle unten aufgeführten Bereiche und wird entweder frei formuliert oder verwendet ein vo",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "type": "terminology",
+  "retired": false
+ },
+ {
+  "id": "de-longterm",
+  "title": "Empfehlungen für EEG-Langzeitableitungen",
+  "titleEn": "Recommendations for long-term EEG recording",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/RL8_EEG_Empfehlung_fuer_EEG-Langzeitableitungen.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "8. Empfehlungen für EEG-Langzeitableitungen ANFALLSDIAGNOSTIK I. Einleitung Die diagnostische Einordnung von anfallsartigen Zuständen erfolgt üblicherweise über die Anamnese oder Fremdanamnese. Dies ist in bestimmten Fällen nicht ausreichend möglich. Eine exakte Dokumentation des Anfallsereignisses kann diagnostisch entscheidend sein und eine differentielle Therapie einleiten. Dazu ist es notwendig, sowohl das Verhalten des Patienten als auch die begleitenden elektroenzephalographischen Veränderungen zu registrieren. Da anfallsartige Ereignisse in der Regel nur sporadisch auftreten, erfordert dies eine kontinuierliche Registrierung des EEGs bei gleichzeitiger Video-Aufzeichnung über mehrere Stunden bis Wochen. Unter Umständen werden Verfahren angewandt, bei denen die Eintrittswahrscheinlichkeit des Anfallsereignisses erhöht werden kann, wie z.B. Photostimulation und Hyperventilation bei epileptischen Syndromen. Eine Überwachung des Patienten durch EEG-Assistenten/innen ist erforderlich. Die Aufzeichnung des Patienten kann stationär (d.h. im Bett) erfolgen oder telemetrisch (bei teilweiser Bewegungsfreiheit innerhalb einer Station). II. Indikationen 1. Diagnostische Einordnung unklarer anfallsartiger Zustände (Differentialdiagnose) 2. Zuordnung epileptischer Anfälle zu einem epileptischen Syndrom (Differentialtypologie) 3. Überprüfung der Therapieeffizienz bei Epilepsiepatienten",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "de-ambulatory",
+  "title": "Empfehlungen für das mobile Langzeit-EEG",
+  "titleEn": "Recommendations for ambulatory long-term EEG",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/RL9_EEG_Empfehlungen_fuer_das_mobile_Langzeit-EEG.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "9. Empfehlungen für das mobile Langzeit-EEG Einleitung Die Empfehlungen für das mobile Langzeit-EEG beziehen sich auf die kontinuierliche Ableitung des EEG über 24 Stunden bei gleichzeitiger Protokollierung des Verhaltens und eventuell auftretender Anfälle des untersuchten Patienten (Eigen- oder Fremdbeobachtung). Sie betreffen nicht andere prolongierte EEG-Ableitungen, wie z. B. intraoperative EEG-Untersuchungen, Nachtschlafanalysen und die präoperative EEG-Diagnostik. Technische Verbesserungen des Langzeit-EEG sollen die Durchführung prolongierter Aufzeichnungen von Patientenverhalten und EEG erleichtern. Gegenwärtig gibt es kein Verfahren, das für alle Zwecke gleich gut geeignet ist. Deswegen wird hier nicht auf besondere technische Ausrüstungen oder verbindliche Protokolle zur Verhaltensbeobachtung eingegangen. Indikationen für das mobile Langzeit-EEG Die nachfolgende Indikationsliste ist nicht vollständig, da unter Umständen besondere Gegebenheiten zu berücksichtigen sind. 1. Nachweis iktualer und interiktualer EEG-Aktivitäten bei Patienten mit epileptischen Anfällen oder auf epileptische Anfälle verdächtigen Störungen der Hirnfunktion oder des Verhaltens, sofern Routine-EEG und Kurzschlaf-EEG keine verläßliche Einordnung erlauben. 2. Nachweis der epileptischen Natur ”neuer Anfälle” bei Patienten, deren bisherige Anfälle geklärt waren. 3. Charakterisierung (Lateralisation,",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "de-sleepdep",
+  "title": "Empfehlungen zur Durchführung des Schlaf-EEG nach Schlafentzug",
+  "titleEn": "Recommendations for sleep EEG after sleep deprivation",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2024,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/2024_RL10_EEG_Empfehlungen_Durchfuehrung_Schlaf-EEG_nach_Schlafentzug_out.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "10. Empfehlungen zur Durchführung des Schlaf-EEG nach Schlafentzug Das Schlaf-EEG nach Schlafentzug ist eine anerkannte diagnostische Methode zur Erhöhung der Sensitivität für pathologische Befunde bei Epilepsien. Die Durchführung eines solchen EEGs verlangt, dass die räumlichen Voraussetzungen wie z.B. ausreichende Ruhe gegeben sind, um einen Schlafeintritt zu gewährleisten. Mit dem Schlaf-EEG können interiktale EEG-Befunde erhoben werden, die eine Epilepsie belegen oder die erst eine zutreffende Einordnung des Epilepsiesyndroms und damit eine Differentialtherapie ermöglichen. In sehr seltenen Fällen treten unerwünscht klinische Anfälle mit iktalen EEG-Befunden auf, insbesondere bei Patientinnen und Patienten mit generalisierten Epilepsien. Dieses Risiko muss bei der Indikationsstellung beachtet werden. Die Durchführung eines Schlaf-EEG nach Schlafentzug erfordert deshalb die Beachtung methodischer Besonderheiten. Diese Aussagen gelten gleichermaßen für Kinder und Erwachsene. In Einrichtungen, in denen eine Langzeit-EEG-Ableitung zur Verfügung steht, können diese Ableitungen das Schlaf-EEG ersetzen. Die Indikationsstellung zum Schlaf-EEG nach Schlafentzug und dessen Auswertung obliegt dem durchführenden Arzt. Hierzu muss die klinische Fragestellung bekannt sein und ein Wach-EEG ohne epilepsietypische Potenziale vorliegen. Ausnahmen bedürfen einer besonderen Indikationsstellung",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG",
+   "Epilepsy"
+  ],
+  "type": "technical",
+  "retired": false
+ },
+ {
+  "id": "de-anaesthesia",
+  "title": "Empfehlungen für die EEG-gestützte Narkoseüberwachung",
+  "titleEn": "Recommendations for EEG-guided anaesthesia monitoring",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/RL12_EEG_Empfehlungen_fuer_die_EEG-gestuetzte_Narkoseueberwachung.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "12. Empfehlungen für die EEG-gestützte Narkoseüberwachung I. Einleitung Die Empfehlungen für die EEG-gestützte Narkoseüberwachung beziehen sich auf die kontinuierliche Ableitung des EEG während operativer Eingriffe zur Überwachung der Narkosetiefe bei gleichzeitiger Protokollierung physiologischer und anästhesiologischer Parameter. Sie betreffen nicht andere prolongierte EEG-Ableitungen, wie z.B. das mobile Langzeit-EEG, Ableitungen im Rahmen der Epilepsiediagnostik oder das intraoperative Hirnfunktionsmonitoring. II. Indikationen Wenngleich die neurophysiologische Überwachung der Narkosetiefe prinzipiell bei jeder Operation eingesetzt werden kann, so ist sie doch in erster Linie bei lang dauernden Operationen oder bei Operationen, die eine sehr tiefe Narkose erfordern, angezeigt. III. Durchführung Die Durchführung der EEG-gestützten Narkoseüberwachung umfaßt folgende Schritte: Indikationsstellung unter Berücksichtigung der geplanten chirurgischen Maßnahme(n). Information des Patienten oder seiner Begleitperson über Möglichkeiten und Grenzen des Verfahrens. Applikation der Elektroden und besondere Vorkehrungen zur Vermeidung von Artefakten (z.B. Fixierung und geeignete Führung von Elektrodenkabel). Überprüfung der Übergangswiderstände der zur Ableitung verwendeten Elektroden, gegebenenfalls Korrektur. Eichen, EEG-Proberegistrierung mit Provokation von Artefakten. Ableitung eine",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG",
+   "IONM"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "de-ionm",
+  "title": "Das intraoperative EEG- und EP-Monitoring",
+  "titleEn": "Intraoperative EEG and evoked potential monitoring",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/RL32_Intraoperatives_EEG-undEP-Monitoring.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "32. Das intraoperative EEG- und EP-Monitoring I. Einleitung Die Empfehlungen für das intraoperative EEG- und EP-Monitoring beziehen sich auf die kontinuierliche Ableitung von EEG, SEP, AEP, VEP, und MEP (einzeln oder in Kombination) während operativer Eingriffe zur Überwachung neuronaler Funktionen bei gleichzeitiger Protokollierung physiologischer und anästhesiologischer Parameter. Sie umfassen zum Teil auch die intraoperative Narkoseüberwachung durch das EEG, gehen jedoch in wichtigen Punkten darüber hinaus. Sie betreffen nicht andere prolongierte EEG-Ableitungen, wie z.B. das mobile Langzeit-EEG oder Ableitungen im Rahmen der Epilepsiediagnostik. Die technischen und methodischen Anforderungen können sich in Abhängigkeit von den operativen Eingriffen erheblich voneinander unterscheiden. II. Indikationen Die nachfolgende Indikationenliste ist nicht vollständig, da unter Umständen besondere Gegebenheiten zu berücksichtigen sind. II.1 Überwachung zerebraler Funktionen bei Operationen an hirnversorgenden Gefäßen, z.B. Carotis-Endarteriektomie. II.2 Zerebrale Funktionsdiagnostik bei Operationen am Herzen und an den großen Gefäßen. II.3 Feststellung des isoelektrischen EEG bei Operationen in tiefer Hypothermie (Hirnprotektion). II.4 Funktionsdiagnostik spezieller Hirnnerven (N. acusticus, N. opticus, N. facialis, N. trigeminus). II.5 Spinale Funktionsdiagnostik bei Operationen am H",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "IONM",
+   "Evoked potentials",
+   "EEG"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "de-tele",
+  "title": "Empfehlungen für telemedizinische EEG-Untersuchungen",
+  "titleEn": "Recommendations for telemedicine EEG",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2019,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/richtlinien/Tele-EEG-DGKN_Richtlinie.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "Empfehlungen für telemedizinische EEG-Untersuchungen 1. Die telemedizinische EEG-Untersuchung unterscheidet derzeit zwei Konstellationen: a. Konsilerbringung zwischen Ärzten b. Leistungserbringung bei telemedizinischem Patientenkontakt 2. EEG-Anforderungen a. Die Empfehlungen der DGKN für die Durchführung, Archivierung und Befundung von EEG Ableitungen bei Erwachsenen und Kindern in Klinik und Praxis gelten bei Tele-EEG-Ableitungen ebenfalls. b. Abweichungen von den Empfehlungen der DGKN müssen begründet und dokumentiert werden. 3. Telemedizinische Befundbewertung – Datenübertragung a. Die Übermittlung von EEG-Ableitungen durch ein Epilepsienetzwerk oder TeleEEG-Einrichtung kann Datenschutz-konform durch Zugriff auf die Aufzeichnungs/Datenbank-Rechner der anfordernden Klinik erfolgen oder durch Übertragung der EEG Daten zur telemedizinischen Auswertung. b. Bei Übertragung in einem Transferformat ist darauf zu achten, dass das Format eine verlustfreie und originalgetreue Darstellung der EEG-Ableitung zulässt. c. Die Vollständigkeit der zu befundenden EEG-Ableitung beim telemedizinischen Auswerter muss durch die Angabe und Übermittlung der EEG-Aufzeichnungslänge und Angabe und Übermittlung der aufgezeichneten EEG-Kanäle gewährleistet werden. d. Moderne EEG-Systeme zeichnen EEG, polygraphische Daten und Video parallel auf. Wird auf die Übertragung des Videos verzichtet, soll dies ",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EEG"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "de-braindeath",
+  "title": "Empfehlungen der DGKN zur Diagnostik des irreversiblen Hirnfunktionsausfalls",
+  "titleEn": "DGKN recommendations for diagnosing irreversible loss of brain function (brain death), EEG and evoked potentials",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2023,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/richtlinien/2023_DGKN_RL_Hirntod_out.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "RICHTLINIE DER KOMMISSION IRREVERSIBLER HIRNFUNKTIONSAUSFALL DER DGKN Richtlinie der Kommission Irreversibler Hirnfunktionsausfall Empfehlungen der Deutschen Gesellschaft für Klinische Neurophysiologie und Funktionelle Bildgebung e.V. zur Diagnostik des irreversiblen Hirnfunktionsausfalls 1. Einleitung Ein spezielles Verfahren zur Feststellung des Todes ist die Diagnostik des irreversiblen Hirnfunktionsausfalls, d.h. des endgültigen, nicht behebbaren Ausfalls der Gesamtfunktion des Großhirns, des Kleinhirns und des Hirnstamms bei intensivmedizinisch aufrecht erhaltener Beatmung und Herz-Kreislauf-Funktion. Die Diagnose des irreversiblen Hirnfunktionsausfalls (sog. „Hirntoddiagnostik“) stützt sich auf die von der Bundesärztekammer festgelegte Richtlinie (1). Die Beachtung dieser Richtlinie ist nach § 16 Abs. 1 Ziffer 1 des Transplantationsgesetzes zwingend vorgeschrieben. Wenn die Voraussetzungen zur Hirntoddiagnostik erfüllt sind, muss der Hirnfunktionsausfall klinisch nachgewiesen werden und seine Irreversibilität dokumentiert werden. Der Irreversibilitätsnachweis des Hirnfunktionsausfalls ist möglich durch   eine weitere klinische Untersuchung nach einer definierten Beobachtungszeit oder ergänzende apparative Untersuchungen. Bei primären infratentoriellen Hirnschädigungen und kombinierten Hirnschädigungen mit primärer Beteiligung der infratentoriellen Hirnanteile muss zwing",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "Brain death",
+   "EEG",
+   "Evoked potentials"
+  ],
+  "type": "criteria",
+  "retired": false
+ },
+ {
+  "id": "de-sleep",
+  "title": "Empfehlungen zur Schlafdiagnostik",
+  "titleEn": "Recommendations for sleep diagnostics (polysomnography)",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2025,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/PDF/2025_Empfehlung_Schlafdiagnostik_out.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "29. Schlafdiagnostik I. Einleitung Nach den AASM-Kriterien lässt sich eine Einteilung des Schlafes in die Stadien Wach, 1 bis 3 und REM anhand von EEG, EOG und EMG vornehmen, im Minimalfall also mit einer Dreikanalableitung. Inzwischen hat die Diagnostik der Schlafstörungen durch Beschreibung von nunmehr über 80 Krankheitsbildern (ICSD-3-TR, 2023) jedoch einen Umfang angenommen, dem dieses Minimalprogramm in keiner Weise gerecht werden kann, vielmehr rücken andere, nicht primär neurophysiologische Parameter wie Atmung und arterielle Sauerstoffsättigung in den Vordergrund. Hinzu kommen polygrafische Registrierungen, die eine rasche Intervention erfordern, z.B. bei der Einstellung eines adäquaten CPAP-Drucks und bei der Quantifizierung einer Tagesschläfrigkeit im Multiplen Schlaflatenz-Test (MSLT) oder Maintenance of Wakefulness Test (MWT). II. Indikationen A) Eine Polysomnografie ist dort indiziert, wo  über hartnäckige und therapieresistente Schlafstörungen geklagt wird, die nicht auf den ersten Blick psychogener/psychiatrischer Natur sind, oder  nach Fremdbetrachtung starkes Schnarchen berichtet wird, die nächtliche Atmung periodisch und/oder durch Apnoen unterbrochen ist, oder  über eine Tagesschläfrigkeit geklagt wird.  Zusätzlich intravasale Druckmessung (z. B. in den Pulmonalarterien) mit Polysomnografie kann bei Hochrisikopatienten indiziert sein, wird jedoch ausschli",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "PSG/Sleep"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "de-cjd",
+  "title": "Empfehlung für den Umgang mit Nadeln (EMG, EEG, EVP usw.) im Zeitalter von CJK",
+  "titleEn": "Recommendation on handling needles (EMG, EEG, evoked potentials) with regard to Creutzfeldt-Jakob disease",
+  "authors": "DGKN",
+  "journal": "DGKN",
+  "year": 2016,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://dgkn.de/images/empfehlungen/RL34_Creutzfeld-Jakob_Nadeln.pdf",
+  "openAccess": true,
+  "lang": "de",
+  "abstract": "34. Empfehlung für den Umgang mit Nadeln (EMG, EEG, EVP usw.) im Zeitalter von CJK (Creutzfeld-Jakob-Krankheit) Patienten mit CJK können eine ALS-Symptomatik bieten und ins EMG-Labor kommem. Die Diskussion über eine mögliche Übertragung durch Nadeln, die bei EMG und NLG-Untersuchungen, aber auch bei EEG- und EVP-Untersuchungen verwendet werden, veranlaßt zu folgender Empfehlung. Sofern ein Patient, von dem bekannt ist, daß er an CJK leidet, mit Nadelelektroden untersucht werden muß, sind die verwendeten Nadeln nicht wieder zu benutzen und angemessen zu entsorgen (z.B. behandeln mit 1 M Natronlauge). Im Rahmen der Routine-Ableitungen im EMG- oder EEG-Labor kann jedoch unwissentlich ein Patient mit CJK untersucht worden sein. Dazu ist folgendes zu sagen: Die ausschließliche Verwendung von Einweg-Nadeln bietet die sicherste Gewähr, daß die Krankheit nicht übertragen werden kann. Die DGKN empfiehlt grundsätzlich die Verwendung von Einweg-Nadeln für das EMG. Für teure Spezialnadeln (Einzelfaser-EMG; Makro-EMG) wird auf die unten aufgeführten Sterilisationstechniken verwiesen, soweit das Material dies zulässt. Das Verwerfen von Nadeln nach Gebrauch ist kostenträchtig. Jedoch können konzentrische EMG-Nadeln als Einmalnadeln, insbesondere über Mengenrabatt, zu vergleichsweise günstigen Bedingungen erworben werden. Für Nadeln, die zu EEGAbleitungen u. ä. verwendet werden, gilt Analoges.",
+  "societies": [
+   "DGKN"
+  ],
+  "modalities": [
+   "EMG/NCS",
+   "EEG",
+   "Evoked potentials"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "es-geer",
+  "title": "Documento de consenso SENFC-GEER sobre las indicaciones de la monitorización neurofisiológica intraoperatoria en cirugía de columna",
+  "titleEn": "SENFC-GEER consensus on indications for intraoperative neurophysiological monitoring in spine surgery",
+  "authors": "SENFC",
+  "journal": "SENFC",
+  "year": 2020,
+  "approxYear": true,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://neurofisiologia.com.es/wp-content/uploads/2021/04/Consenso-SENFC-GEER.pdf",
+  "openAccess": true,
+  "lang": "es",
+  "abstract": "La Sociedad Española de Columna Vertebral (GEER) y la Sociedad Española de Neurofisiología Clínica, tras análisis técnico en comisión mixta de ambas sociedades por especialistas en Cirugía de Columna y en Neurofisiología Clínica, con búsqueda bibliográfica exhaustiva y con el aval de los respectivos comités científicos, hemos creado un documento sobre las indicaciones de la monitorización neurofisiológica intraoperatoria en cirugía de columna”. El citado documento ha sido analizado desde el punto de vista médico legal por Roger Bruguera, abogado del Colegio Oficial de Médicos de Barcelona, y sometido a aprobación por la asamblea general de ambas sociedades. Indicaciones de la monitorización neurofisiológica intraoperatoria en cirugía de columna. Pensamos que es preceptiva en las siguientes cirugías: COLUMNA CERVICAL a) MIELOPATÍA CERVICAL. b) DEFORMIDAD CERVICAL. c) SUBOCCIPITAL C0-C1-C2. COLUMNA TORACOLUMBAR 1. CIRUGÍAS DE LA DEFORMIDAD TANTO DEL ADOLESCENTE COMO DEL ADULTO. 2. CIRUGÍAS COMPLEJAS a) INFECCIONES PRIMARIAS ASOCIADAS A DEFORMIDAD Y/O AFECTACIÓN NEUROLÓGICA. b) TUMORAL PRIMARIA. c) FRACTURAS CON AFECTACIÓN NEUROLÓGICA. En este caso la necesidad vendrá condicionada por la urgencia y la situación clínica del paciente, por tanto, la decisión será médico-quirúrgica. pág. 1 d) OSTEOTOMÍAS COMPLEJAS. e) MIELOPATÍAS DORSALES. f) LISTESIS DE ALTO GRADO (IV, ESPONDILOPTOSI",
+  "societies": [
+   "SENFC"
+  ],
+  "modalities": [
+   "IONM"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "es-consent",
+  "title": "Recomendaciones para el consentimiento informado escrito",
+  "titleEn": "Recommendations for written informed consent",
+  "authors": "SENFC",
+  "journal": "SENFC",
+  "year": 2019,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://neurofisiologia.com.es/wp-content/uploads/2021/04/2019-03-28-Recomendaciones-para-el-CI-escrito.pdf",
+  "openAccess": true,
+  "lang": "es",
+  "abstract": "SOCIEDAD ESPAÑOLA DE NEUROFISIOLOGÍA CLÍNICA Presidente: Antonio García García Vicepresidente: Juan Moliner Ibáñez Secretario: Lidia Cabañes Martínez Tesorero: Jesús González Rato Vocal: Vicenç Pascual Rubio Vocal Delegado en la IFCN: Concepción Maeztu Sardiña Presidente anterior: Gema de Blas Beorlegui Madrid, 28 de marzo de 2019 Recomendaciones para el Consentimiento Informado escrito La Sociedad Española de Neurofisiología Clínica (SENFC) tiene entre sus fines velar por el ejercicio profesional de sus miembros en beneficio de la salud de los ciudadanos (art. 3 de los Estatutos), por lo que aparte del ineludible deber de información a los pacientes emanado de la Ley 14/1986, de 25 de abril, General de Sanidad, y por regla general de la obtención del consentimiento informado verbal (Ley 41/2002, de 14 de noviembre, básica reguladora de la autonomía del paciente y de los derechos y obligaciones en materia de información y documentación clínica), tras la consulta realizada a los distintos Grupos de Trabajo de nuestra Sociedad considera conveniente la obtención del consentimiento informado escrito en los procedimientos que se detallan a continuación, bien por considerarlos en sí mismos “invasores” o porque suponen “riesgos o inconveniente de notoria y previsible repercusión negativa en la salud del paciente”, según establece el art. 8 de la citada Ley 41/2002. 1.-ELECTROENCEFALOG",
+  "societies": [
+   "SENFC"
+  ],
+  "modalities": [
+   "EEG",
+   "EMG/NCS",
+   "Evoked potentials"
+  ],
+  "type": "practice",
+  "retired": false
+ },
+ {
+  "id": "es-oncall",
+  "title": "Recomendaciones de la SENFC para la atención continuada en los Servicios de Neurofisiología Clínica",
+  "titleEn": "SENFC recommendations for on-call care in clinical neurophysiology services (incl. brain death diagnosis)",
+  "authors": "SENFC",
+  "journal": "SENFC",
+  "year": 2024,
+  "doi": null,
+  "pmid": null,
+  "pmcid": null,
+  "url": "https://neurofisiologia.com.es/wp-content/uploads/2024/12/Recomendaciones-de-la-SENFC-para-la-atencioin-continuada-en-los-Servicios-de-Neurofisiologiia-Cliinica.pdf",
+  "openAccess": true,
+  "lang": "es",
+  "abstract": "Recomendaciones de la SENFC para la atención continuada en los Servicios de Neuroﬁsiología Clínica Exposición 1- Existen diferentes prestaciones asistenciales en los servicios/unidades de Neuroﬁsiología Clínica de nuestro país, en función de las necesidades a cubrir y de los pactos particulares de cada hospital. Hasta el momento el diagnóstico de muerte encefálica ha sido la prestación más demandada para la atención continuada de dichos servicios, y en la mayoría de los hospitales se realiza mediante guardias localizadas. Dada la creciente demanda asistencial para la realización de estudios neuroﬁsiológicos de urgencia, como son: - - el electroencefalograma (EEG), fundamentalmente para el diagnóstico de status epilepticus, con la puesta en marcha del llamado “Código crisis” en algunas Comunidades Autónomas, las monitorizaciones neuroﬁsiológicas intraoperatorias (MION), el ya mencionado diagnóstico de muerte encefálica (sobre todo para el trasplante de órganos), se hace necesaria una respuesta a la demanda y una homogeneización de dichas prestaciones en la medida de lo posible, según los recursos materiales y humanos de cada Hospital. 2- Por otra parte, en el programa de formación de la especialidad de Neuroﬁsiología Clínica, publicado en el B.O.E. (Orden SCO/2617/2008, de 1 de septiembre), se especiﬁca: 7. Guardias durante el período de formación especíﬁca Durante los 3 años de",
+  "societies": [
+   "SENFC"
+  ],
+  "modalities": [
+   "Brain death",
+   "EEG"
+  ],
+  "type": "practice",
+  "retired": false
+ }
+]
