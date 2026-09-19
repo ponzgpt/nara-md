@@ -42,7 +42,7 @@ question ─┬─ lib/search.ts ───────── curated library (da
 | `components/Suggestions.tsx`, `AnswerPending.tsx` | The typing dropdown ("↵ Ask…" + matching standards) and the answer placeholder with timer |
 | `components/Results.tsx` | Answer, then **Standards** (grouped by document type) and **Literature** side by side, then hand-offs. Numbers match the `[n]` citations |
 | `lib/llm.ts`, `lib/answer.ts` | Answer synthesis (Anthropic, OpenRouter or keyless) and the citation check that every answer must pass |
-| `components/` | `Answer`, `StandardsList`, `RegionMenu`, `ThemeToggle`, `SourcesSheet` (sources + library proxy) |
+| `components/` | `Answer`, `StandardsList`, `RegionMenu`, `ThemeToggle`, `DatabasesSheet` (databases searched + library proxy) |
 | `app/api/ask/route.ts` | Retrieval and synthesis. Validates input, rate-limits per IP, and never logs the question |
 | `lib/search.ts` | Ranking. Shorthand (CIDP, LPD, MSLT…) expands to phrases and weighs double. Generic words ("criteria", "standards") refine a match but can't make one. Documents covering more of the question's concepts win |
 | `lib/catalog.ts` | Modalities, regions and their societies, document types (the results ontology), rotating examples, connectors, citation links. **Adding a country or a source only means editing this data** |
@@ -61,12 +61,12 @@ Add `{"q": "<exact title>", "soc": ["ACNS"], "mod": ["EEG"], "type": "criteria|t
 
 The curated library ships with the page as about 60 KB of JSON. Search, modality scope and region ordering run client-side, instantly and with no request, using the same `lib/search.ts` the server uses to pick the answer's sources. The server is called only to search the literature and write the answer. Move library filtering behind an API when either (a) the library reaches thousands of documents, or (b) it includes licensed content that can't be shipped to the browser, which will happen with the paid connectors.
 
-## Sources and access
+## Databases and access
 
-| Kind | Sources | How |
+| Kind | Databases | How |
 |---|---|---|
 | Live | Neuronara library, Europe PMC | Queried on every question |
-| Via your library | Cochrane, Embase, MEDLINE Complete | Paywalled DOIs open through the clinician's EZproxy/OpenAthens prefix (set in **Sources**) |
+| Via your library | Cochrane, Embase, MEDLINE Complete | Paywalled DOIs open through the clinician's EZproxy/OpenAthens prefix (set in **Databases**) |
 | Hand-off | PubMed, OpenEvidence, Consensus, AASM Scoring Manual | Opened with the question prefilled where the site supports it. OpenEvidence has no public API |
 
 ## Market and positioning
@@ -100,6 +100,10 @@ Measured with `npm run eval` (`evals/README.md`). Scores are retrieval + literat
 Read the first row as the honest one for any new Spanish phrasing: a hand-written glossary does not generalise, which is why cognates were added. After tuning, all four sets score 89-100 in English and 87-93 in Spanish, but those sets have been used to tune and overstate how it will do on new questions. The ceiling is spelling: a Spanish word that isn't a cognate and isn't in the glossary ("agujas", "codo") is dropped until someone adds it. Letting an LLM rewrite the query would fix that, at a cost of 10-30 s on the keyless tier.
 
 **Answer quality is not measured yet.** Scoring written answers needs the LLM, which on the keyless tier serves about one answer every 30 s. A full run takes 12 minutes, and correctness still needs a clinician reading them.
+
+### Ambiguous acronyms
+
+PubMed acronyms collide across specialities: **MGA** is Martin-Gruber anastomosis in EMG/NCS but also microglandular adenosis and a microbial growth assay. Neuronara handles this three ways: (1) a table of field shorthand expands each acronym to the phrase a neurophysiologist means (`lib/search.ts`: MGA, CMAP, SNAP, MUAP, RNS, MUNE, TOS, CMT, HNPP, AIDP, LEMS…); (2) every Europe PMC query is fenced to the field with a required neurophysiology term (`lib/connectors/europepmc.ts`), so other specialities can't match; (3) the answer prompt tells the model to use the neurophysiology meaning and ignore sources about other meanings. An acronym that isn't in the table still reaches Europe PMC bare (though fenced), so add new ones as they turn up.
 
 ### What the free model gets wrong
 

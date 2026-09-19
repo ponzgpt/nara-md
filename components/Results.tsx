@@ -28,11 +28,11 @@ export function Results({ q, entries, result, asking, proxy, papers, region, mis
       <div className="results">
         <section className="col" aria-labelledby="col-standards">
           <h2 id="col-standards" className="col-title">Standards <span>{entries.length}</span></h2>
-          <StandardsList entries={entries} proxy={proxy} region={region} missing={missing} citeNo={(e) => cited.get(key(e))} />
+          <StandardsList entries={entries} proxy={proxy} region={region} missing={missing} searched={q.trim() !== ""} citeNo={(e) => cited.get(key(e))} />
         </section>
 
         <section className="col" aria-labelledby="col-literature">
-          <h2 id="col-literature" className="col-title">Literature {literature && <span>{literature.length}</span>}</h2>
+          <h2 id="col-literature" className="col-title">Literature <span>{literature?.length ?? 0}</span></h2>
           {asking && !result ? (
             <div className="card skeleton" aria-label="Searching the literature"><i /><i /><i /></div>
           ) : literature?.length ? (

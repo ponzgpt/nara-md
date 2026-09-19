@@ -7,12 +7,12 @@ const KIND = { live: "Live", proxy: "Via your library", link: "Hand-off" };
 
 type Props = { region: string; proxy: string; onProxy: (v: string) => void };
 
-export const SourcesSheet = forwardRef<HTMLDialogElement, Props>(function SourcesSheet({ region, proxy, onProxy }, ref) {
+export const DatabasesSheet = forwardRef<HTMLDialogElement, Props>(function DatabasesSheet({ region, proxy, onProxy }, ref) {
   const societies = [...GLOBAL_SOCIETIES, ...REGIONS[region].societies].filter((s) => SOCIETY_SITES[s]);
   return (
     <dialog ref={ref} className="sheet" aria-labelledby="sources-title">
       <form method="dialog">
-        <h2 id="sources-title">Sources &amp; access</h2>
+        <h2 id="sources-title">Databases &amp; access</h2>
         <ul className="sources">
           {CONNECTORS.map((c) => (
             <li key={c.id}>

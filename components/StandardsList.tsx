@@ -6,9 +6,9 @@ import type { Entry } from "@/lib/search";
 
 const LANG = { en: "English", de: "Deutsch", es: "Español" };
 
-type Props = { entries: Entry[]; proxy: string; region: string; missing: string[]; citeNo: (e: Entry) => number | undefined };
+type Props = { entries: Entry[]; proxy: string; region: string; missing: string[]; searched: boolean; citeNo: (e: Entry) => number | undefined };
 
-export function StandardsList({ entries, proxy, region, missing, citeNo }: Props) {
+export function StandardsList({ entries, proxy, region, missing, searched, citeNo }: Props) {
   const short = REGIONS[region].short;
   const notice = region !== "global" && missing.length > 0 && (
     <p className="region-note">
@@ -18,16 +18,21 @@ export function StandardsList({ entries, proxy, region, missing, citeNo }: Props
     </p>
   );
 
-  if (!entries.length) return <>{notice}<p className="empty">No society document in the library covers this yet. The literature may.</p></>;
   return (
     <>
       {notice}
+      {/* Every category is always listed, with its count, so an empty one reads "0 documents" rather than vanishing. */}
       {DOC_TYPES.map((t) => {
         const group = entries
           .filter((e) => e.type === t.id)
           .map((e, i) => ({ e, i, tier: tierOf(e.societies, region) }))
           .sort((a, b) => TIER_ORDER[a.tier] - TIER_ORDER[b.tier] || a.i - b.i);
-        if (!group.length) return null;
+        if (!group.length) return (
+          <div key={t.id} className="group empty-group">
+            <h3 className="group-title">{t.label} <span>0</span></h3>
+            <p>{searched ? "No document in the library for this question." : "No documents."}</p>
+          </div>
+        );
         return (
           <div key={t.id} className="group">
             <h3 className="group-title">{t.label} <span>{group.length}</span></h3>

@@ -28,6 +28,20 @@ const SYNONYMS: Record<string, string[]> = {
   lpd: ["periodic discharges", "critical care eeg terminology"], gpd: ["periodic discharges", "critical care eeg terminology"],
   lrda: ["rhythmic delta", "critical care eeg terminology"], iiic: ["ictal interictal", "critical care eeg terminology"],
   ied: ["interictal epileptiform"], score: ["organized reporting"],
+  // EMG/NCS and clinical neurophysiology shorthand. Plain acronyms are ambiguous in PubMed (MGA is also microglandular adenosis),
+  // so each one expands to the phrase a neurophysiologist means.
+  mga: ["martin gruber anastomosis"], rca: ["riche cannieu anastomosis"], cmap: ["compound muscle action potential"],
+  snap: ["sensory nerve action potential"], muap: ["motor unit action potential"], mune: ["motor unit number estimation"],
+  rns: ["repetitive nerve stimulation"], sncv: ["sensory nerve conduction"], mncv: ["motor nerve conduction"], ncv: ["nerve conduction velocity"],
+  tos: ["thoracic outlet syndrome"], cmt: ["charcot marie tooth"], hnpp: ["hereditary neuropathy with liability to pressure palsies"],
+  aidp: ["acute inflammatory demyelinating polyneuropathy", "guillain"], aman: ["acute motor axonal neuropathy"],
+  mg: ["myasthenia gravis"], lems: ["lambert eaton myasthenic syndrome"], sma: ["spinal muscular atrophy"],
+  hreflex: ["h reflex"], abr: ["auditory brainstem response"],
+  rbd: ["rem sleep behavior disorder"], csa: ["central sleep apnea"], nrem: ["non rem sleep"], rem: ["rem sleep"],
+  emu: ["epilepsy monitoring unit"], sudep: ["sudden unexpected death in epilepsy"], nead: ["non epileptic attack disorder"],
+  pdr: ["posterior dominant rhythm"], firda: ["frontal intermittent rhythmic delta activity"], tirda: ["temporal intermittent rhythmic delta activity"],
+  sreda: ["subclinical rhythmic electrographic discharges"], bets: ["benign epilepsy with centrotemporal spikes"],
+  jme: ["juvenile myoclonic epilepsy"], ige: ["idiopathic generalized epilepsy"],
   fnd: ["functional neurological disorder"], pnes: ["nonepileptic", "functional seizures"],
   psg: ["polysomnograph", "sleep"], osa: ["obstructive sleep apnea"], mslt: ["multiple sleep latency"], mwt: ["maintenance of wakefulness"],
   rls: ["restless legs"], plm: ["periodic limb movement"],
@@ -79,7 +93,7 @@ export function units(q: string): Unit[] {
   };
   const lang = detectLang(q);
   // Capitalised words in the middle of a sentence are names ("World Brain Death Project"): international, whatever the language.
-  for (const m of q.replace(/^\W+/, "").split(/(?<=[.?!¿¡:])\s*/)[0].matchAll(/(?<=\S\s)[A-ZÁÉÍÓÚ][\wáéíóúñ-]{2,}/g)) acronyms.add(norm(m[0]));
+  for (const m of q.replace(/^\W+/, "").split(/(?<=[.?!¿¡:])\s*/)[0].matchAll(/(?<=\S\s)[A-ZÁÉÍÓÚ][\wáéíóúñ-]{2,}/g)) for (const part of norm(m[0]).split("-")) acronyms.add(part); // "Martin-Gruber" → martin, gruber
   for (const w of raw) {
     // "LPDs", "hypopneas": try the plural-stripped shorthand too
     const sh = SYNONYMS[w] ?? (w.endsWith("s") ? SYNONYMS[w.slice(0, -1)] : undefined);
@@ -87,7 +101,9 @@ export function units(q: string): Unit[] {
     else {
       const twin = lang !== "en" && !acronyms.has(w) ? cognate(w, VOCAB) : null; // "magnetoencefalografia" → "magnetoencephalography"
       if (twin) add(twin, 1.2, true, w);
-      add(w, 0.6, lang === "en" || acronyms.has(w), w); // plain words weigh less than shorthand; in a Spanish/German question they are not English unless an acronym
+      // Latin/Greek medical endings are the same word in English ("anastomosis", "polyneuropathy"), whatever the language around them
+      const medical = /(osis|itis|oma|emia|pathy|plasia|ectomy|otomy|graphy|algia)$/.test(w) && w.length >= 7;
+      add(w, 0.6, lang === "en" || acronyms.has(w) || medical, w); // plain words weigh less than shorthand; in a Spanish/German question they are not English unless an acronym
     }
   }
   for (const g of translate(q)) for (const u of g) add(u, isGeneric(u) ? 0.6 : 2, true, g[0]);
@@ -179,7 +195,9 @@ export function literatureAttempts(q: string): string[][][] {
   for (const u of units(q).filter((u) => u.english && !isDiscourse(u.text))) groups.set(u.group, [...(groups.get(u.group) ?? []), u]);
   const all = [...groups.values()];
   const rank = (g: Unit[]) => (g.some((u) => !isGeneric(u.text)) ? 10 : 0) + Math.max(...g.map((u) => u.weight)) * 2 + Math.min(...g.map((u) => u.text.length)) / 100;
-  const pool = all.sort((a, b) => rank(b) - rank(a));
+  // A group whose words all sit inside another group's phrase adds nothing ("nerve" inside "nerve conduction").
+  const redundant = (g: Unit[]) => all.some((o) => o !== g && g.every((u) => o.some((v) => v.text !== u.text && v.text.split(" ").includes(u.text))));
+  const pool = all.filter((g) => !redundant(g)).sort((a, b) => rank(b) - rank(a));
   const text = (g: Unit[]) => g.map((u) => u.text);
   const and = (n: number) => pool.slice(0, n).map(text);
   const attempts = [and(5), and(3), and(2), [pool.slice(0, 3).flatMap(text)]].filter((a) => a[0]?.length);

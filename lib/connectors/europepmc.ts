@@ -10,10 +10,18 @@ const term = (u: string) => (u.includes(" ") ? `"${clean(u)}"` : clean(u));
 
 /** `q` is a sentence, or groups of alternatives that must each appear: [["als","amyotrophic lateral sclerosis"],["criteria"]]
  *  becomes (als OR "amyotrophic lateral sclerosis") AND criteria. */
-export async function searchLiterature(q: string | string[][], size = 6): Promise<Omit<Source, "n">[]> {
+// Everything asked here belongs to clinical neurophysiology. Requiring one of these words stops an ambiguous acronym
+// ("MGA" = Martin-Gruber anastomosis here, microglandular adenosis in breast pathology) from pulling in other specialties.
+const FIELD = '(nerve OR neuro* OR EEG OR EMG OR electromyograph* OR electroencephalograph* OR electrodiagnos* OR electrophysiolog* OR "evoked potential*" OR epilep* OR seizure* OR polysomnograph* OR sleep OR "brain death" OR "motor unit" OR myopath* OR "transcranial magnetic" OR intraoperative)';
+
+export function buildQuery(q: string | string[][], fieldFilter = true): string {
   const terms = Array.isArray(q) ? q.map((g) => (g.length > 1 ? `(${g.map(term).join(" OR ")})` : term(g[0]))).join(" AND ") : clean(q);
   // Title+abstract only: whole-text matching on PMC articles drags in unrelated papers.
-  const query = `TITLE_ABS:(${terms}) AND HAS_ABSTRACT:y AND (SRC:MED OR SRC:PMC)`;
+  return `TITLE_ABS:(${terms})${fieldFilter ? ` AND TITLE_ABS:${FIELD}` : ""} AND HAS_ABSTRACT:y AND (SRC:MED OR SRC:PMC)`;
+}
+
+export async function searchLiterature(q: string | string[][], size = 6, fieldFilter = true): Promise<Omit<Source, "n">[]> {
+  const query = buildQuery(q, fieldFilter);
   try {
     const res = await fetch(`${API}?format=json&resultType=core&pageSize=${size}&query=${encodeURIComponent(query)}`, {
       signal: AbortSignal.timeout(6000),

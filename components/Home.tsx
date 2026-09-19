@@ -12,7 +12,7 @@ import { Results } from "@/components/Results";
 import { Suggestions } from "@/components/Suggestions";
 import { Examples } from "@/components/Examples";
 import { RegionMenu } from "@/components/RegionMenu";
-import { SourcesSheet } from "@/components/SourcesSheet";
+import { DatabasesSheet } from "@/components/DatabasesSheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const SOCIETIES = new Set(LIBRARY.flatMap((e) => e.societies)).size;
@@ -107,9 +107,9 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
           <span>Neuro<b>nara</b></span>
         </a>
         <nav>
-          <button className="pill" onClick={() => sources.current?.showModal()} title="Sources and library access" aria-label="Sources and library access">
+          <button className="pill" onClick={() => sources.current?.showModal()} title="Databases Neuronara searches, and your library access" aria-label="Databases and library access">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5ZM13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13Z" /></svg>
-            <span className="label">Sources</span>
+            <span className="label">Databases</span>
           </button>
           <RegionMenu value={region} onChange={setRegion} />
           <ThemeToggle />
@@ -156,7 +156,7 @@ export function Home({ papers, children }: { papers: string; children: React.Rea
         <a href="https://github.com/ponzgpt/neuronara" target="_blank" rel="noreferrer">Source</a>
       </footer>
 
-      <SourcesSheet ref={sources} region={region} proxy={proxy} onProxy={setProxy} />
+      <DatabasesSheet ref={sources} region={region} proxy={proxy} onProxy={setProxy} />
     </>
   );
 }

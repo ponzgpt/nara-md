@@ -147,3 +147,28 @@ test("literature queries carry English concepts only, never the question's fille
   assert.match(flat("¿Cuál es la clasificación de las epilepsias de la ILAE?"), /epilepsy/);
   assert.doesNotMatch(flat("¿Cuál es la clasificación de las epilepsias de la ILAE?"), /clasificaci|epilepsias/); // no Spanish leaks to Europe PMC
 });
+
+test("ambiguous field acronyms expand to the neurophysiology meaning and are fenced to the field", async () => {
+  const { literatureAttempts } = await import("./search.ts");
+  const { buildQuery } = await import("./connectors/europepmc.ts");
+  const attempts = literatureAttempts("MGA");
+  assert.deepEqual(attempts[0], [["martin gruber anastomosis"]]);             // never the bare acronym
+  const q = buildQuery(attempts[0]);
+  assert.match(q, /"martin gruber anastomosis"/);
+  assert.match(q, /TITLE_ABS:\(nerve OR neuro\*/);                              // field fence: breast pathology can't match
+  assert.doesNotMatch(buildQuery(attempts[0], false), /neuro\*/);               // and it can be switched off
+  for (const [acr, phrase] of [["CMAP", "compound muscle action potential"], ["RNS", "repetitive nerve stimulation"], ["MUNE", "motor unit number estimation"]])
+    assert.deepEqual(literatureAttempts(`${acr} normal values`)[0][0], [phrase]);
+  assert.equal(rank(lib, "MGA").length, 0);                                     // the library has no document on it: say so
+});
+
+test("a Spanish sentence about a named anatomical variant reaches Europe PMC with its English terms", async () => {
+  const { literatureAttempts } = await import("./search.ts");
+  const q = "¿Qué es la anastomosis de Martin-Gruber y cómo afecta a la neurografía del nervio mediano?";
+  const first = literatureAttempts(q)[0].flat().join(" ");
+  assert.match(first, /anastomosis/);
+  assert.match(first, /martin/);
+  assert.match(first, /gruber/);
+  assert.match(first, /median nerve|nerve conduction/);
+  assert.doesNotMatch(first, /neurograf|nervio|afecta/);   // no Spanish leaks through
+});
